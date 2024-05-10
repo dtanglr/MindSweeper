@@ -1,5 +1,4 @@
-﻿using SchneiderElectric.MindSweeper.Domain.Entities;
-using SchneiderElectric.MindSweeper.Domain.Repositories;
+﻿using SchneiderElectric.MindSweeper.Domain.Repositories;
 
 namespace SchneiderElectric.MindSweeper.Persistence.Repositories;
 

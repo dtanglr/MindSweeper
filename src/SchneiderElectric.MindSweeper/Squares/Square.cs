@@ -1,5 +1,4 @@
 ﻿using SchneiderElectric.MindSweeper.Columns;
-using SchneiderElectric.MindSweeper.Moves;
 using SchneiderElectric.MindSweeper.Rows;
 
 namespace SchneiderElectric.MindSweeper.Squares;
@@ -12,42 +11,42 @@ internal record Square(Field.Squares Squares, IColumn Column, IRow Row)
 
     public bool HasBomb(Field.Bombs bombs) => bombs.OnSquare(this);
 
-    public bool TryMove(Move move, out Square? square)
+    public bool TryMove(Direction move, out Square? square)
     {
         square = move switch
         {
-            Move.Up => Row is IHasRowAbove ? Squares[Index + Column.Columns.Length] : null,
-            Move.Down => Row is IHasRowBelow ? Squares[Index - Column.Columns.Length] : null,
-            Move.Left => Column is IHasColumnOnLeft ? Squares[Index - 1] : null,
-            Move.Right => Column is IHasColumnOnRight ? Squares[Index + 1] : null,
+            Direction.Up => Row is IHasRowAbove ? Squares[Index + Column.Columns.Length] : null,
+            Direction.Down => Row is IHasRowBelow ? Squares[Index - Column.Columns.Length] : null,
+            Direction.Left => Column is IHasColumnOnLeft ? Squares[Index - 1] : null,
+            Direction.Right => Column is IHasColumnOnRight ? Squares[Index + 1] : null,
             _ => null
         };
 
         return square is not null;
     }
 
-    public Dictionary<Move, Square> GetAvailableMoves()
+    public Dictionary<Direction, Square> GetAvailableMoves()
     {
-        var moves = new Dictionary<Move, Square>();
+        var moves = new Dictionary<Direction, Square>();
 
         if (Row is IHasRowAbove)
         {
-            moves.Add(Move.Up, Squares[Index + Column.Columns.Length]);
+            moves.Add(Direction.Up, Squares[Index + Column.Columns.Length]);
         }
 
         if (Row is IHasRowBelow)
         {
-            moves.Add(Move.Down, Squares[Index - Column.Columns.Length]);
+            moves.Add(Direction.Down, Squares[Index - Column.Columns.Length]);
         }
 
         if (Column is IHasColumnOnLeft)
         {
-            moves.Add(Move.Left, Squares[Index - 1]);
+            moves.Add(Direction.Left, Squares[Index - 1]);
         }
 
         if (Column is IHasColumnOnRight)
         {
-            moves.Add(Move.Right, Squares[Index + 1]);
+            moves.Add(Direction.Right, Squares[Index + 1]);
         }
 
         return moves;

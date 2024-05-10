@@ -1,26 +1,24 @@
-﻿using SchneiderElectric.MindSweeper.Moves;
-
-namespace SchneiderElectric.MindSweeper;
+﻿namespace SchneiderElectric.MindSweeper;
 
 partial class Field
 {
     public sealed class Moves
     {
-        private readonly List<Move> _moves;
+        private readonly List<Direction> _moves;
 
         public Moves()
         {
             _moves = [];
         }
 
-        public Moves(IEnumerable<Move> moves)
+        public Moves(IEnumerable<Direction> moves)
         {
-            _moves = new List<Move>(moves);
+            _moves = new List<Direction>(moves);
         }
 
-        public void Add(Move move) => _moves.Add(move);
+        public void Add(Direction move) => _moves.Add(move);
 
-        public List<Move> ToList() => _moves;
+        public List<Direction> ToList() => _moves;
 
         public int Length => _moves.Count;
     }

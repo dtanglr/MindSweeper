@@ -13,7 +13,7 @@ partial class Field
         {
             if (capacity < Settings.MinimumRows)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The capacity setting for the number of rows must be at least {MinRows}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The capacity setting for the number of rows must be at least {Settings.MinimumRows}.");
             }
 
             _rows = new(() =>

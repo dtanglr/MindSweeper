@@ -1,6 +1,4 @@
-﻿using SchneiderElectric.MindSweeper.Domain.Entities;
-
-namespace SchneiderElectric.MindSweeper.Domain.Repositories;
+﻿namespace SchneiderElectric.MindSweeper.Domain.Repositories;
 
 public interface IGameRepository
 {

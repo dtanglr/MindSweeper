@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\Move\" />
-    <Folder Include="Commands\Start\" />
     <Folder Include="Behaviours\" />
     <Folder Include="Requests\GetStatus\" />
   </ItemGroup>

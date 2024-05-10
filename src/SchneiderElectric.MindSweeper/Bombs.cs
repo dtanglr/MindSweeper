@@ -8,10 +8,9 @@ partial class Field
     {
         private readonly Lazy<HashSet<int>> _bombs;
 
-        public Bombs(IEnumerable<int> bombs)
-        {
-            _bombs = new(() => new HashSet<int>(bombs));
-        }
+        public Bombs() : this(new Settings()) { }
+
+        public Bombs(Settings settings) : this(settings.Columns, settings.Rows, settings.Bombs) { }
 
         public Bombs(int columnCapacity, int rowCapacity, int bombCapacity)
         {
@@ -28,10 +27,17 @@ partial class Field
             });
         }
 
+        public Bombs(IEnumerable<int> bombs)
+        {
+            _bombs = new(() => new HashSet<int>(bombs));
+        }
+
         public int Length => _bombs.Value.Count;
 
         public List<int> ToList() => [.. _bombs.Value];
 
         public bool OnSquare(Square square) => _bombs.Value.Contains(square.Index);
+
+        public static implicit operator List<int>(Bombs bombs) => bombs.ToList();
     }
 }

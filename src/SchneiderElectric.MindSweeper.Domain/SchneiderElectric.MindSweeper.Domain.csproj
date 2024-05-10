@@ -10,9 +10,4 @@
     <ProjectReference Include="..\SchneiderElectric.MindSweeper\SchneiderElectric.MindSweeper.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Core\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>
