@@ -22,24 +22,23 @@ partial class Program
                 var explosiveOutcome = response.HitBomb ? "Ooops. You hit a bomb!" : "Yay! You didn't hit a bomb.";
                 Console.WriteLine(explosiveOutcome);
 
-                if (response.Game.Lives == 0)
+                switch (response.Game.Status)
                 {
-                    Console.WriteLine("Game over, you lose!");
-                    Console.WriteLine($"Total moves: {response.Game.Moves}");
-                    return;
+                    case GameStatus.Won:
+                        Console.WriteLine("Game over, you win!");
+                        Console.WriteLine($"Total moves: {response.Game.Moves}");
+                        break;
+                    case GameStatus.Lost:
+                        Console.WriteLine("Game over, you lose!");
+                        Console.WriteLine($"Total moves: {response.Game.Moves}");
+                        break;
+                    default:
+                        Console.WriteLine($"You are currently on square: {response.Game.CurrentSquare}");
+                        Console.WriteLine($"Based on your current square, you can move: {string.Join(", ", response.Game.AvailableMoves.Select(m => m.Key.ToString()))}");
+                        Console.WriteLine($"You have made {response.Game.Moves} moves so far and have {response.Game.Lives} {(response.Game.Lives > 1 ? "lives" : "life")} left in this game.");
+                        break;
                 }
 
-                // TODO: Add logic to handle game over when all squares are visited
-                if (!response.Game.AvailableMoves.ContainsKey(Direction.Up))
-                {
-                    Console.WriteLine("Game over, you win!");
-                    Console.WriteLine($"Total moves: {response.Game.Moves}");
-                    return;
-                }
-
-                Console.WriteLine($"You are currently on square: {response.Game.CurrentSquare}");
-                Console.WriteLine($"Based on your current square, you can move: {string.Join(", ", response.Game.AvailableMoves.Select(m => m.Key.ToString()))}");
-                Console.WriteLine($"You have made {response.Game.Moves} moves so far and have {response.Game.Lives} {(response.Game.Lives > 1 ? "lives" : "life")} left in this game.");
                 break;
             case ResultStatus.Unprocessable:
                 Console.WriteLine($"It's not possible to move '{direction}' from your current square.");
