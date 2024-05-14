@@ -1,3 +1,5 @@
-﻿namespace SchneiderElectric.MindSweeper.Cli;
+﻿using SchneiderElectric.MindSweeper.Domain;
 
-public record StartOptions(string Name, int Columns, int Rows, int Bombs, int Lives);
+namespace SchneiderElectric.MindSweeper.Cli;
+
+public record StartOptions(string Name, Settings Settings);

@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\SchneiderElectric.MindSweeper\SchneiderElectric.MindSweeper.csproj" />
+    <ProjectReference Include="..\..\src\SchneiderElectric.MindSweeper.Application\SchneiderElectric.MindSweeper.Application.csproj" />
   </ItemGroup>
 
 </Project>

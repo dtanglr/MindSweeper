@@ -9,12 +9,6 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>mindgame</ToolCommandName>
   </PropertyGroup>
- 
-  <ItemGroup>
-    <Content Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.24209.3" />
@@ -23,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SchneiderElectric.MindSweeper.Application\SchneiderElectric.MindSweeper.Application.csproj" />
+    <ProjectReference Include="..\SchneiderElectric.MindSweeper.Persistence\SchneiderElectric.MindSweeper.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

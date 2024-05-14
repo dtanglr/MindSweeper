@@ -1,6 +1,4 @@
-﻿using SchneiderElectric.MindSweeper.Rows;
-
-namespace SchneiderElectric.MindSweeper.UnitTests;
+﻿namespace SchneiderElectric.MindSweeper.UnitTests;
 
 public class RowTests
 {

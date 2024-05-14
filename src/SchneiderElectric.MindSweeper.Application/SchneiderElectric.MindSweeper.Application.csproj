@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Behaviours\" />
-    <Folder Include="Requests\GetStatus\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
   </ItemGroup>
@@ -19,5 +14,10 @@
   <ItemGroup>
     <ProjectReference Include="..\SchneiderElectric.MindSweeper.Domain\SchneiderElectric.MindSweeper.Domain.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="SchneiderElectric.MindSweeper.UnitTests" />
+  </ItemGroup>
+
 
 </Project>

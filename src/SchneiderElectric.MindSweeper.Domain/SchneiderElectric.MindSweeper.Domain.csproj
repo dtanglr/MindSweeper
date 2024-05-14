@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SchneiderElectric.MindSweeper\SchneiderElectric.MindSweeper.csproj" />
+    <InternalsVisibleTo Include="SchneiderElectric.MindSweeper.UnitTests" />
   </ItemGroup>
 
 </Project>

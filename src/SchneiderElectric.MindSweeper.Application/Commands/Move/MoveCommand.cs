@@ -1,10 +1,6 @@
 ﻿using MediatR;
+using SchneiderElectric.MindSweeper.Domain;
 
 namespace SchneiderElectric.MindSweeper.Application.Commands.Move;
 
-public class MoveCommand : IRequest
-{
-    public Guid GameId { get; init; }
-
-    public Direction Direction { get; init; }
-}
+public record MoveCommand(string PlayerId, Direction Direction) : IRequest<Result<MoveCommandResponse>>;

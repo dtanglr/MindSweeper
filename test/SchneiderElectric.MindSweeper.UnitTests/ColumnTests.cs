@@ -1,6 +1,4 @@
-﻿using SchneiderElectric.MindSweeper.Columns;
-
-namespace SchneiderElectric.MindSweeper.UnitTests;
+﻿namespace SchneiderElectric.MindSweeper.UnitTests;
 
 public class ColumnTests
 {

@@ -2,14 +2,17 @@
 using System.CommandLine.Completions;
 using System.CommandLine.Hosting;
 using System.CommandLine.NamingConventionBinder;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SchneiderElectric.MindSweeper.Application;
+using SchneiderElectric.MindSweeper.Domain;
+using SchneiderElectric.MindSweeper.Persistence;
 
 namespace SchneiderElectric.MindSweeper.Cli;
 
-public static class Program
+static partial class Program
 {
     private static Task<int> Main(string[] args) => BuildCommandLine()
         .UseHost(_ => Host.CreateDefaultBuilder(),
@@ -17,7 +20,7 @@ public static class Program
             {
                 host.ConfigureServices(services =>
                 {
-                    services.AddMindGame();
+                    services.AddMindGame(options => options.UseRepository<JsonFileGameRepository>());
                 });
             })
         .InvokeAsync(args);
@@ -30,14 +33,6 @@ public static class Program
             Action = CommandHandler.Create<StartOptions, IHost>(Start),
             Options =
             {
-                new CliOption<string>("--name", "-n")
-                {
-                    Arity = ArgumentArity.ExactlyOne,
-                    Description = "The name of the player",
-                    HelpName = "name",
-                    Required = false,
-                    DefaultValueFactory = (arg) => "Manic Miner"
-                },
                 new CliOption<int>("--columns", "-c", "-cols")
                 {
                     Arity = ArgumentArity.ExactlyOne,
@@ -96,33 +91,20 @@ public static class Program
             Arguments = { directionArgument }
         };
 
+        // End command
+        var endCommand = new CliCommand("end", "End the current game")
+        {
+            Action = CommandHandler.Create<IHost>(End)
+        };
+
         // Root command
         var rootCommand = new CliRootCommand("A game to sweep the mind of it's creator by it's players :-P")
         {
             Action = CommandHandler.Create<IHost>(Root),
-            Subcommands = { startCommand, moveCommand }
+            Subcommands = { startCommand, moveCommand, endCommand }
         };
 
         return new CliConfiguration(rootCommand);
-    }
-
-    private static void Root(IHost host)
-    {
-        var logger = host.CreateLogger();
-        logger.LogInformation("Root command handled");
-    }
-
-    private static void Start(StartOptions options, IHost host)
-    {
-        var logger = host.CreateLogger();
-        logger.LogInformation("Start command handled with options - Name: {Name}, Columns: {Columns}, Rows: {Rows}, Bombs: {Bombs}, Lives: {Lives}",
-            options.Name, options.Columns, options.Rows, options.Bombs, options.Lives);
-    }
-
-    private static void Move(Direction direction, IHost host)
-    {
-        var logger = host.CreateLogger();
-        logger.LogInformation("Move {Direction} command handled", direction);
     }
 
     private static ILogger CreateLogger(this IHost host)
@@ -130,5 +112,11 @@ public static class Program
         var serviceProvider = host.Services;
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
         return loggerFactory.CreateLogger(typeof(Program));
+    }
+
+    private static IMediator CreateMediator(this IHost host)
+    {
+        var serviceProvider = host.Services;
+        return serviceProvider.GetRequiredService<IMediator>();
     }
 }
