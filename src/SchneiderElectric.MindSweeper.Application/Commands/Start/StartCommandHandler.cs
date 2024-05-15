@@ -13,8 +13,8 @@ public class StartCommandHandler(IGameRepository repository) : IRequestHandler<S
         var id = Guid.NewGuid();
         var playerId = request.PlayerId;
         var settings = request.Settings;
-        var bombs = new Field.Bombs(settings);
         var lives = request.Settings.Lives;
+        var bombs = new Field.Bombs(settings);
         var squares = new Field.Squares(settings);
         var startSquare = squares.GetStartSquare();
         var availableMoves = startSquare
