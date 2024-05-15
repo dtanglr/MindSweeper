@@ -17,11 +17,7 @@ public class StartCommandHandler(IGameRepository repository) : IRequestHandler<S
         var bombs = new Field.Bombs(settings);
         var squares = new Field.Squares(settings);
         var startSquare = squares.GetStartSquare();
-        var availableMoves = startSquare
-            .GetAvailableMoves()
-            .Select(m => new KeyValuePair<Direction, string>(m.Key, m.Value.Name))
-            .ToDictionary();
-
+        var availableMoves = startSquare.GetAvailableMoves();
         var game = new Game(id, playerId, settings, bombs, lives, 0, startSquare.Name, availableMoves);
         var result = await _repository.CreateGameAsync(game, cancellationToken);
 

@@ -31,11 +31,7 @@ public class MoveCommandHandler(IGameRepository repository) : IRequestHandler<Mo
         var hitBomb = toSquare!.HasBomb(bombs);
         var lives = hitBomb ? game.Lives - 1 : game.Lives;
         var moves = game.Moves + 1;
-        var availableMoves = toSquare
-            .GetAvailableMoves()
-            .Select(m => new KeyValuePair<Direction, string>(m.Key, m.Value.Name))
-            .ToDictionary();
-
+        var availableMoves = toSquare.GetAvailableMoves();
         var updatedGame = game with
         {
             CurrentSquare = toSquare.Name,

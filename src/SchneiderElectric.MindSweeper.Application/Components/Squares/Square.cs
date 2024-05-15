@@ -26,28 +26,28 @@ internal record Square(Field.Squares Squares, IColumn Column, IRow Row)
         return square is not null;
     }
 
-    public Dictionary<Direction, Square> GetAvailableMoves()
+    public Dictionary<Direction, string> GetAvailableMoves()
     {
-        var moves = new Dictionary<Direction, Square>();
+        var moves = new Dictionary<Direction, string>();
 
         if (Row is IHasRowAbove)
         {
-            moves.Add(Direction.Up, Squares[Index + Column.Columns.Length]);
+            moves.Add(Direction.Up, Squares[Index + Column.Columns.Length].Name);
         }
 
         if (Row is IHasRowBelow)
         {
-            moves.Add(Direction.Down, Squares[Index - Column.Columns.Length]);
+            moves.Add(Direction.Down, Squares[Index - Column.Columns.Length].Name);
         }
 
         if (Column is IHasColumnOnLeft)
         {
-            moves.Add(Direction.Left, Squares[Index - 1]);
+            moves.Add(Direction.Left, Squares[Index - 1].Name);
         }
 
         if (Column is IHasColumnOnRight)
         {
-            moves.Add(Direction.Right, Squares[Index + 1]);
+            moves.Add(Direction.Right, Squares[Index + 1].Name);
         }
 
         return moves;
