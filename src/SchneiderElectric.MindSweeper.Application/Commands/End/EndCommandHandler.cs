@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.Extensions.Logging;
 using SchneiderElectric.MindSweeper.Domain;
 
 namespace SchneiderElectric.MindSweeper.Application.Commands.End;

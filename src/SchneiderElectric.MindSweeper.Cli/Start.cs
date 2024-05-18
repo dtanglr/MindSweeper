@@ -66,6 +66,10 @@ partial class Program
                 case ResultStatus.Conflict:
                     Console.WriteLine("You already have an active game. Please end the current game before starting a new one.");
                     break;
+                case ResultStatus.Invalid:
+                    Console.WriteLine("One or more validation issues occurred.");
+                    result.ValidationIssues.ForEach(e => Console.WriteLine(e.Message));
+                    break;
                 case ResultStatus.Error:
                     Console.WriteLine("Unfortunately an error occurred.");
                     result.Errors.ForEach(e => Console.WriteLine(e));

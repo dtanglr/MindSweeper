@@ -33,6 +33,10 @@ partial class Program
                 case ResultStatus.NotFound:
                     Console.WriteLine("You don't have an active game. Start a new game to play.");
                     break;
+                case ResultStatus.Invalid:
+                    Console.WriteLine("One or more validation issues occurred.");
+                    result.ValidationIssues.ForEach(e => Console.WriteLine(e.Message));
+                    break;
                 case ResultStatus.Error:
                     Console.WriteLine("Unfortunately an error occurred.");
                     result.Errors.ForEach(e => Console.WriteLine(e));

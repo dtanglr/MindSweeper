@@ -27,6 +27,10 @@ partial class Program
                 case ResultStatus.NotFound:
                     Console.WriteLine("There is no game to end!");
                     break;
+                case ResultStatus.Invalid:
+                    Console.WriteLine("One or more validation issues occurred.");
+                    result.ValidationIssues.ForEach(e => Console.WriteLine(e.Message));
+                    break;
                 case ResultStatus.Error:
                     Console.WriteLine("Unfortunately an error occurred.");
                     result.Errors.ForEach(e => Console.WriteLine(e));

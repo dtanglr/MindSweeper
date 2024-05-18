@@ -1,5 +1,4 @@
-﻿using System;
-using SchneiderElectric.MindSweeper.Application.Components.Squares;
+﻿using SchneiderElectric.MindSweeper.Application.Components.Squares;
 using SchneiderElectric.MindSweeper.Application.Exceptions;
 using SchneiderElectric.MindSweeper.Domain;
 
