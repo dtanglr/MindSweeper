@@ -71,7 +71,8 @@ partial class Program
                     Console.WriteLine("There is no game to make a move on!. Start a new game first!");
                     break;
                 case ResultStatus.Error:
-                    Console.WriteLine("Unfortunately an error occurred");
+                    Console.WriteLine("Unfortunately an error occurred.");
+                    result.Errors.ForEach(e => Console.WriteLine(e));
                     break;
                 default:
                     Console.WriteLine($"Unexpected result: {result.Status}");

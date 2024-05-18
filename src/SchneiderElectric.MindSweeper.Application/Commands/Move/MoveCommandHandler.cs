@@ -10,57 +10,64 @@ public class MoveCommandHandler(IGameRepository repository) : IRequestHandler<Mo
 
     public async Task<Result<MoveCommandResponse>> Handle(MoveCommand request, CancellationToken cancellationToken)
     {
-        var getGameResult = await _repository.GetGameAsync(request.PlayerId, cancellationToken);
-
-        if (!getGameResult.IsSuccess)
+        try
         {
-            return getGameResult.ToResult<MoveCommandResponse>();
-        }
+            var getGameResult = await _repository.GetGameAsync(request.PlayerId, cancellationToken);
 
-        var game = getGameResult.Value!;
-        var settings = game.Settings;
-        var squares = new Field.Squares(settings);
-        var fromSquare = squares[game.CurrentSquare];
-
-        if (!fromSquare.TryMove(request.Direction, out var toSquare))
-        {
-            return Result<MoveCommandResponse>.Unprocessable();
-        }
-
-        var bombs = new Field.Bombs(game.Bombs);
-        var hitBomb = toSquare!.HasBomb(bombs);
-        var lives = hitBomb ? game.Lives - 1 : game.Lives;
-        var moves = game.Moves + 1;
-        var availableMoves = toSquare.GetAvailableMoves();
-        var updatedGame = game with
-        {
-            CurrentSquare = toSquare.Name,
-            AvailableMoves = availableMoves,
-            Lives = lives,
-            Moves = moves
-        };
-
-        if (updatedGame.Status == GameStatus.InProgress)
-        {
-            var updateResult = await _repository.UpdateGameAsync(updatedGame, cancellationToken);
-
-            if (!updateResult.IsSuccess)
+            if (!getGameResult.IsSuccess)
             {
-                return updateResult.ToResult<MoveCommandResponse>();
+                return getGameResult.ToResult<MoveCommandResponse>();
             }
-        }
-        else
-        {
-            var deleteResult = await _repository.DeleteGameAsync(request.PlayerId, cancellationToken);
 
-            if (!deleteResult.IsSuccess)
+            var game = getGameResult.Value!;
+            var settings = game.Settings;
+            var squares = new Field.Squares(settings);
+            var fromSquare = squares[game.CurrentSquare];
+
+            if (!fromSquare.TryMove(request.Direction, out var toSquare))
             {
-                return deleteResult.ToResult<MoveCommandResponse>();
+                return Result<MoveCommandResponse>.Unprocessable();
             }
+
+            var bombs = new Field.Bombs(game.Bombs);
+            var hitBomb = toSquare!.HasBomb(bombs);
+            var lives = hitBomb ? game.Lives - 1 : game.Lives;
+            var moves = game.Moves + 1;
+            var availableMoves = toSquare.GetAvailableMoves();
+            var updatedGame = game with
+            {
+                CurrentSquare = toSquare.Name,
+                AvailableMoves = availableMoves,
+                Lives = lives,
+                Moves = moves
+            };
+
+            if (updatedGame.Status == GameStatus.InProgress)
+            {
+                var updateResult = await _repository.UpdateGameAsync(updatedGame, cancellationToken);
+
+                if (!updateResult.IsSuccess)
+                {
+                    return updateResult.ToResult<MoveCommandResponse>();
+                }
+            }
+            else
+            {
+                var deleteResult = await _repository.DeleteGameAsync(request.PlayerId, cancellationToken);
+
+                if (!deleteResult.IsSuccess)
+                {
+                    return deleteResult.ToResult<MoveCommandResponse>();
+                }
+            }
+
+            var response = new MoveCommandResponse(updatedGame, fromSquare.Name, toSquare.Name, request.Direction, hitBomb);
+
+            return Result<MoveCommandResponse>.Accepted(response);
         }
-
-        var response = new MoveCommandResponse(updatedGame, fromSquare.Name, toSquare.Name, request.Direction, hitBomb);
-
-        return Result<MoveCommandResponse>.Accepted(response);
+        catch (Exception ex)
+        {
+            return Result<MoveCommandResponse>.Error(ex.Message);
+        }
     }
 }

@@ -14,7 +14,12 @@ partial class Field
         {
             if (capacity < Settings.MinimumRows)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The capacity setting for the number of rows must be at least {Settings.MinimumRows}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of rows must be at least {Settings.MinimumRows}.");
+            }
+
+            if (capacity > Settings.MaximumRows)
+            {
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of rows must not exceed {Settings.MaximumRows}.");
             }
 
             _rows = new(() =>
@@ -42,7 +47,7 @@ partial class Field
             get
             {
                 return index < 0 || index >= _rows.Value.Length
-                    ? throw new RowIndexOutOfRangeException() : _rows.Value[index];
+                    ? throw new RowIndexOutOfRangeException($"The row index of {index} was out of range.") : _rows.Value[index];
             }
         }
     }

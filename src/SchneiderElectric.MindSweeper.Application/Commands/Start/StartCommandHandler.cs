@@ -10,24 +10,31 @@ public class StartCommandHandler(IGameRepository repository) : IRequestHandler<S
 
     public async Task<Result<StartCommandResponse>> Handle(StartCommand request, CancellationToken cancellationToken)
     {
-        var id = Guid.NewGuid();
-        var playerId = request.PlayerId;
-        var settings = request.Settings;
-        var lives = request.Settings.Lives;
-        var bombs = new Field.Bombs(settings);
-        var squares = new Field.Squares(settings);
-        var startSquare = squares.GetStartSquare();
-        var availableMoves = startSquare.GetAvailableMoves();
-        var game = new Game(id, playerId, settings, bombs, lives, 0, startSquare.Name, availableMoves);
-        var result = await _repository.CreateGameAsync(game, cancellationToken);
-
-        if (!result.IsSuccess)
+        try
         {
-            return result.ToResult<StartCommandResponse>();
+            var id = Guid.NewGuid();
+            var playerId = request.PlayerId;
+            var settings = request.Settings;
+            var squares = new Field.Squares(settings);
+            var startSquare = squares.GetStartSquare();
+            var availableMoves = startSquare.GetAvailableMoves();
+            var bombs = new Field.Bombs(settings);
+            var lives = settings.Lives;
+            var game = new Game(id, playerId, settings, bombs, lives, 0, startSquare.Name, availableMoves);
+            var result = await _repository.CreateGameAsync(game, cancellationToken);
+
+            if (!result.IsSuccess)
+            {
+                return result.ToResult<StartCommandResponse>();
+            }
+
+            var response = new StartCommandResponse(game);
+
+            return Result<StartCommandResponse>.Accepted(response);
         }
-
-        var response = new StartCommandResponse(game);
-
-        return Result<StartCommandResponse>.Accepted(response);
+        catch (Exception ex)
+        {
+            return Result<StartCommandResponse>.Error(ex.Message);
+        }
     }
 }

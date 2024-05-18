@@ -9,15 +9,22 @@ public class GetGameRequestHandler(IGameRepository repository) : IRequestHandler
 
     public async Task<Result<GetGameRequestResponse>> Handle(GetGameRequest request, CancellationToken cancellationToken)
     {
-        var result = await _repository.GetGameAsync(request.PlayerId, cancellationToken);
-
-        if (!result.IsSuccess)
+        try
         {
-            return result.ToResult<GetGameRequestResponse>();
+            var result = await _repository.GetGameAsync(request.PlayerId, cancellationToken);
+
+            if (!result.IsSuccess)
+            {
+                return result.ToResult<GetGameRequestResponse>();
+            }
+
+            var response = new GetGameRequestResponse(result.Value!);
+
+            return Result<GetGameRequestResponse>.Success(response);
         }
-
-        var response = new GetGameRequestResponse(result.Value!);
-
-        return Result<GetGameRequestResponse>.Success(response);
+        catch (Exception ex)
+        {
+            return Result<GetGameRequestResponse>.Error(ex.Message);
+        }
     }
 }

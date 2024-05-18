@@ -14,12 +14,12 @@ partial class Field
         {
             if (capacity < Settings.MinimumColumns)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The capacity setting for the number of columns must be at least {Settings.MinimumColumns}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of columns must be at least {Settings.MinimumColumns}.");
             }
 
             if (capacity > Settings.MaximumColumns)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The capacity setting for the number of columns must not exceed {Settings.MaximumColumns}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of columns must not exceed {Settings.MaximumColumns}.");
             }
 
             _columns = new(() =>
@@ -43,6 +43,6 @@ partial class Field
         public int Length => _columns.Value.Length;
 
         public IColumn this[int index] => index < 0 || index >= _columns.Value.Length
-            ? throw new ColumnIndexOutOfRangeException() : _columns.Value[index];
+            ? throw new ColumnIndexOutOfRangeException($"The column index of {index} was out of range.") : _columns.Value[index];
     }
 }

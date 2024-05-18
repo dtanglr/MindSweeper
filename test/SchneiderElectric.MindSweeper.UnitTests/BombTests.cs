@@ -3,22 +3,20 @@
 public class BombTests
 {
     [Fact]
-    public void GivenAColumnRowAndBombCapacity_AboveTheMinimumRequired_BombsInstantiateCorrectly()
+    public void GivenDefaultSettings_BombsInstantiateCorrectly()
     {
         // Arrange
-        const int ColumnsCapacity = 8;
-        const int RowsCapacity = 8;
-        const int BombsCapacity = 12;
+        var settings = new Settings();
 
         // Act
-        var sut = new Field.Bombs(ColumnsCapacity, RowsCapacity, BombsCapacity);
+        var sut = new Field.Bombs(settings);
 
         // Assert
-        sut.Length.Should().Be(BombsCapacity);
+        sut.Length.Should().Be(settings.Bombs);
         sut.ToList().ForEach(bomb =>
         {
             bomb.Should().BeGreaterThan(-1);
-            bomb.Should().BeLessThan(ColumnsCapacity * RowsCapacity);
+            bomb.Should().BeLessThan(settings.Squares);
         });
     }
 
@@ -26,10 +24,8 @@ public class BombTests
     public void GivenAListOfBombs_BombsInstantiateCorrectly()
     {
         // Arrange
-        const int ColumnsCapacity = 8;
-        const int RowsCapacity = 8;
-        const int BombsCapacity = 12;
-        var bombs = new Field.Bombs(ColumnsCapacity, RowsCapacity, BombsCapacity);
+        var settings = new Settings();
+        var bombs = new Field.Bombs(settings);
         var listOfBombs = bombs.ToList();
 
         // Act
@@ -43,13 +39,11 @@ public class BombTests
     public void GivenACollectionOfSquares_BombsOnSquareMethod_CorrectlyReturnsSquaresWithBombs()
     {
         // Arrange
-        const int ColumnsCapacity = 8;
-        const int RowsCapacity = 8;
-        const int BombsCapacity = 12;
-        var squares = new Field.Squares(ColumnsCapacity, RowsCapacity);
+        var settings = new Settings();
+        var squares = new Field.Squares(settings);
 
         // Act
-        var bombs = new Field.Bombs(ColumnsCapacity, RowsCapacity, BombsCapacity);
+        var bombs = new Field.Bombs(settings);
         var listOfBombs = bombs.ToList();
 
         // Assert

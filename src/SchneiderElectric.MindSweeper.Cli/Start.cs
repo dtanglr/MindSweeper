@@ -14,7 +14,7 @@ partial class Program
     {
         Options =
         {
-            new CliOption<int>("--columns", "-c", "-cols")
+            new CliOption<int>("--columns", "-c")
             {
                 Arity = ArgumentArity.ExactlyOne,
                 Description = "The number of columns",
@@ -35,8 +35,7 @@ partial class Program
                 Arity = ArgumentArity.ExactlyOne,
                 Description = "The number of bombs",
                 HelpName = "bombs",
-                Required = false,
-                DefaultValueFactory = (arg) => Settings.DefaultBombs
+                Required = false
             },
             new CliOption<int>("--lives", "-l")
             {
@@ -69,6 +68,7 @@ partial class Program
                     break;
                 case ResultStatus.Error:
                     Console.WriteLine("Unfortunately an error occurred.");
+                    result.Errors.ForEach(e => Console.WriteLine(e));
                     break;
                 default:
                     Console.WriteLine($"Unexpected result: {result.Status}");

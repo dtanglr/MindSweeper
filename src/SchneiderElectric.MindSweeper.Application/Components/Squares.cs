@@ -1,4 +1,5 @@
-﻿using SchneiderElectric.MindSweeper.Application.Components.Squares;
+﻿using System;
+using SchneiderElectric.MindSweeper.Application.Components.Squares;
 using SchneiderElectric.MindSweeper.Application.Exceptions;
 using SchneiderElectric.MindSweeper.Domain;
 
@@ -11,18 +12,16 @@ partial class Field
         private readonly Lazy<Dictionary<string, Square>> _squares;
         private readonly int _columnCapacity;
 
-        public Squares() : this(new Settings()) { }
+        public Squares(Settings settings) : this(settings.Columns, settings.Rows, settings.Squares) { }
 
-        public Squares(Settings settings) : this(settings.Columns, settings.Rows) { }
-
-        public Squares(int columnCapacity, int rowCapacity)
+        private Squares(int columnCapacity, int rowCapacity, int squaresCapacity)
         {
             _columnCapacity = columnCapacity;
             _squares = new(() =>
             {
                 var columns = new Columns(columnCapacity);
                 var rows = new Rows(rowCapacity);
-                var squares = new Dictionary<string, Square>(columnCapacity * rowCapacity);
+                var squares = new Dictionary<string, Square>(squaresCapacity);
 
                 for (var i = 0; i < rows.Length; i++)
                 {
@@ -44,16 +43,16 @@ partial class Field
             get
             {
                 return index < 0 || index >= _squares.Value.Count
-                    ? throw new SquareIndexOutOfRangeException() : _squares.Value.ElementAt(index).Value;
+                    ? throw new SquareIndexOutOfRangeException($"The square index of {index} was out of range.") : _squares.Value.ElementAt(index).Value;
             }
         }
 
-        public Square this[string name]
+        public Square this[string index]
         {
             get
             {
-                return !_squares.Value.TryGetValue(name, out var square)
-                    ? throw new SquareIndexOutOfRangeException() : square;
+                return !_squares.Value.TryGetValue(index, out var square)
+                    ? throw new SquareIndexOutOfRangeException($"The square index of {index} was out of range.") : square;
             }
         }
 

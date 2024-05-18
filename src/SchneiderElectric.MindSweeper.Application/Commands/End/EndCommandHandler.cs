@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using SchneiderElectric.MindSweeper.Domain;
 
 namespace SchneiderElectric.MindSweeper.Application.Commands.End;
@@ -7,8 +8,15 @@ public class EndCommandHandler(IGameRepository repository) : IRequestHandler<End
 {
     private readonly IGameRepository _repository = repository;
 
-    public Task<Result> Handle(EndCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(EndCommand request, CancellationToken cancellationToken)
     {
-        return _repository.DeleteGameAsync(request.PlayerId, cancellationToken);
+        try
+        {
+            return await _repository.DeleteGameAsync(request.PlayerId, cancellationToken);
+        }
+        catch (Exception ex)
+        {
+            return Result.Error(ex.Message);
+        }
     }
 }

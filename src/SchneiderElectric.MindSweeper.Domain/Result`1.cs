@@ -36,7 +36,7 @@ public class Result<T> : IResult<T>
 
     public string SuccessMessage { get; init; } = string.Empty;
 
-    public IEnumerable<string> Errors { get; init; } = [];
+    public List<string> Errors { get; init; } = [];
 
     public List<ValidationIssue> ValidationIssues { get; init; } = [];
 
@@ -136,7 +136,7 @@ public class Result<T> : IResult<T>
     /// <returns>A Result<typeparamref name="T"/></returns>
     public static Result<T> Error(params string[] errorMessages) => new(ResultStatus.Error)
     {
-        Errors = errorMessages
+        Errors = new(errorMessages)
     };
 
     /// <summary>
@@ -168,7 +168,7 @@ public class Result<T> : IResult<T>
     /// <returns>A Result<typeparamref name="T"/></returns>
     public static Result<T> Unprocessable(params string[] errorMessages) => new(ResultStatus.Unprocessable)
     {
-        Errors = errorMessages
+        Errors = new(errorMessages)
     };
 
     /// <summary>

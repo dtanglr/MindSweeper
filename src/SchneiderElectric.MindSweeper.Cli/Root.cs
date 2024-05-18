@@ -34,7 +34,8 @@ partial class Program
                     Console.WriteLine("You don't have an active game. Start a new game to play.");
                     break;
                 case ResultStatus.Error:
-                    Console.WriteLine("Unfortunately an error occurred");
+                    Console.WriteLine("Unfortunately an error occurred.");
+                    result.Errors.ForEach(e => Console.WriteLine(e));
                     break;
                 default:
                     Console.WriteLine($"Unexpected result: {result.Status}");

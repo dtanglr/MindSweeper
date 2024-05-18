@@ -3,19 +3,18 @@
 public class SquareTests
 {
     [Fact]
-    public void GivenAColumnAndRowCapacity_AboveTheMinimumRequired_SquaresInstantiateCorrectly()
+    public void GivenDefaultSettings_AboveTheMinimumRequired_SquaresInstantiateCorrectly()
     {
         // Arrange
-        const int ColumnsCapacity = 8;
-        const int RowsCapacity = 8;
+        var settings = new Settings();
 
         // Act
-        var sut = new Field.Squares(ColumnsCapacity, RowsCapacity);
+        var sut = new Field.Squares(settings);
 
         // Assert
-        sut.Length.Should().Be(ColumnsCapacity * RowsCapacity);
+        sut.Length.Should().Be(settings.Squares);
 
-        for (var i = 0; i < (ColumnsCapacity * RowsCapacity); i++)
+        for (var i = 0; i < settings.Squares; i++)
         {
             var @this = sut[i];
             @this.Index.Should().Be(i);
@@ -32,9 +31,8 @@ public class SquareTests
     public void GivenACollectionOfSquares_SquareGetStartSquareMethod_CorrectlyReturnsASquareOnTheFirstRow()
     {
         // Arrange
-        const int ColumnsCapacity = 8;
-        const int RowsCapacity = 8;
-        var squares = new Field.Squares(ColumnsCapacity, RowsCapacity);
+        var settings = new Settings();
+        var squares = new Field.Squares(settings);
 
         // Act
         var square = squares.GetStartSquare();
@@ -43,19 +41,17 @@ public class SquareTests
         square.Should().NotBeNull();
         square.Row.Index.Should().Be(0);
         square.Row.Should().BeOfType<FirstRow>();
-        square.Index.Should().BeLessThan(ColumnsCapacity);
+        square.Index.Should().BeLessThan(settings.Columns);
     }
 
     [Fact]
     public void GivenACollectionOfBombs_SquareHasBombMethod_CorrectlyReturnsWhetherTheSquareHasABomb()
     {
         // Arrange
-        const int ColumnsCapacity = 8;
-        const int RowsCapacity = 8;
-        const int BombsCapacity = 12;
-        var bombs = new Field.Bombs(ColumnsCapacity, RowsCapacity, BombsCapacity);
+        var settings = new Settings();
+        var bombs = new Field.Bombs(settings);
         var listOfBombs = bombs.ToList();
-        var squares = new Field.Squares(ColumnsCapacity, RowsCapacity);
+        var squares = new Field.Squares(settings);
 
         for (var i = 0; i < squares.Length; i++)
         {

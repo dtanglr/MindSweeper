@@ -9,19 +9,27 @@ partial class Field
     {
         private readonly Lazy<HashSet<int>> _bombs;
 
-        public Bombs() : this(new Settings()) { }
+        public Bombs(Settings settings) : this(settings.Bombs, settings.Squares) { }
 
-        public Bombs(Settings settings) : this(settings.Columns, settings.Rows, settings.Bombs) { }
-
-        public Bombs(int columnCapacity, int rowCapacity, int bombCapacity)
+        private Bombs(int bombCapacity, int squaresCapacity)
         {
+            if (bombCapacity < Settings.MinimumBombs)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bombCapacity), $"The number of bombs must be at least {Settings.MinimumBombs}.");
+            }
+
+            if (bombCapacity > squaresCapacity)
+            {
+                throw new ArgumentOutOfRangeException(nameof(bombCapacity), $"The number of bombs must not exceed {squaresCapacity}.");
+            }
+
             _bombs = new(() =>
             {
                 var bombs = new HashSet<int>(bombCapacity);
 
                 while (bombs.Count < bombCapacity)
                 {
-                    bombs.Add(Random.Shared.Next(0, columnCapacity * rowCapacity));
+                    bombs.Add(Random.Shared.Next(0, squaresCapacity));
                 }
 
                 return bombs;

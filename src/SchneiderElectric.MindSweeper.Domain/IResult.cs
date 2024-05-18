@@ -4,7 +4,7 @@ public interface IResult
 {
     ResultStatus Status { get; }
 
-    IEnumerable<string> Errors { get; }
+    List<string> Errors { get; }
 
     List<ValidationIssue> ValidationIssues { get; }
 

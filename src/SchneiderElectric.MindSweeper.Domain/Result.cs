@@ -17,7 +17,7 @@ public class Result : IResult
 
     public string SuccessMessage { get; internal set; } = string.Empty;
 
-    public IEnumerable<string> Errors { get; internal set; } = [];
+    public List<string> Errors { get; internal set; } = [];
 
     public List<ValidationIssue> ValidationIssues { get; internal set; } = [];
 
@@ -99,7 +99,7 @@ public class Result : IResult
     /// <returns>A Result</returns>
     public static Result Error(params string[] errorMessages) => new(ResultStatus.Error)
     {
-        Errors = errorMessages
+        Errors = new(errorMessages)
     };
 
     /// <summary>
@@ -131,7 +131,7 @@ public class Result : IResult
     /// <returns>A Result</returns>
     public static Result Unprocessable(params string[] errorMessages) => new(ResultStatus.Unprocessable)
     {
-        Errors = errorMessages
+        Errors = new(errorMessages)
     };
 
     /// <summary>
