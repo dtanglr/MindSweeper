@@ -15,7 +15,9 @@ partial class Program : IProgram
                 host.ConfigureServices(services =>
                 {
                     services.AddMindGame(options =>
-                        options.UseRepository<JsonFileGameRepository>());
+                    {
+                        options.UseRepository<JsonFileGameRepository>();
+                    });
                 });
             })
         .InvokeAsync(args);

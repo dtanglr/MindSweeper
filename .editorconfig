@@ -43,6 +43,9 @@ indent_size = 2
 # IDE0055: Fix formatting
 dotnet_diagnostic.IDE0055.severity = suggestion
 
+# IDE0290: Use primary constructor
+dotnet_diagnostic.IDE0290.severity = none
+
 # Sort using and Import directives with System.* appearing first
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false

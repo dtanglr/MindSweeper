@@ -36,7 +36,7 @@ public abstract class BaseValidationBehavior<TRequest, TResponse> : IPipelineBeh
             errors.AddRange(result.AsErrors());
         }
 
-        if (errors.Any())
+        if (errors.Count != 0)
         {
             _logger.LogDebug("Request had {ValidationIssueCount} validation issues", errors.Count);
 
