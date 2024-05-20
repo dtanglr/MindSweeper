@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using SchneiderElectric.MindSweeper.Application.Behaviors;
+using SchneiderElectric.MindSweeper.Application.Commands.End;
 using SchneiderElectric.MindSweeper.Application.Commands.Move;
 using SchneiderElectric.MindSweeper.Application.Commands.Start;
 using SchneiderElectric.MindSweeper.Application.Requests.GetGame;
@@ -21,10 +21,11 @@ public static class DependencyInjection
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
-            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ResultValidationBehavior<,>));
-            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(MoveCommandValidationBehavior<,>));
-            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(StartCommandValidationBehavior<,>));
-            config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(GetGameRequestValidationBehavior<,>));
+            config.AddBehavior(typeof(IPipelineBehavior<EndCommand, Result>), typeof(EndCommandValidationBehavior));
+            config.AddBehavior(typeof(IPipelineBehavior<MoveCommand, Result<MoveCommandResponse>>), typeof(MoveCommandGameBehavior));
+            config.AddBehavior(typeof(IPipelineBehavior<MoveCommand, Result<MoveCommandResponse>>), typeof(MoveCommandValidationBehavior));
+            config.AddBehavior(typeof(IPipelineBehavior<StartCommand, Result<StartCommandResponse>>), typeof(StartCommandValidationBehavior));
+            config.AddBehavior(typeof(IPipelineBehavior<GetGameRequest, Result<GetGameRequestResponse>>), typeof(GetGameRequestValidationBehavior));
         });
 
         services.AddValidatorsFromAssemblies([typeof(DependencyInjection).Assembly]);

@@ -12,14 +12,7 @@ public class MoveCommandHandler(IGameRepository repository) : IRequestHandler<Mo
     {
         try
         {
-            var getGameResult = await _repository.GetGameAsync(request.PlayerId, cancellationToken);
-
-            if (!getGameResult.IsSuccess)
-            {
-                return getGameResult.ToResult<MoveCommandResponse>();
-            }
-
-            var game = getGameResult.Value!;
+            var game = request.Game!;
             var settings = game.Settings;
             var squares = new Field.Squares(settings);
             var fromSquare = squares[game.CurrentSquare];

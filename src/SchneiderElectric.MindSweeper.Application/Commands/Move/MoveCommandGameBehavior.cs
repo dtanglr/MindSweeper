@@ -3,7 +3,7 @@ using SchneiderElectric.MindSweeper.Domain;
 
 namespace SchneiderElectric.MindSweeper.Application.Commands.Move;
 
-public class MoveCommandGameBehavior(IGameRepository repository) : IPipelineBehavior<MoveCommand, Result<MoveCommandResponse>>
+public sealed class MoveCommandGameBehavior(IGameRepository repository) : IPipelineBehavior<MoveCommand, Result<MoveCommandResponse>>
 {
     private readonly IGameRepository _repository = repository;
 
@@ -11,14 +11,14 @@ public class MoveCommandGameBehavior(IGameRepository repository) : IPipelineBeha
     {
         try
         {
-            var getGameResult = await _repository.GetGameAsync(request.PlayerId, cancellationToken);
+            var result = await _repository.GetGameAsync(request.PlayerId, cancellationToken);
 
-            if (!getGameResult.IsSuccess)
+            if (!result.IsSuccess)
             {
-                return getGameResult.ToResult<MoveCommandResponse>();
+                return result.ToResult<MoveCommandResponse>();
             }
 
-            request.Game = getGameResult.Value!;
+            request.Game = result.Value!;
 
             var response = await next();
 
