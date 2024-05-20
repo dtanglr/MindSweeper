@@ -16,10 +16,10 @@ internal record Square(Field.Squares Squares, IColumn Column, IRow Row)
     {
         square = move switch
         {
-            Direction.Up => Row is IHasRowAbove ? Squares[Index + Column.Columns.Length] : null,
-            Direction.Down => Row is IHasRowBelow ? Squares[Index - Column.Columns.Length] : null,
-            Direction.Left => Column is IHasColumnOnLeft ? Squares[Index - 1] : null,
-            Direction.Right => Column is IHasColumnOnRight ? Squares[Index + 1] : null,
+            Direction.Up when Row is IHasRowAbove => Squares[Index + Column.Columns.Length],
+            Direction.Down when Row is IHasRowBelow => Squares[Index - Column.Columns.Length],
+            Direction.Left when Column is IHasColumnOnLeft => Squares[Index - 1],
+            Direction.Right when Column is IHasColumnOnRight => Squares[Index + 1],
             _ => null
         };
 
