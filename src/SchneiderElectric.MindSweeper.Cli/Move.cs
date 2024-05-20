@@ -2,6 +2,7 @@
 using System.CommandLine.Completions;
 using System.CommandLine.NamingConventionBinder;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SchneiderElectric.MindSweeper.Application.Commands.Move;
@@ -32,6 +33,7 @@ partial class Program
         },
         Action = CommandHandler.Create<Direction, IHost>(async (direction, host) =>
         {
+            var configuration = host.Services.GetRequiredService<IConfiguration>();
             var mediator = host.Services.GetRequiredService<IMediator>();
             var command = new MoveCommand(Environment.MachineName, direction);
             var result = await mediator.Send(command);
@@ -46,21 +48,22 @@ partial class Program
                     var explosiveOutcome = response.HitBomb ? "Ooops. You hit a bomb!" : "Yay! You didn't hit a bomb.";
                     Console.WriteLine(explosiveOutcome);
 
-                    switch (response.Game.Status)
+                    if (response.Game.Status == GameStatus.InProgress)
                     {
-                        case GameStatus.Won:
-                            Console.WriteLine("Game over, you win!");
-                            Console.WriteLine($"Total moves: {response.Game.Moves}");
-                            break;
-                        case GameStatus.Lost:
-                            Console.WriteLine("Game over, you lose!");
-                            Console.WriteLine($"Total moves: {response.Game.Moves}");
-                            break;
-                        default:
-                            Console.WriteLine($"You are currently on square: {response.Game.CurrentSquare}");
-                            Console.WriteLine($"Based on your current square, you can move: {string.Join(", ", response.Game.AvailableMoves.Select(m => m.Key.ToString()))}");
-                            Console.WriteLine($"You have made {response.Game.Moves} moves so far and have {response.Game.Lives} {(response.Game.Lives > 1 ? "lives" : "life")} left in this game.");
-                            break;
+                        Console.WriteLine($"You are currently on square: {response.Game.CurrentSquare}");
+                        Console.WriteLine($"Based on your current square, you can move: {string.Join(", ", response.Game.AvailableMoves.Select(m => m.Key.ToString()))}");
+                        Console.WriteLine($"You have made {response.Game.Moves} moves so far and have {response.Game.Lives} {(response.Game.Lives > 1 ? "lives" : "life")} left in this game.");
+                    }
+                    else
+                    {
+                        var gameOver = configuration.GetRequiredSection("MindGame:Ascii:GameOver").Get<List<string>>();
+                        gameOver.ForEach(Console.WriteLine);
+
+                        var key = response.Game.Status == GameStatus.Won ? "YouWin" : "YouLose";
+                        var outcome = configuration.GetRequiredSection($"MindGame:Ascii:{key}").Get<List<string>>();
+                        outcome.ForEach(Console.WriteLine);
+
+                        Console.WriteLine($"Total moves: {response.Game.Moves}");
                     }
 
                     break;
@@ -76,7 +79,7 @@ partial class Program
                     break;
                 case ResultStatus.Error:
                     Console.WriteLine("Unfortunately an error occurred.");
-                    result.Errors.ForEach(e => Console.WriteLine(e));
+                    result.Errors.ForEach(Console.WriteLine);
                     break;
                 default:
                     Console.WriteLine($"Unexpected result: {result.Status}");

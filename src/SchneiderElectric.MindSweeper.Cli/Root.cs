@@ -3,6 +3,7 @@ using System.CommandLine.Help;
 using System.CommandLine.Invocation;
 using System.CommandLine.NamingConventionBinder;
 using System.CommandLine.Parsing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -10,18 +11,6 @@ namespace SchneiderElectric.MindSweeper.Cli;
 
 partial class Program
 {
-    private static readonly List<string> _gameHeader =
-    [
-        "___  ____           _   _____                      ",
-        "|  \\/  (_)         | | |  __ \\                     ",
-        "| .  . |_ _ __   __| | | |  \\/ __ _ _ __ ___   ___ ",
-        "| |\\/| | | '_ \\ / _` | | | __ / _` | '_ ` _ \\ / _ \\",
-        "| |  | | | | | | (_| | | |_\\ \\ (_| | | | | | |  __/",
-        "\\_|  |_/_|_| |_|\\__,_|  \\____/\\__,_|_| |_| |_|\\___|",
-        "                                  CLI Delux Edition",
-        "                                                   "
-    ];
-
     public static CliRootCommand RootCommand => new(
         "On a playing field, that's similar to a chess board, you can issue simple CLI commands to play the game by moving " +
         "from a randomly allocated square on the bottom row to the top row. You are allowed to move one square at a time. " +
@@ -38,7 +27,9 @@ partial class Program
         },
         Action = CommandHandler.Create<IHost>((host) =>
         {
-            _gameHeader.ForEach(Console.WriteLine);
+            var configuration = host.Services.GetRequiredService<IConfiguration>();
+            var logo = configuration.GetRequiredSection("MindGame:Ascii:Logo").Get<List<string>>();
+            logo.ForEach(Console.WriteLine);
 
             var parseResult = host.Services.GetRequiredService<ParseResult>();
             var availableHelpOptions = parseResult

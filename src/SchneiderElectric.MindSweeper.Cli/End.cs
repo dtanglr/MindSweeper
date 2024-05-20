@@ -33,7 +33,7 @@ partial class Program
                     break;
                 case ResultStatus.Error:
                     Console.WriteLine("Unfortunately an error occurred.");
-                    result.Errors.ForEach(e => Console.WriteLine(e));
+                    result.Errors.ForEach(Console.WriteLine);
                     break;
                 default:
                     Console.WriteLine($"Unexpected result: {result.Status}");

@@ -2,7 +2,7 @@
   "profiles": {
     "SchneiderElectric.MindSweeper.Cli": {
       "commandName": "Project",
-      "commandLineArgs": "move up"
+      "commandLineArgs": "start"
     }
   }
 }
