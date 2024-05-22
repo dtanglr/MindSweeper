@@ -1,8 +1,12 @@
 ﻿using System.CommandLine;
 using System.CommandLine.Hosting;
+using System.Resources;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using SchneiderElectric.MindSweeper.Application;
 using SchneiderElectric.MindSweeper.Persistence;
+
+[assembly: NeutralResourcesLanguage("en")]
 
 namespace SchneiderElectric.MindSweeper.Cli;
 
@@ -18,6 +22,10 @@ partial class Program : IProgram
                     {
                         options.UseRepository<JsonFileGameRepository>();
                     });
+                });
+                host.ConfigureLogging(logging =>
+                {
+                    logging.SetMinimumLevel(LogLevel.Error);
                 });
             })
         .InvokeAsync(args);

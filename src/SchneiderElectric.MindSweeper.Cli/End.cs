@@ -18,6 +18,8 @@ partial class Program
             var command = new EndCommand(Environment.MachineName);
             var result = await mediator.Send(command);
 
+            Console.WriteLine();
+
             switch (result.Status)
             {
                 case ResultStatus.Accepted:
@@ -39,6 +41,8 @@ partial class Program
                     Console.WriteLine($"Unexpected result: {result.Status}");
                     break;
             }
+
+            Console.WriteLine();
         })
     };
 }

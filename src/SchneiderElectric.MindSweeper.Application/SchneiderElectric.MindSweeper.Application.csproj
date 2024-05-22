@@ -21,5 +21,4 @@
     <InternalsVisibleTo Include="SchneiderElectric.MindSweeper.UnitTests" />
   </ItemGroup>
 
-
 </Project>
