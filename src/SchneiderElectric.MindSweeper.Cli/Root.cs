@@ -3,7 +3,6 @@ using System.CommandLine.Help;
 using System.CommandLine.Invocation;
 using System.CommandLine.NamingConventionBinder;
 using System.CommandLine.Parsing;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -12,11 +11,11 @@ namespace SchneiderElectric.MindSweeper.Cli;
 partial class Program
 {
     public static CliRootCommand RootCommand => new(
-        "On a playing field, that's similar to a chess board, you can issue simple CLI commands to play the game by moving " +
-        "from a randomly allocated square on the bottom row to the top row. You are allowed to move one square at a time. " +
-        "Each move requires a great deal of consideration and skill because the destination square may or may not have been " +
-        "randomly allocated an explosive device. If it does, it will kill you. If you die too many times, you will lose. " +
-        "However, if you make it to the top without losing all your lives, you will be a winner and become god-like genius!. Good luck.")
+        "Once started, you will be placed on a square on the very bottom of a playing field that's similar to a chess board. " +
+        "To compete you must issue simple CLI commands to move one square at a time in any direction of your choosing. " +
+        "Each move requires a great deal of consideration because the destination square may or may not have been " +
+        "randomly allocated an explosive device. Stepping on such as square will kill you! " +
+        "To win, you must make it to the top without losing all your lives. Good luck.")
     {
         Subcommands =
         {
@@ -27,9 +26,7 @@ partial class Program
         },
         Action = CommandHandler.Create<IHost>((host) =>
         {
-            var configuration = host.Services.GetRequiredService<IConfiguration>();
-            var logo = configuration.GetRequiredSection("MindGame:Ascii:Logo").Get<List<string>>();
-            logo.ForEach(Console.WriteLine);
+            Console.Write(Ascii.Logo);
 
             var parseResult = host.Services.GetRequiredService<ParseResult>();
             var availableHelpOptions = parseResult

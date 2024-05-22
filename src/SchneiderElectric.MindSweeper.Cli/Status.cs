@@ -18,6 +18,8 @@ partial class Program
             var request = new GetGameRequest(Environment.MachineName);
             var result = await mediator.Send(request);
 
+            Console.WriteLine();
+
             switch (result.Status)
             {
                 case ResultStatus.Accepted:
@@ -44,6 +46,8 @@ partial class Program
                     Console.WriteLine($"Unexpected result: {result.Status}");
                     break;
             }
+
+            Console.WriteLine();
         })
     };
 }
