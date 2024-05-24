@@ -1,47 +1,41 @@
-﻿using System.CommandLine;
-using System.CommandLine.NamingConventionBinder;
-using MediatR;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using SchneiderElectric.MindSweeper.Application.Commands.Start;
-using SchneiderElectric.MindSweeper.Domain;
+﻿using SchneiderElectric.MindSweeper.Application.Commands.Start;
 
 namespace SchneiderElectric.MindSweeper.Cli;
 
 partial class Program
 {
-    public static CliCommand StartCommand => new("start", "Start a new game")
+    public static CliCommand StartCommand => new("start", Resources.StartCommandDescription)
     {
         Options =
         {
             new CliOption<int>("--columns", "-c")
             {
                 Arity = ArgumentArity.ExactlyOne,
-                Description = "The number of columns",
-                HelpName = "columns",
+                Description = Resources.StartCommandColumnsOptionDescription,
+                HelpName = Resources.StartCommandColumnsOptionHelpName,
                 Required = false,
                 DefaultValueFactory = (arg) => Settings.DefaultColumns
             },
             new CliOption<int>("--rows", "-r")
             {
                 Arity = ArgumentArity.ExactlyOne,
-                Description = "The number of rows",
-                HelpName = "rows",
+                Description = Resources.StartCommandRowsOptionDescription,
+                HelpName = Resources.StartCommandRowsOptionHelpName,
                 Required = false,
                 DefaultValueFactory = (arg) => Settings.DefaultRows
             },
             new CliOption<int>("--bombs", "-b")
             {
                 Arity = ArgumentArity.ExactlyOne,
-                Description = "The number of bombs",
-                HelpName = "bombs",
+                Description = Resources.StartCommandBombsOptionDescription,
+                HelpName = Resources.StartCommandBombsOptionHelpName,
                 Required = false
             },
             new CliOption<int>("--lives", "-l")
             {
                 Arity = ArgumentArity.ExactlyOne,
-                Description = "The number of lives",
-                HelpName = "lives",
+                Description = Resources.StartCommandLivesOptionDescription,
+                HelpName = Resources.StartCommandLivesOptionHelpName,
                 Required = false,
                 DefaultValueFactory = (arg) => Settings.DefaultLives
             }
@@ -57,27 +51,30 @@ partial class Program
             switch (result.Status)
             {
                 case ResultStatus.Accepted:
-                case ResultStatus.Ok:
                     var game = result.Value!.Game;
-                    Console.WriteLine("Successfully started a new game.");
-                    Console.WriteLine($"The field of play contains {game.Settings.Bombs} bombs on {game.Settings.Squares} squares ({game.Settings.Columns} columns by {game.Settings.Rows} rows).");
-                    Console.WriteLine($"You are starting on square: {game.CurrentSquare}.");
-                    Console.WriteLine($"Based on your current square, you can move: {string.Join(", ", game.AvailableMoves.Select(m => m.Key.ToString()))}");
-                    Console.WriteLine($"You have {game.Settings.Lives} lives. God speed!");
+                    Console.WriteLine(Resources.StartCommandResultStatusAccepted);
+                    Console.WriteLine(Resources.GameStatusRows, game.Settings.Rows);
+                    Console.WriteLine(Resources.GameStatusColumns, game.Settings.Columns);
+                    Console.WriteLine(Resources.GameStatusSquares, game.Settings.Squares);
+                    Console.WriteLine(Resources.GameStatusBombs, game.Settings.Bombs);
+                    Console.WriteLine(Resources.GameStatusCurrentSquare, game.CurrentSquare);
+                    Console.WriteLine(Resources.GameStatusAvailableMoves, string.Join(", ", game.AvailableMoves.Select(m => $"'{m.Key}'")));
+                    Console.WriteLine(Resources.GameStatusMoves, game.Moves);
+                    Console.WriteLine(Resources.GameStatusLives, game.Lives);
                     break;
                 case ResultStatus.Conflict:
-                    Console.WriteLine("You already have an active game. Please end the current game before starting a new one.");
+                    Console.WriteLine(Resources.StartCommandResultStatusConflict);
                     break;
                 case ResultStatus.Invalid:
-                    Console.WriteLine("One or more validation issues occurred.");
+                    Console.WriteLine(Resources.CommandResultStatusInvalid);
                     result.ValidationIssues.ForEach(e => Console.WriteLine(e.Message));
                     break;
                 case ResultStatus.Error:
-                    Console.WriteLine("Unfortunately an error occurred.");
+                    Console.WriteLine(Resources.CommandResultStatusError);
                     result.Errors.ForEach(Console.WriteLine);
                     break;
                 default:
-                    Console.WriteLine($"Unexpected result: {result.Status}");
+                    Console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
                     break;
             }
 

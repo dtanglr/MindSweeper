@@ -1,7 +1,5 @@
-﻿using System.CommandLine;
-using System.CommandLine.Hosting;
+﻿using System.CommandLine.Hosting;
 using System.Resources;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SchneiderElectric.MindSweeper.Application;
 using SchneiderElectric.MindSweeper.Persistence;

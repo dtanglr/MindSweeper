@@ -1,6 +1,4 @@
-﻿using System.CommandLine;
-
-namespace SchneiderElectric.MindSweeper.Cli;
+﻿namespace SchneiderElectric.MindSweeper.Cli;
 
 public interface IProgram
 {
