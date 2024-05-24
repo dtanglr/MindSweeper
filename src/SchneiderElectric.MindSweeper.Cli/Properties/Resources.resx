@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Boom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Boom.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="CommandResultStatusError" xml:space="preserve">
     <value>Unfortunately an error occurred.</value>
   </data>
@@ -135,41 +139,42 @@
   <data name="EndCommandResultStatusNotFound" xml:space="preserve">
     <value>There is no game to end!</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="GameOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>GameOver.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="GameStatusAvailableMoves" xml:space="preserve">
-    <value>Available moves: {0}.</value>
-    <comment>e.g. "Available moves: 'up', 'down', 'left'."</comment>
+    <value>  Available moves: {0}.</value>
   </data>
   <data name="GameStatusBombs" xml:space="preserve">
-    <value>Bombs: '{0}'.</value>
-    <comment>e.g. "Bombs: '24'."</comment>
+    <value>  Bombs: {0}.</value>
+    <comment>e.g. "Bombs: 24."</comment>
+  </data>
+  <data name="GameStatusBombsHit" xml:space="preserve">
+    <value>  Bombs hit: {0}</value>
   </data>
   <data name="GameStatusColumns" xml:space="preserve">
-    <value>Columns: '{0}'.</value>
-    <comment>e.g. "Columns: '8'."</comment>
+    <value>  Columns: {0}.</value>
+    <comment>e.g. "Columns: 8."</comment>
   </data>
   <data name="GameStatusCurrentSquare" xml:space="preserve">
-    <value>Current square: '{0}'.</value>
-    <comment>e.g. "Current square: 'C1'."</comment>
+    <value>  Current square: {0}.</value>
+    <comment>e.g. "Current square: C1."</comment>
   </data>
   <data name="GameStatusLives" xml:space="preserve">
-    <value>Lives: '{0}'.</value>
-    <comment>e.g. "Lives: '2'."</comment>
+    <value>  Remaining lives: {0}.</value>
+    <comment>e.g. "Remaining lives: 2."</comment>
   </data>
   <data name="GameStatusMoves" xml:space="preserve">
-    <value>Moves: '{0}'.</value>
-    <comment>e.g. "Moves: '2'."</comment>
+    <value>  Moves made: {0}.</value>
+    <comment>e.g. "Moves made: 2."</comment>
   </data>
   <data name="GameStatusRows" xml:space="preserve">
-    <value>Rows: '{0}'.</value>
-    <comment>e.g. "Rows: '8'."</comment>
+    <value>  Rows: {0}.</value>
+    <comment>e.g. "Rows: 8."</comment>
   </data>
   <data name="GameStatusSquares" xml:space="preserve">
-    <value>Squares: '{0}'.</value>
-    <comment>e.g. "Squares: '64'."</comment>
+    <value>  Squares: {0}.</value>
+    <comment>e.g. "Squares: 64."</comment>
   </data>
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Logo.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -177,11 +182,15 @@
   <data name="MoveCommandDescription" xml:space="preserve">
     <value>Move to a square.</value>
   </data>
+  <data name="MoveCommandDetails" xml:space="preserve">
+    <value>Moving '{0}' from '{1}' to '{2}'...</value>
+    <comment>e.g. "Moving 'up' from 'C1' to 'C2'..."</comment>
+  </data>
   <data name="MoveCommandDidHitBomb" xml:space="preserve">
     <value>Ooops. You hit a bomb!</value>
   </data>
   <data name="MoveCommandDidNotHitBomb" xml:space="preserve">
-    <value>Yay! You didn't hit a bomb.</value>
+    <value>You didn't hit a bomb. Good skills!</value>
   </data>
   <data name="MoveCommandDirectionArgumentDescription" xml:space="preserve">
     <value>Choices can be either 'up', 'down', 'left' or 'right' but a successful move is dependent on your current square's position.</value>
@@ -190,11 +199,10 @@
     <value>direction</value>
   </data>
   <data name="MoveCommandResultStatusAccepted" xml:space="preserve">
-    <value>Moving '{0}' from '{1}' to '{2}'...</value>
-    <comment>e.g. "Moving 'up' from 'C1' to 'C2'..."</comment>
+    <value>The current state of play is as follows:</value>
   </data>
   <data name="MoveCommandResultStatusNotFound" xml:space="preserve">
-    <value>There is no game to make a move on!. Start a new game first. Then make your move.</value>
+    <value>You don't have an active game. Start a new game then make your move.</value>
   </data>
   <data name="MoveCommandResultStatusUnprocessable" xml:space="preserve">
     <value>It's not possible to move '{0}' from your current square.</value>
@@ -228,7 +236,7 @@
     <value>lives</value>
   </data>
   <data name="StartCommandResultStatusAccepted" xml:space="preserve">
-    <value>Successfully started a new game.</value>
+    <value>Successfully started a new game. The current state of play is as follows:</value>
   </data>
   <data name="StartCommandResultStatusConflict" xml:space="preserve">
     <value>You already have an active game. Please end the current game before starting a new one.</value>
@@ -246,7 +254,10 @@
     <value>You don't have an active game. Start a new game to play.</value>
   </data>
   <data name="StatusCommandResultStatusOk" xml:space="preserve">
-    <value>You have an active game!</value>
+    <value>You have an active game. The current state of play is as follows:</value>
+  </data>
+  <data name="Yes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Yes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="YouLose" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>YouLose.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

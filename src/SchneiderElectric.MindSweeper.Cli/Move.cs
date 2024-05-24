@@ -1,4 +1,5 @@
-﻿using SchneiderElectric.MindSweeper.Application.Commands.Move;
+﻿using System.Runtime.InteropServices;
+using SchneiderElectric.MindSweeper.Application.Commands.Move;
 
 namespace SchneiderElectric.MindSweeper.Cli;
 
@@ -27,7 +28,7 @@ partial class Program
         {
             var mediator = host.Services.GetRequiredService<IMediator>();
             var command = new MoveCommand(Environment.MachineName, direction);
-            var result = await mediator.Send(command);
+            var result = await mediator.Send(command).ConfigureAwait(false);
 
             Console.WriteLine();
 
@@ -37,21 +38,38 @@ partial class Program
                     var response = result.Value!;
                     var game = response.Game;
 
-                    Console.WriteLine(Resources.MoveCommandResultStatusAccepted,
-                        response.Direction.ToString().ToLower(),
+                    Console.WriteLine(Resources.MoveCommandDetails,
+                        response.Direction.ToString().ToLowerInvariant(),
                         response.FromSquare,
                         response.ToSquare);
 
-                    Console.WriteLine(response.HitBomb
-                        ? Resources.MoveCommandDidHitBomb
-                        : Resources.MoveCommandDidNotHitBomb);
+                    Console.WriteLine();
 
                     switch (game.Status)
                     {
                         case GameStatus.InProgress:
+                            if (response.HitBomb)
+                            {
+                                Console.WriteLine(Resources.Boom);
+                                Console.WriteLine(Resources.MoveCommandDidHitBomb);
+                            }
+                            else
+                            {
+                                Console.WriteLine(Resources.Yes);
+                                Console.WriteLine(Resources.MoveCommandDidNotHitBomb);
+                            }
+
+                            Console.WriteLine();
+                            Console.WriteLine(Resources.MoveCommandResultStatusAccepted);
+                            Console.WriteLine();
+                            Console.WriteLine(Resources.GameStatusRows, game.Settings.Rows);
+                            Console.WriteLine(Resources.GameStatusColumns, game.Settings.Columns);
+                            Console.WriteLine(Resources.GameStatusSquares, game.Settings.Squares);
+                            Console.WriteLine(Resources.GameStatusBombs, game.Settings.Bombs);
                             Console.WriteLine(Resources.GameStatusCurrentSquare, game.CurrentSquare);
-                            Console.WriteLine(Resources.GameStatusAvailableMoves, string.Join(", ", game.AvailableMoves.Select(m => $"'{m.Key.ToString().ToLower()}'")));
+                            Console.WriteLine(Resources.GameStatusAvailableMoves, string.Join(", ", game.AvailableMoves.Select(m => $"{Environment.NewLine}    {m.Key} to {m.Value}")));
                             Console.WriteLine(Resources.GameStatusMoves, game.Moves);
+                            Console.WriteLine(Resources.GameStatusBombsHit, game.BombsHit);
                             Console.WriteLine(Resources.GameStatusLives, game.Lives);
                             break;
                         case GameStatus.Won:
@@ -59,6 +77,7 @@ partial class Program
                             Console.Write(Resources.YouWin);
                             Console.WriteLine();
                             Console.WriteLine(Resources.GameStatusMoves, game.Moves);
+                            Console.WriteLine(Resources.GameStatusBombsHit, game.BombsHit);
                             Console.WriteLine(Resources.GameStatusLives, game.Lives);
                             break;
                         case GameStatus.Lost:
@@ -66,6 +85,7 @@ partial class Program
                             Console.Write(Resources.YouLose);
                             Console.WriteLine();
                             Console.WriteLine(Resources.GameStatusMoves, game.Moves);
+                            Console.WriteLine(Resources.GameStatusBombsHit, game.BombsHit);
                             break;
                         default:
                             break;

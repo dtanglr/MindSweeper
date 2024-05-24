@@ -16,4 +16,12 @@ public record Game(
         _ when !AvailableMoves.ContainsKey(Direction.Up) => GameStatus.Won,
         _ => GameStatus.InProgress
     };
+
+    public int BombsHit => this switch
+    {
+        { Lives: 0 } => Settings.Lives,
+        _ when Lives == Settings.Lives => 0,
+        _ when Lives < Settings.Lives => Settings.Lives - Lives,
+        _ => throw new ArgumentOutOfRangeException(nameof(Lives))
+    };
 }

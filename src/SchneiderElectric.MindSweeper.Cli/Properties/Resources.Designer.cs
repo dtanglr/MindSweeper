@@ -61,6 +61,22 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to  _   _   ______   _____   _____  ___  ___   _   _ 
+        ///| | | |  | ___ \ |  _  | |  _  | |  \/  |  | | | |
+        ///| | | |  | |_/ / | | | | | | | | | .  . |  | | | |
+        ///| | | |  | ___ \ | | | | | | | | | |\/| |  | | | |
+        ///|_| |_|  | |_/ / \ \_/ / \ \_/ / | |  | |  |_| |_|
+        ///(_) (_)  \____/   \___/   \___/  \_|  |_/  (_) (_)
+        ///                                                  
+        ///.
+        /// </summary>
+        internal static string Boom {
+            get {
+                return ResourceManager.GetString("Boom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unfortunately an error occurred..
         /// </summary>
         internal static string CommandResultStatusError {
@@ -130,7 +146,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Available moves: {0}..
+        ///   Looks up a localized string similar to   Available moves: {0}..
         /// </summary>
         internal static string GameStatusAvailableMoves {
             get {
@@ -139,7 +155,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bombs: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to   Bombs: {0}..
         /// </summary>
         internal static string GameStatusBombs {
             get {
@@ -148,7 +164,16 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Columns: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to   Bombs hit: {0}.
+        /// </summary>
+        internal static string GameStatusBombsHit {
+            get {
+                return ResourceManager.GetString("GameStatusBombsHit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to   Columns: {0}..
         /// </summary>
         internal static string GameStatusColumns {
             get {
@@ -157,7 +182,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current square: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to   Current square: {0}..
         /// </summary>
         internal static string GameStatusCurrentSquare {
             get {
@@ -166,7 +191,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lives: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to   Remaining lives: {0}..
         /// </summary>
         internal static string GameStatusLives {
             get {
@@ -175,7 +200,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moves: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to   Moves made: {0}..
         /// </summary>
         internal static string GameStatusMoves {
             get {
@@ -184,7 +209,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rows: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to   Rows: {0}..
         /// </summary>
         internal static string GameStatusRows {
             get {
@@ -193,7 +218,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Squares: &apos;{0}&apos;..
+        ///   Looks up a localized string similar to   Squares: {0}..
         /// </summary>
         internal static string GameStatusSquares {
             get {
@@ -227,6 +252,15 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Moving &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;....
+        /// </summary>
+        internal static string MoveCommandDetails {
+            get {
+                return ResourceManager.GetString("MoveCommandDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ooops. You hit a bomb!.
         /// </summary>
         internal static string MoveCommandDidHitBomb {
@@ -236,7 +270,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yay! You didn&apos;t hit a bomb..
+        ///   Looks up a localized string similar to You didn&apos;t hit a bomb. Good skills!.
         /// </summary>
         internal static string MoveCommandDidNotHitBomb {
             get {
@@ -263,7 +297,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moving &apos;{0}&apos; from &apos;{1}&apos; to &apos;{2}&apos;....
+        ///   Looks up a localized string similar to The current state of play is as follows:.
         /// </summary>
         internal static string MoveCommandResultStatusAccepted {
             get {
@@ -272,7 +306,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no game to make a move on!. Start a new game first. Then make your move..
+        ///   Looks up a localized string similar to You don&apos;t have an active game. Start a new game then make your move..
         /// </summary>
         internal static string MoveCommandResultStatusNotFound {
             get {
@@ -365,7 +399,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Successfully started a new game..
+        ///   Looks up a localized string similar to Successfully started a new game. The current state of play is as follows:.
         /// </summary>
         internal static string StartCommandResultStatusAccepted {
             get {
@@ -419,11 +453,27 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have an active game!.
+        ///   Looks up a localized string similar to You have an active game. The current state of play is as follows:.
         /// </summary>
         internal static string StatusCommandResultStatusOk {
             get {
                 return ResourceManager.GetString("StatusCommandResultStatusOk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to __   __  _____   _____   _   _ 
+        ///\ \ / / |  ___| /  ___| | | | |
+        /// \ V /  | |__   \ `--.  | | | |
+        ///  \ /   |  __|   `--. \ | | | |
+        ///  | |   | |___  /\__/ / |_| |_|
+        ///  \_/   \____/  \____/  (_) (_)
+        ///                               
+        ///.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         
