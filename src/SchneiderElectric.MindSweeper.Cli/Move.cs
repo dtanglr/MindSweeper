@@ -47,17 +47,8 @@ partial class Program
                     switch (game.Status)
                     {
                         case GameStatus.InProgress:
-                            if (response.HitBomb)
-                            {
-                                Console.WriteLine(Resources.Boom);
-                                Console.WriteLine(Resources.MoveCommandDidHitBomb);
-                            }
-                            else
-                            {
-                                Console.WriteLine(Resources.Yes);
-                                Console.WriteLine(Resources.MoveCommandDidNotHitBomb);
-                            }
-
+                            Console.WriteLine(response.HitBomb ? Resources.Boom : Resources.Yes);
+                            Console.WriteLine(response.HitBomb ? Resources.MoveCommandDidHitBomb : Resources.MoveCommandDidNotHitBomb);
                             Console.WriteLine();
                             Console.WriteLine(Resources.MoveCommandResultStatusAccepted);
                             break;
