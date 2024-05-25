@@ -150,7 +150,7 @@
     <comment>e.g. "Bombs: 24."</comment>
   </data>
   <data name="GameStatusBombsHit" xml:space="preserve">
-    <value>  Bombs hit: {0}</value>
+    <value>  Bombs hit: {0}.</value>
   </data>
   <data name="GameStatusColumns" xml:space="preserve">
     <value>  Columns: {0}.</value>

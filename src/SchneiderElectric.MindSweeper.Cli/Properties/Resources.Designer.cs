@@ -67,7 +67,6 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         ///| | | |  | ___ \ | | | | | | | | | |\/| |  | | | |
         ///|_| |_|  | |_/ / \ \_/ / \ \_/ / | |  | |  |_| |_|
         ///(_) (_)  \____/   \___/   \___/  \_|  |_/  (_) (_)
-        ///                                                  
         ///.
         /// </summary>
         internal static string Boom {
@@ -164,7 +163,7 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to   Bombs hit: {0}.
+        ///   Looks up a localized string similar to   Bombs hit: {0}..
         /// </summary>
         internal static string GameStatusBombsHit {
             get {
@@ -468,7 +467,6 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         ///  \ /   |  __|   `--. \ | | | |
         ///  | |   | |___  /\__/ / |_| |_|
         ///  \_/   \____/  \____/  (_) (_)
-        ///                               
         ///.
         /// </summary>
         internal static string Yes {
@@ -478,12 +476,12 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to       __   __            _                _
-        ///      \ \ / /           | |              | |
-        ///       \ V /___  _   _  | | ___  ___  ___| |
-        ///        \ // _ \| | | | | |/ _ \/ __|/ _ \ |
-        ///        | | (_) | |_| | | | (_) \__ \  __/_|
-        ///        \_/\___/ \__,_| |_|\___/|___/\___(_)
+        ///   Looks up a localized string similar to     __   __            _                _
+        ///    \ \ / /           | |              | |
+        ///     \ V /___  _   _  | | ___  ___  ___| |
+        ///      \ // _ \| | | | | |/ _ \/ __|/ _ \ |
+        ///      | | (_) | |_| | | | (_) \__ \  __/_|
+        ///      \_/\___/ \__,_| |_|\___/|___/\___(_)
         ///.
         /// </summary>
         internal static string YouLose {
@@ -493,12 +491,12 @@ namespace SchneiderElectric.MindSweeper.Cli.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to       __   __                     _       _
-        ///      \ \ / /                    (_)     | |
-        ///       \ V /___  _   _  __      ___ _ __ | |
-        ///        \ // _ \| | | | \ \ /\ / / | &apos;_ \| |
-        ///        | | (_) | |_| |  \ V  V /| | | | |_|
-        ///        \_/\___/ \__,_|   \_/\_/ |_|_| |_(_)
+        ///   Looks up a localized string similar to     __   __                     _       _
+        ///    \ \ / /                    (_)     | |
+        ///     \ V /___  _   _  __      ___ _ __ | |
+        ///      \ // _ \| | | | \ \ /\ / / | &apos;_ \| |
+        ///      | | (_) | |_| |  \ V  V /| | | | |_|
+        ///      \_/\___/ \__,_|   \_/\_/ |_|_| |_(_)
         ///.
         /// </summary>
         internal static string YouWin {
