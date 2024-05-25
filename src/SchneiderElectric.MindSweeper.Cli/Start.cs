@@ -54,15 +54,7 @@ partial class Program
                     var game = result.Value!.Game;
                     Console.WriteLine(Resources.StartCommandResultStatusAccepted);
                     Console.WriteLine();
-                    Console.WriteLine(Resources.GameStatusRows, game.Settings.Rows);
-                    Console.WriteLine(Resources.GameStatusColumns, game.Settings.Columns);
-                    Console.WriteLine(Resources.GameStatusSquares, game.Settings.Squares);
-                    Console.WriteLine(Resources.GameStatusBombs, game.Settings.Bombs);
-                    Console.WriteLine(Resources.GameStatusCurrentSquare, game.CurrentSquare);
-                    Console.WriteLine(Resources.GameStatusAvailableMoves, string.Join(", ", game.AvailableMoves.Select(m => $"{Environment.NewLine}    {m.Key} to {m.Value}")));
-                    Console.WriteLine(Resources.GameStatusMoves, game.Moves);
-                    Console.WriteLine(Resources.GameStatusBombsHit, game.BombsHit);
-                    Console.WriteLine(Resources.GameStatusLives, game.Lives);
+                    Console.WriteLine(game.GetGameStatus());
                     break;
                 case ResultStatus.Conflict:
                     Console.WriteLine(Resources.StartCommandResultStatusConflict);
