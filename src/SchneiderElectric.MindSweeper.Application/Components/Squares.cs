@@ -42,7 +42,8 @@ partial class Field
             get
             {
                 return index < 0 || index >= _squares.Value.Count
-                    ? throw new SquareIndexOutOfRangeException($"The square index of {index} was out of range.") : _squares.Value.ElementAt(index).Value;
+                    ? throw new SquareIndexOutOfRangeException($"The square index of {index} was out of range.")
+                    : _squares.Value.ElementAt(index).Value;
             }
         }
 
@@ -51,7 +52,8 @@ partial class Field
             get
             {
                 return !_squares.Value.TryGetValue(index, out var square)
-                    ? throw new SquareIndexOutOfRangeException($"The square index of {index} was out of range.") : square;
+                    ? throw new SquareIndexOutOfRangeException($"The square index of {index} was out of range.")
+                    : square;
             }
         }
 

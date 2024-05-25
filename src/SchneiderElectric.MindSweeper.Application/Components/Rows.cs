@@ -47,7 +47,8 @@ partial class Field
             get
             {
                 return index < 0 || index >= _rows.Value.Length
-                    ? throw new RowIndexOutOfRangeException($"The row index of {index} was out of range.") : _rows.Value[index];
+                    ? throw new RowIndexOutOfRangeException($"The row index of {index} was out of range.")
+                    : _rows.Value[index];
             }
         }
     }

@@ -43,6 +43,7 @@ partial class Field
         public int Length => _columns.Value.Length;
 
         public IColumn this[int index] => index < 0 || index >= _columns.Value.Length
-            ? throw new ColumnIndexOutOfRangeException($"The column index of {index} was out of range.") : _columns.Value[index];
+            ? throw new ColumnIndexOutOfRangeException($"The column index of {index} was out of range.")
+            : _columns.Value[index];
     }
 }
