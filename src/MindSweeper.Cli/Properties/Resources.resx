@@ -1,0 +1,275 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Boom" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Boom.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="CommandResultStatusError" xml:space="preserve">
+    <value>Unfortunately an error occurred.</value>
+  </data>
+  <data name="CommandResultStatusInvalid" xml:space="preserve">
+    <value>One or more validation issues occurred.</value>
+  </data>
+  <data name="CommandResultStatusUnhandled" xml:space="preserve">
+    <value>Unexpected result: '{0}'.</value>
+  </data>
+  <data name="EndCommandDescription" xml:space="preserve">
+    <value>End the current game.</value>
+  </data>
+  <data name="EndCommandResultStatusAccepted" xml:space="preserve">
+    <value>Successfully ended your game.</value>
+  </data>
+  <data name="EndCommandResultStatusNotFound" xml:space="preserve">
+    <value>There is no game to end!</value>
+  </data>
+  <data name="GameOver" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>GameOver.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="GameStatusAvailableMoves" xml:space="preserve">
+    <value>  Available moves: {0}.</value>
+  </data>
+  <data name="GameStatusBombs" xml:space="preserve">
+    <value>  Bombs: {0}.</value>
+    <comment>e.g. "Bombs: 24."</comment>
+  </data>
+  <data name="GameStatusBombsHit" xml:space="preserve">
+    <value>  Bombs hit: {0}.</value>
+  </data>
+  <data name="GameStatusColumns" xml:space="preserve">
+    <value>  Columns: {0}.</value>
+    <comment>e.g. "Columns: 8."</comment>
+  </data>
+  <data name="GameStatusCurrentSquare" xml:space="preserve">
+    <value>  Current square: {0}.</value>
+    <comment>e.g. "Current square: C1."</comment>
+  </data>
+  <data name="GameStatusLives" xml:space="preserve">
+    <value>  Remaining lives: {0}.</value>
+    <comment>e.g. "Remaining lives: 2."</comment>
+  </data>
+  <data name="GameStatusMoves" xml:space="preserve">
+    <value>  Moves made: {0}.</value>
+    <comment>e.g. "Moves made: 2."</comment>
+  </data>
+  <data name="GameStatusRows" xml:space="preserve">
+    <value>  Rows: {0}.</value>
+    <comment>e.g. "Rows: 8."</comment>
+  </data>
+  <data name="GameStatusSquares" xml:space="preserve">
+    <value>  Squares: {0}.</value>
+    <comment>e.g. "Squares: 64."</comment>
+  </data>
+  <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Logo.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="MoveCommandDescription" xml:space="preserve">
+    <value>Move to a square.</value>
+  </data>
+  <data name="MoveCommandDetails" xml:space="preserve">
+    <value>Moving '{0}' from '{1}' to '{2}'...</value>
+    <comment>e.g. "Moving 'up' from 'C1' to 'C2'..."</comment>
+  </data>
+  <data name="MoveCommandDidHitBomb" xml:space="preserve">
+    <value>Ooops. You hit a bomb!</value>
+  </data>
+  <data name="MoveCommandDidNotHitBomb" xml:space="preserve">
+    <value>You didn't hit a bomb. Good skills!</value>
+  </data>
+  <data name="MoveCommandDirectionArgumentDescription" xml:space="preserve">
+    <value>Choices can be either 'up', 'down', 'left' or 'right' but a successful move is dependent on your current square's position.</value>
+  </data>
+  <data name="MoveCommandDirectionArgumentHelpName" xml:space="preserve">
+    <value>direction</value>
+  </data>
+  <data name="MoveCommandResultStatusAccepted" xml:space="preserve">
+    <value>The current state of play is as follows:</value>
+  </data>
+  <data name="MoveCommandResultStatusNotFound" xml:space="preserve">
+    <value>You don't have an active game. Start a new game then make your move.</value>
+  </data>
+  <data name="MoveCommandResultStatusUnprocessable" xml:space="preserve">
+    <value>It's not possible to move '{0}' from your current square.</value>
+    <comment>e.g. "It's not possible to move 'down' from your current square."</comment>
+  </data>
+  <data name="RootCommandDescription" xml:space="preserve">
+    <value>Once started, you will be placed on a square on the very bottom of a playing field that's similar to a chess board.
+
+To compete you must issue simple CLI commands to move one square at a time in a direction of your choosing.
+
+Each move requires a great deal of consideration because the destination square may or may not have been randomly allocated an explosive device.
+
+Stepping on such as square will kill you!
+
+To win, you must make it to the top without losing all your lives.
+
+Good luck!!</value>
+  </data>
+  <data name="StartCommandBombsOptionDescription" xml:space="preserve">
+    <value>The number of bombs.</value>
+  </data>
+  <data name="StartCommandBombsOptionHelpName" xml:space="preserve">
+    <value>bombs</value>
+  </data>
+  <data name="StartCommandColumnsOptionDescription" xml:space="preserve">
+    <value>The number of columns.</value>
+  </data>
+  <data name="StartCommandColumnsOptionHelpName" xml:space="preserve">
+    <value>columns</value>
+  </data>
+  <data name="StartCommandDescription" xml:space="preserve">
+    <value>Start a new game.</value>
+  </data>
+  <data name="StartCommandLivesOptionDescription" xml:space="preserve">
+    <value>The number of lives.</value>
+  </data>
+  <data name="StartCommandLivesOptionHelpName" xml:space="preserve">
+    <value>lives</value>
+  </data>
+  <data name="StartCommandResultStatusAccepted" xml:space="preserve">
+    <value>Successfully started a new game. The current state of play is as follows:</value>
+  </data>
+  <data name="StartCommandResultStatusConflict" xml:space="preserve">
+    <value>You already have an active game. Please end the current game before starting a new one.</value>
+  </data>
+  <data name="StartCommandRowsOptionDescription" xml:space="preserve">
+    <value>The number of rows.</value>
+  </data>
+  <data name="StartCommandRowsOptionHelpName" xml:space="preserve">
+    <value>rows</value>
+  </data>
+  <data name="StatusCommandDescription" xml:space="preserve">
+    <value>Get the status of your current game.</value>
+  </data>
+  <data name="StatusCommandResultStatusNotFound" xml:space="preserve">
+    <value>You don't have an active game. Start a new game to play.</value>
+  </data>
+  <data name="StatusCommandResultStatusOk" xml:space="preserve">
+    <value>You have an active game. The current state of play is as follows:</value>
+  </data>
+  <data name="Yes" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>Yes.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="YouLose" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>YouLose.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="YouWin" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>YouWin.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+</root>

@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "SchneiderElectric.MindSweeper.Cli": {
-      "commandName": "Project",
-      "commandLineArgs": "start"
-    }
-  }
-}
