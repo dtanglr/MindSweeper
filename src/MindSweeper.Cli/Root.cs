@@ -11,11 +11,19 @@ partial class Program
     /// </summary>
     public static CliRootCommand RootCommand => new(Resources.RootCommandDescription)
     {
-        Subcommands = { StartCommand, MoveCommand, EndCommand, StatusCommand },
+        Subcommands =
+        {
+            StartCommand,
+            MoveCommand,
+            EndCommand,
+            StatusCommand
+        },
         Action = CommandHandler.Create<IHost>((host) =>
         {
+            // Display the logo.
             Console.Write(Resources.Logo);
 
+            // Get and display the help text for the root command.
             var parseResult = host.Services.GetRequiredService<ParseResult>();
             var availableHelpOptions = parseResult
                 .CommandResult
