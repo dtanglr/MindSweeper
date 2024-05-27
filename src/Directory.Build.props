@@ -1,9 +1,6 @@
 <Project>
 
-  <!--PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>none</DebugType>
-  </PropertyGroup-->
-
+  <!-- Prevents the *.pdb files being published -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
   </PropertyGroup>
