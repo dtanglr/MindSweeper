@@ -12,7 +12,7 @@ Being able to use the host builder to configure and run the CLI console app in j
 
 As a result of all this, I thought I would share this project to share the love for the good old `black screen white text`! Nb. other colour variations are available.
 
-To read more about the why I developed this code. See the [motivations for this project](#motivation-for-this-project).
+To read more about why I developed this code. See the [motivations for this project](#motivation-for-this-project).
 
 ## Quick Start
 
@@ -28,11 +28,15 @@ The game is played on a grid of squares similar to a chess board. Unlike chess t
 
 The player can move up, down, left, right, but not diagonally.
 
-To win the player must move from a square on the bottom row to any square on the top row without stepping too many bombs.
+To win, the player must move from a square on the bottom row, to any square on the top row, without stepping on too many bombs.
 
-If they step on a bomb along their journey, they lose a life. Lose too many lives and you will lose the game.
+Stepping on a bomb loses the player a life. Losing all their lives means they lose the game.
 
-The game defaults to 8 rows by 8 columns. Just like a chess board each row is numbered from 1 to 8 and each column is lettered from A to H, so each square is labelled according to it's row and column e.g. A1 to H1 and A1 to A8 etc.
+The playing field defaults to 8 rows by 8 columns, 64 squares and 21 bombs (i.e. 1 in 3 squares will explode!).  The player gets 3 lives. All these values are configurable via options for the `start` command. See the [Commands](#commands) section below for further information.
+
+Just like a chess board each row on the playing field is numbered from 1 to 8 and each column is lettered from A to H, so each square is labelled according to it's row and column e.g. A1 to H1 and A1 to A8 etc.
+
+Good luck!
 
 ### Commands
 
@@ -55,7 +59,7 @@ It was recommended that the test be completed within 2 hours.  For me personally
 
 Despite this I decided to create a similar game in my own time. I felt inspired by the challenge and wanted to see if I could create a CLI version of the game rather than a simple console application that has a while loop listening for key inputs from the user.
 
-For many years I have developed API and web applications that have a clear separation of concerns with the host  sending commands and requests along a pipeline to an application layer containing CQRS behaviors, pre- and post-request processors and handlers thanks to the wonderful [Mediatr](https://github.com/jbogard/MediatR) package.
+For many years I have developed API and web applications that have a clear separation of concerns with the host sending commands and requests along a pipeline to an application layer containing CQRS behaviors, pre- and post-request processors and handlers thanks to the wonderful [Mediatr](https://github.com/jbogard/MediatR) package.
 
 I wanted to prove I could build a CLI host application using a similar approach. It would also mean that in the future I could potentially build other host implementations, such as an API or Blazor front end, without any changes to the game logic.
 

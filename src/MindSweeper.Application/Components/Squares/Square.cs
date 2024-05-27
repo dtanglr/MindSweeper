@@ -4,7 +4,7 @@ using MindSweeper.Domain;
 
 namespace MindSweeper.Application.Components.Squares;
 
-internal record Square(Field.Squares Squares, IColumn Column, IRow Row)
+internal sealed record Square(Field.Squares Squares, IColumn Column, IRow Row)
 {
     public int Index => (Column.Columns.Length * Row.Index) + Column.Index;
 
