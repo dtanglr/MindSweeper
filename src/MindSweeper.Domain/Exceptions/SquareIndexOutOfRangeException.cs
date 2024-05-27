@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Exceptions;
+﻿namespace MindSweeper.Domain.Exceptions;
 
 /// <summary>
 /// Represents an exception that is thrown when a square index is out of range.

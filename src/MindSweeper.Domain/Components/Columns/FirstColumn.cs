@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components.Columns;
+﻿namespace MindSweeper.Domain.Components.Columns;
 
 /// <summary>
 /// Represents the first column in the field.

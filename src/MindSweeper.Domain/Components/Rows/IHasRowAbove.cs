@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components.Rows;
+﻿namespace MindSweeper.Domain.Components.Rows;
 
 /// <summary>
 /// Represents an interface for a row that has a row below.

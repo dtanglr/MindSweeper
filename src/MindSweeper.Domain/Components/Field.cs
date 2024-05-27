@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components;
+﻿namespace MindSweeper.Domain.Components;
 
 /// <summary>
 /// Represents the playing field in the MindSweeper game.

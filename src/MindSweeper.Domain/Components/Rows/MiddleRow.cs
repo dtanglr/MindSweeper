@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components.Rows;
+﻿namespace MindSweeper.Domain.Components.Rows;
 
 /// <summary>
 /// Represents a middle row in the field.

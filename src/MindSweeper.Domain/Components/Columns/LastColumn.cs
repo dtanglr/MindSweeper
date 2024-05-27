@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components.Columns;
+﻿namespace MindSweeper.Domain.Components.Columns;
 
 /// <summary>
 /// Represents the last column in a field.

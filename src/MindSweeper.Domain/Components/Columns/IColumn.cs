@@ -1,6 +1,4 @@
-﻿using MindSweeper.Domain;
-
-namespace MindSweeper.Application.Components.Columns;
+﻿namespace MindSweeper.Domain.Components.Columns;
 
 /// <summary>
 /// Represents a column in the MindSweeper game.

@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components.Columns;
+﻿namespace MindSweeper.Domain.Components.Columns;
 
 /// <summary>
 /// Represents a middle column in the field.

@@ -1,8 +1,7 @@
-﻿using MindSweeper.Application.Components.Columns;
-using MindSweeper.Application.Components.Rows;
-using MindSweeper.Domain;
+﻿using MindSweeper.Domain.Components.Columns;
+using MindSweeper.Domain.Components.Rows;
 
-namespace MindSweeper.Application.Components.Squares;
+namespace MindSweeper.Domain.Components.Squares;
 
 /// <summary>
 /// Represents a square in the field.

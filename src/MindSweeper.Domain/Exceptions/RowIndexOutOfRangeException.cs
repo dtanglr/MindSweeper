@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Exceptions;
+﻿namespace MindSweeper.Domain.Exceptions;
 
 /// <summary>
 /// Represents an exception that is thrown when the row index is out of range.

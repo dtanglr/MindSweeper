@@ -1,8 +1,7 @@
-﻿using MindSweeper.Application.Components.Rows;
-using MindSweeper.Application.Exceptions;
-using MindSweeper.Domain;
+﻿using MindSweeper.Domain.Components.Rows;
+using MindSweeper.Domain.Exceptions;
 
-namespace MindSweeper.Application.Components;
+namespace MindSweeper.Domain.Components;
 
 partial class Field
 {

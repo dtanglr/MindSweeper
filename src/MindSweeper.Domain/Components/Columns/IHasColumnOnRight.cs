@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components.Columns;
+﻿namespace MindSweeper.Domain.Components.Columns;
 
 /// <summary>
 /// Represents an interface for a column that has a column on the right.

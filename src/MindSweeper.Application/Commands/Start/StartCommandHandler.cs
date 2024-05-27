@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using MindSweeper.Application.Components;
 using MindSweeper.Domain;
+using MindSweeper.Domain.Components;
 
 namespace MindSweeper.Application.Commands.Start;
 

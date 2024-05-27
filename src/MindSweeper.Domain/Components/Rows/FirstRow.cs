@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Application.Components.Rows;
+﻿namespace MindSweeper.Domain.Components.Rows;
 
 /// <summary>
 /// Represents the first row of the field.

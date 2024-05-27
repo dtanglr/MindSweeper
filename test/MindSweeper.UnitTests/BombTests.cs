@@ -1,4 +1,6 @@
-﻿namespace MindSweeper.UnitTests;
+﻿using MindSweeper.Domain.Components;
+
+namespace MindSweeper.UnitTests;
 
 public class BombTests
 {

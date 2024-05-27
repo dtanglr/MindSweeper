@@ -1,4 +1,7 @@
-﻿namespace MindSweeper.UnitTests;
+﻿using MindSweeper.Domain.Components;
+using MindSweeper.Domain.Components.Rows;
+
+namespace MindSweeper.UnitTests;
 
 public class SquareTests
 {
