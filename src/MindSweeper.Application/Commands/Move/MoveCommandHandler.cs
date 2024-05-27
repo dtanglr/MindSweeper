@@ -4,10 +4,28 @@ using MindSweeper.Domain;
 
 namespace MindSweeper.Application.Commands.Move;
 
-public class MoveCommandHandler(IGameRepository repository) : IRequestHandler<MoveCommand, Result<MoveCommandResponse>>
+/// <summary>
+/// Handles the MoveCommand and updates the game state accordingly.
+/// </summary>
+public class MoveCommandHandler : IRequestHandler<MoveCommand, Result<MoveCommandResponse>>
 {
-    private readonly IGameRepository _repository = repository;
+    private readonly IGameRepository _repository;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MoveCommandHandler"/> class.
+    /// </summary>
+    /// <param name="repository">The game repository.</param>
+    public MoveCommandHandler(IGameRepository repository)
+    {
+        _repository = repository;
+    }
+
+    /// <summary>
+    /// Handles the MoveCommand and updates the game state accordingly.
+    /// </summary>
+    /// <param name="request">The MoveCommand request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The result of the MoveCommand handling.</returns>
     public async Task<Result<MoveCommandResponse>> Handle(MoveCommand request, CancellationToken cancellationToken)
     {
         try

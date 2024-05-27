@@ -4,6 +4,9 @@ namespace MindSweeper.Cli;
 
 partial class Program
 {
+    /// <summary>
+    /// Represents the CLI command for ending the game.
+    /// </summary>
     public static CliCommand EndCommand => new("end", Resources.EndCommandDescription)
     {
         Action = CommandHandler.Create<IHost>(async (host) =>

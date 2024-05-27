@@ -3,6 +3,9 @@ using MindSweeper.Domain;
 
 namespace MindSweeper.Persistence;
 
+/// <summary>
+/// Represents a JSON file game repository.
+/// </summary>
 public class JsonFileGameRepository : IGameRepository
 {
     private const string FileName = "game.json";
@@ -13,6 +16,12 @@ public class JsonFileGameRepository : IGameRepository
         WriteIndented = true
     };
 
+    /// <summary>
+    /// Creates a new game asynchronously.
+    /// </summary>
+    /// <param name="newGame">The new game to create.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation with the result of the operation.</returns>
     public async Task<Result> CreateGameAsync(Game newGame, CancellationToken cancellationToken)
     {
         try
@@ -46,6 +55,12 @@ public class JsonFileGameRepository : IGameRepository
         }
     }
 
+    /// <summary>
+    /// Deletes a game asynchronously.
+    /// </summary>
+    /// <param name="playerId">The player ID of the game to delete.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation with the result of the operation.</returns>
     public async Task<Result> DeleteGameAsync(string playerId, CancellationToken cancellationToken)
     {
         try
@@ -83,6 +98,12 @@ public class JsonFileGameRepository : IGameRepository
         }
     }
 
+    /// <summary>
+    /// Gets a game asynchronously.
+    /// </summary>
+    /// <param name="playerId">The player ID of the game to get.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation with the result of the operation.</returns>
     public async Task<Result<Game>> GetGameAsync(string playerId, CancellationToken cancellationToken)
     {
         try
@@ -109,6 +130,12 @@ public class JsonFileGameRepository : IGameRepository
         }
     }
 
+    /// <summary>
+    /// Updates a game asynchronously.
+    /// </summary>
+    /// <param name="updatedGame">The updated game.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation with the result of the operation.</returns>
     public async Task<Result> UpdateGameAsync(Game updatedGame, CancellationToken cancellationToken)
     {
         try

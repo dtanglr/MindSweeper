@@ -6,6 +6,9 @@ namespace MindSweeper.Cli;
 
 partial class Program
 {
+    /// <summary>
+    /// Gets the root command for the CLI application.
+    /// </summary>
     public static CliRootCommand RootCommand => new(Resources.RootCommandDescription)
     {
         Subcommands = { StartCommand, MoveCommand, EndCommand, StatusCommand },

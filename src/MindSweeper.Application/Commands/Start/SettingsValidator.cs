@@ -3,8 +3,14 @@ using MindSweeper.Domain;
 
 namespace MindSweeper.Application.Commands.Start;
 
+/// <summary>
+/// Validator for the Settings class.
+/// </summary>
 public class SettingsValidator : AbstractValidator<Settings>
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SettingsValidator"/> class.
+    /// </summary>
     public SettingsValidator()
     {
         RuleFor(x => x.Rows).GreaterThanOrEqualTo(Settings.MinimumRows);

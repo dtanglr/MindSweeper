@@ -6,11 +6,18 @@ namespace MindSweeper.Application.Components;
 
 partial class Field
 {
+    /// <summary>
+    /// Represents the collection of squares in the field.
+    /// </summary>
     public sealed class Squares
     {
         private readonly Lazy<Dictionary<string, Square>> _squares;
         private readonly int _columnCapacity;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Squares"/> class.
+        /// </summary>
+        /// <param name="settings">The game settings.</param>
         public Squares(Settings settings) : this(settings.Columns, settings.Rows, settings.Squares) { }
 
         private Squares(int columnCapacity, int rowCapacity, int squaresCapacity)
@@ -35,8 +42,17 @@ partial class Field
             });
         }
 
+        /// <summary>
+        /// Gets the number of squares in the collection.
+        /// </summary>
         public int Length => _squares.Value.Count;
 
+        /// <summary>
+        /// Gets the square at the specified index.
+        /// </summary>
+        /// <param name="index">The index of the square.</param>
+        /// <returns>The square at the specified index.</returns>
+        /// <exception cref="SquareIndexOutOfRangeException">Thrown when the index is out of range.</exception>
         public Square this[int index]
         {
             get
@@ -47,6 +63,12 @@ partial class Field
             }
         }
 
+        /// <summary>
+        /// Gets the square with the specified name.
+        /// </summary>
+        /// <param name="index">The name of the square.</param>
+        /// <returns>The square with the specified name.</returns>
+        /// <exception cref="SquareIndexOutOfRangeException">Thrown when the index is out of range.</exception>
         public Square this[string index]
         {
             get
@@ -57,6 +79,10 @@ partial class Field
             }
         }
 
+        /// <summary>
+        /// Gets a random square from the first row.
+        /// </summary>
+        /// <returns>A random square from the first row.</returns>
         public Square GetStartSquare()
         {
             var randomFirstRowSquareIndex = Random.Shared.Next(0, _columnCapacity - 1);

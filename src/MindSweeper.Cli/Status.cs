@@ -4,6 +4,9 @@ namespace MindSweeper.Cli;
 
 partial class Program
 {
+    /// <summary>
+    /// Represents the CLI command for getting the current game status.
+    /// </summary>
     public static CliCommand StatusCommand => new("status", Resources.StatusCommandDescription)
     {
         Action = CommandHandler.Create<IHost>(async (host) =>

@@ -4,10 +4,19 @@ using MindSweeper.Domain;
 
 namespace MindSweeper.Application.Commands.Start;
 
+/// <summary>
+/// Command handler for starting the game.
+/// </summary>
 public class StartCommandHandler(IGameRepository repository) : IRequestHandler<StartCommand, Result<StartCommandResponse>>
 {
     private readonly IGameRepository _repository = repository;
 
+    /// <summary>
+    /// Handles the StartCommand request.
+    /// </summary>
+    /// <param name="request">The StartCommand request.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>The result of the StartCommand request.</returns>
     public async Task<Result<StartCommandResponse>> Handle(StartCommand request, CancellationToken cancellationToken)
     {
         try

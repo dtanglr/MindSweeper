@@ -4,6 +4,9 @@ namespace MindSweeper.Cli;
 
 partial class Program
 {
+    /// <summary>
+    /// Represents the CLI command for moving in the game.
+    /// </summary>
     public static CliCommand MoveCommand => new("move", Resources.MoveCommandDescription)
     {
         Arguments =

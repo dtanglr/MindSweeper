@@ -7,6 +7,11 @@ namespace MindSweeper.Cli;
 
 partial class Program : IProgram
 {
+    /// <summary>
+    /// Entry point of the application.
+    /// </summary>
+    /// <param name="args">Command-line arguments.</param>
+    /// <returns>Exit code of the application.</returns>
     public static Task<int> Main(string[] args) => new CliConfiguration(RootCommand)
         .UseHost(_ => Host.CreateDefaultBuilder(),
             host =>

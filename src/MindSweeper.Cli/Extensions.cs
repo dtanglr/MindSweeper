@@ -4,6 +4,13 @@ namespace MindSweeper.Cli;
 
 internal static class Extensions
 {
+    /// <summary>
+    /// Recursively iterates over the source object while it is not null.
+    /// </summary>
+    /// <typeparam name="T">The type of the source object.</typeparam>
+    /// <param name="source">The source object.</param>
+    /// <param name="next">The function to get the next object in the iteration.</param>
+    /// <returns>An enumerable of the source object and its descendants.</returns>
     public static IEnumerable<T> RecurseWhileNotNull<T>(this T? source, Func<T, T?> next) where T : class
     {
         while (source is not null)
@@ -14,6 +21,11 @@ internal static class Extensions
         }
     }
 
+    /// <summary>
+    /// Gets the game status as a formatted string.
+    /// </summary>
+    /// <param name="game">The game object.</param>
+    /// <returns>A StringBuilder containing the formatted game status.</returns>
     public static StringBuilder GetGameStatus(this Game game)
     {
         var sb = new StringBuilder();

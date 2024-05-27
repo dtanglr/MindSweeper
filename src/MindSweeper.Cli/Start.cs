@@ -4,6 +4,9 @@ namespace MindSweeper.Cli;
 
 partial class Program
 {
+    /// <summary>
+    /// Represents the CLI command for starting a new game.
+    /// </summary>
     public static CliCommand StartCommand => new("start", Resources.StartCommandDescription)
     {
         Options =
