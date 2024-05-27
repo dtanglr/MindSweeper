@@ -57,7 +57,7 @@ Despite this I decided to create a similar game in my own time. I felt inspired 
 
 For many years I have developed API and web applications that have a clear separation of concerns with the host  sending commands and requests along a pipeline to an application layer containing CQRS behaviors, pre- and post-request processors and handlers thanks to the wonderful [Mediatr](https://github.com/jbogard/MediatR) package.
 
-I wanted to prove I could build a CLI host application using a similar approach. It would also mean that in the future I could potentially builder other host implementations such as an API or Blazor front end without any changes to the game logic.
+I wanted to prove I could build a CLI host application using a similar approach. It would also mean that in the future I could potentially build other host implementations, such as an API or Blazor front end, without any changes to the game logic.
 
 In order to achieve this I looked at various command line parsers but settled on using the new dotnet [Command Line API](https://github.com/dotnet/command-line-api). Despite this still being in a pre-release state I was convinced it was viable due to it's wide adoption and integration with the dotnet host builder for dependency injection, logging, settings etc.  This was a crucial factor for me as it's essential to be able to create other host application flavours using exactly the same game logic.
 
