@@ -6,11 +6,11 @@
 
 As a game it's not going to set the world on fire by any means whatsoever!
 
-However, as a .NET engineer this project may provide you an excellent `experimental playground` for developers wishing to learn about writing modern .NET CLI applications using the new .NET [Command Line API](https://github.com/dotnet/command-line-api).
+However, as a .NET engineer this project may hopefully provide an excellent `experimental playground` for developers wishing to learn about writing modern .NET CLI applications using the new .NET [Command Line API](https://github.com/dotnet/command-line-api).
 
-Being able to use the host builder to configure and run the CLI console app in just the same way as one does for web and web api projects, has been a really transformative experience. It makes it a real possibility to be able to easily add a CLI to an existing .NET app as well as developing them right from the get-go on green-field projects.
+Being able to use the host builder to configure and run the CLI console app in just the same way as one does for web and web api projects has been a really transformative experience. It makes it a real possibility to be able to easily add a CLI to an existing .NET app as well as developing them right from the get-go on green-field projects.
 
-As a result of all this, I thought I would share this project to share the love for the good old `black screen white text`! Nb. other colour variations are available.
+As a result of all this, I thought I would share this project to share the love for the good old `black screen white text`! Nb. other colour variations are available :-)
 
 To read more about why I developed this code. See the [motivations for this project](#motivation-for-this-project).
 
