@@ -6,6 +6,16 @@
 public interface IProgram
 {
     /// <summary>
+    /// Gets the end command of the CLI program.
+    /// </summary>
+    abstract static CliCommand EndCommand { get; }
+
+    /// <summary>
+    /// Gets the move command of the CLI program.
+    /// </summary>
+    abstract static CliCommand MoveCommand { get; }
+
+    /// <summary>
     /// Gets the root command of the CLI program.
     /// </summary>
     abstract static CliRootCommand RootCommand { get; }
@@ -14,17 +24,6 @@ public interface IProgram
     /// Gets the start command of the CLI program.
     /// </summary>
     abstract static CliCommand StartCommand { get; }
-
-    /// <summary>
-    /// Gets the move command of the CLI program.
-    /// </summary>
-    abstract static CliCommand MoveCommand { get; }
-
-    /// <summary>
-    /// Gets the end command of the CLI program.
-    /// </summary>
-    abstract static CliCommand EndCommand { get; }
-
     /// <summary>
     /// Gets the status command of the CLI program.
     /// </summary>

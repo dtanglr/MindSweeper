@@ -12,7 +12,7 @@ partial class Program
         Action = CommandHandler.Create<IHost>(async (host) =>
         {
             var mediator = host.Services.GetRequiredService<IMediator>();
-            var command = new EndCommand(Environment.MachineName);
+            var command = new EndCommand();
             var result = await mediator.Send(command).ConfigureAwait(false);
 
             Console.WriteLine();

@@ -4,6 +4,6 @@ using MindSweeper.Domain;
 namespace MindSweeper.Application.Commands.End;
 
 /// <summary>
-/// Represents a command to end the game for a specific player.
+/// Represents a command to end the game for the current player.
 /// </summary>
-public record EndCommand(string PlayerId) : IRequest<Result>;
+public record EndCommand() : IRequest<Result>;

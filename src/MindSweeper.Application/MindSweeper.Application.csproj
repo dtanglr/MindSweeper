@@ -17,8 +17,4 @@
     <ProjectReference Include="..\MindSweeper.Domain\MindSweeper.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <InternalsVisibleTo Include="MindSweeper.UnitTests" />
-  </ItemGroup>
-
 </Project>
