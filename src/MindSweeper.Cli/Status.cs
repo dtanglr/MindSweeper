@@ -1,4 +1,4 @@
-﻿using MindSweeper.Application.Requests.GetGame;
+﻿using MindSweeper.Application.Queries.GetGame;
 
 namespace MindSweeper.Cli;
 
@@ -12,7 +12,7 @@ partial class Program
         Action = CommandHandler.Create<IHost>(async (host) =>
         {
             var mediator = host.Services.GetRequiredService<IMediator>();
-            var request = new GetGameRequest();
+            var request = new GetGameQuery();
             var result = await mediator.Send(request);
 
             Console.WriteLine();

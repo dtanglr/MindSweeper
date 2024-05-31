@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using MindSweeper.Domain;
 
-namespace MindSweeper.Application.Requests.GetGame;
+namespace MindSweeper.Application.Queries.GetGame;
 
 /// <summary>
 /// Request handler for getting the game for the player.
 /// </summary>
-public class GetGameRequestHandler(PlayerContext context) : IRequestHandler<GetGameRequest, Result<GetGameRequestResponse>>
+public class GetGameQueryHandler(PlayerContext context) : IRequestHandler<GetGameQuery, Result<GetGameQueryResponse>>
 {
     private readonly PlayerContext _context = context;
 
@@ -16,19 +16,19 @@ public class GetGameRequestHandler(PlayerContext context) : IRequestHandler<GetG
     /// <param name="request">The GetGameRequest object.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The result of the GetGameRequest.</returns>
-    public Task<Result<GetGameRequestResponse>> Handle(GetGameRequest request, CancellationToken cancellationToken)
+    public Task<Result<GetGameQueryResponse>> Handle(GetGameQuery request, CancellationToken cancellationToken)
     {
         if (!_context.HasGame)
         {
-            var result = Result<GetGameRequestResponse>.NotFound();
+            var result = Result<GetGameQueryResponse>.NotFound();
 
             return Task.FromResult(result);
         }
         else
         {
             var game = _context.Game!;
-            var response = new GetGameRequestResponse(game);
-            var result = Result<GetGameRequestResponse>.Success(response);
+            var response = new GetGameQueryResponse(game);
+            var result = Result<GetGameQueryResponse>.Success(response);
 
             return Task.FromResult(result);
         }
