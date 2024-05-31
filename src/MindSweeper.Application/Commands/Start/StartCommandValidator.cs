@@ -12,7 +12,6 @@ public class StartCommandValidator : AbstractValidator<StartCommand>
     /// </summary>
     public StartCommandValidator()
     {
-        RuleFor(x => x.PlayerId).NotEmpty();
         RuleFor(x => x.Settings).SetValidator(new SettingsValidator());
     }
 }

@@ -46,8 +46,8 @@ partial class Program
         Action = CommandHandler.Create<StartOptions, IHost>(async (options, host) =>
         {
             var mediator = host.Services.GetRequiredService<IMediator>();
-            var command = new StartCommand(Environment.MachineName, options.Settings);
-            var result = await mediator.Send(command).ConfigureAwait(false);
+            var command = new StartCommand(options.Settings);
+            var result = await mediator.Send(command);
 
             Console.WriteLine();
 

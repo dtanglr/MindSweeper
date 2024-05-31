@@ -1,12 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
-using MediatR.Pipeline;
 using Microsoft.Extensions.DependencyInjection;
 using MindSweeper.Application.Behaviors;
-using MindSweeper.Application.Commands.End;
-using MindSweeper.Application.Commands.Move;
 using MindSweeper.Application.Commands.Start;
-using MindSweeper.Application.Requests.GetGame;
 using MindSweeper.Domain;
 
 namespace MindSweeper.Application;
@@ -27,19 +23,15 @@ public static class DependencyInjection
         var options = new GameOptions();
         build.Invoke(options);
 
-        services.AddScoped<PlayerContext>((_) => new(Environment.MachineName));
+        services.AddScoped<IGameService, GameService>();
         services.AddScoped(typeof(IGameRepository), options.RepositoryType!);
-        //services.AddScoped<IGameService, GameService>();
+        services.AddScoped(typeof(PlayerContext), (_) => new PlayerContext(Environment.MachineName));
 
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             config.AddOpenRequestPreProcessor(typeof(PlayerContextBehavior<>));
-            config.AddBehavior(typeof(IPipelineBehavior<EndCommand, Result>), typeof(EndCommandValidationBehavior));
-            config.AddBehavior(typeof(IPipelineBehavior<MoveCommand, Result<MoveCommandResponse>>), typeof(MoveCommandGetGameBehavior));
-            config.AddBehavior(typeof(IPipelineBehavior<MoveCommand, Result<MoveCommandResponse>>), typeof(MoveCommandValidationBehavior));
             config.AddBehavior(typeof(IPipelineBehavior<StartCommand, Result<StartCommandResponse>>), typeof(StartCommandValidationBehavior));
-            config.AddBehavior(typeof(IPipelineBehavior<GetGameRequest, Result<GetGameRequestResponse>>), typeof(GetGameRequestValidationBehavior));
         });
 
         services.AddValidatorsFromAssemblies([typeof(DependencyInjection).Assembly]);

@@ -3,34 +3,65 @@
 /// <summary>
 /// Represents a MindSweeper game instance for a player.
 /// </summary>
-public record Game(
-    Guid Id,
-    string PlayerId,
-    Settings Settings,
-    List<int> Bombs,
-    int Lives,
-    int Moves,
-    string CurrentSquare,
-    Dictionary<Direction, string> AvailableMoves)
+public record Game
 {
     /// <summary>
-    /// Gets the status of the game.
+    /// Gets the game ID.
     /// </summary>
-    public GameStatus Status => this switch
-    {
-        { Lives: 0 } => GameStatus.Lost,
-        _ when !AvailableMoves.ContainsKey(Direction.Up) => GameStatus.Won,
-        _ => GameStatus.InProgress
-    };
+    public required Guid Id { get; init; }
+
+    /// <summary>
+    /// Gets the player ID.
+    /// </summary>
+    public required string PlayerId { get; init; }
+
+    /// <summary>
+    /// Gets the game settings.
+    /// </summary>
+    public required Settings Settings { get; init; }
+
+    /// <summary>
+    /// Gets the collection of bomb positions.
+    /// </summary>
+    public required List<int> Bombs { get; init; }
+
+    /// <summary>
+    /// Gets or sets the current square.
+    /// </summary>
+    public required string CurrentSquare { get; set; }
+
+    /// <summary>
+    /// Gets or sets the available moves.
+    /// </summary>
+    public required Dictionary<Direction, string> AvailableMoves { get; set; }
 
     /// <summary>
     /// Gets the number of bombs hit in the game.
     /// </summary>
-    public int BombsHit => this switch
-    {
-        { Lives: 0 } => Settings.Lives,
-        _ when Lives == Settings.Lives => 0,
-        _ when Lives < Settings.Lives => Settings.Lives - Lives,
-        _ => throw new ArgumentOutOfRangeException(nameof(Lives))
-    };
+    public int BombsHit { get; set; }
+
+    /// <summary>
+    /// Gets or sets the number of lives remaining in the game.
+    /// </summary>
+    public int Lives { get; set; }
+
+    /// <summary>
+    /// Gets or sets the number of moves made in the game.
+    /// </summary>
+    public int Moves { get; set; }
+
+    /// <summary>
+    /// Gets the last move made in the game.
+    /// </summary>
+    public Move? LastMove { get; set; }
+
+    /// <summary>
+    /// Gets or sets the moves made in the game.
+    /// </summary>
+    public List<Move> MovesMade { get; init; } = [];
+
+    /// <summary>
+    /// Gets or sets the status of the game.
+    /// </summary>
+    public GameStatus Status { get; set; } = GameStatus.InProgress;
 }

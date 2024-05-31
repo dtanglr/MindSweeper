@@ -12,8 +12,8 @@ partial class Program
         Action = CommandHandler.Create<IHost>(async (host) =>
         {
             var mediator = host.Services.GetRequiredService<IMediator>();
-            var request = new GetGameRequest(Environment.MachineName);
-            var result = await mediator.Send(request).ConfigureAwait(false);
+            var request = new GetGameRequest();
+            var result = await mediator.Send(request);
 
             Console.WriteLine();
 

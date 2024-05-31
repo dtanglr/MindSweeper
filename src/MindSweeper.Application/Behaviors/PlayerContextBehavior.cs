@@ -12,6 +12,11 @@ public sealed class PlayerContextBehavior<TRequest> : IRequestPreProcessor<TRequ
 
     public PlayerContextBehavior(PlayerContext context, IGameRepository repository, ILogger<PlayerContextBehavior<TRequest>> logger)
     {
+        if (string.IsNullOrEmpty(context.Id))
+        {
+            throw new ArgumentException("Player ID cannot be null or empty.", nameof(context));
+        }
+
         _context = context;
         _repository = repository;
         _logger = logger;
@@ -26,7 +31,7 @@ public sealed class PlayerContextBehavior<TRequest> : IRequestPreProcessor<TRequ
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to retrieve the game for player: {PlayerId}.", _context.Id);
+            _logger.LogError(ex, "An error occurred getting the game for player: {PlayerId}.", _context.Id);
         }
     }
 }

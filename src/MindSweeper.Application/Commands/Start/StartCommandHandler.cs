@@ -1,15 +1,23 @@
 ﻿using MediatR;
 using MindSweeper.Domain;
-using MindSweeper.Domain.Components;
 
 namespace MindSweeper.Application.Commands.Start;
 
 /// <summary>
 /// Command handler for starting the game.
 /// </summary>
-public class StartCommandHandler(IGameRepository repository) : IRequestHandler<StartCommand, Result<StartCommandResponse>>
+public class StartCommandHandler : IRequestHandler<StartCommand, Result<StartCommandResponse>>
 {
-    private readonly IGameRepository _repository = repository;
+    private readonly IGameService _service;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StartCommandHandler"/> class.
+    /// </summary>
+    /// <param name="service">The game service.</param>
+    public StartCommandHandler(IGameService service)
+    {
+        _service = service;
+    }
 
     /// <summary>
     /// Handles the StartCommand request.
@@ -19,31 +27,15 @@ public class StartCommandHandler(IGameRepository repository) : IRequestHandler<S
     /// <returns>The result of the StartCommand request.</returns>
     public async Task<Result<StartCommandResponse>> Handle(StartCommand request, CancellationToken cancellationToken)
     {
-        try
+        var result = await _service.StartAsync(request.Settings, cancellationToken);
+
+        if (!result.IsSuccess)
         {
-            var id = Guid.NewGuid();
-            var playerId = request.PlayerId;
-            var settings = request.Settings;
-            var squares = new Field.Squares(settings);
-            var startSquare = squares.GetStartSquare();
-            var availableMoves = startSquare.GetAvailableMoves();
-            var bombs = new Field.Bombs(settings);
-            var lives = settings.Lives;
-            var game = new Game(id, playerId, settings, bombs, lives, 0, startSquare.Name, availableMoves);
-            var result = await _repository.CreateGameAsync(game, cancellationToken);
-
-            if (!result.IsSuccess)
-            {
-                return result.ToResult<StartCommandResponse>();
-            }
-
-            var response = new StartCommandResponse(game);
-
-            return Result<StartCommandResponse>.Accepted(response);
+            return result.ToResult<StartCommandResponse>();
         }
-        catch (Exception ex)
-        {
-            return Result<StartCommandResponse>.Error(ex.Message);
-        }
+
+        var response = new StartCommandResponse(result.Value!);
+
+        return Result<StartCommandResponse>.Accepted(response);
     }
 }

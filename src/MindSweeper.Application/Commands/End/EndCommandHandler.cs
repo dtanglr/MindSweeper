@@ -8,15 +8,15 @@ namespace MindSweeper.Application.Commands.End;
 /// </summary>
 public class EndCommandHandler : IRequestHandler<EndCommand, Result>
 {
-    private readonly IGameRepository _repository;
+    private readonly IGameService _service;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EndCommandHandler"/> class.
     /// </summary>
-    /// <param name="repository">The game repository.</param>
-    public EndCommandHandler(IGameRepository repository)
+    /// <param name="service">The game repository.</param>
+    public EndCommandHandler(IGameService service)
     {
-        _repository = repository;
+        _service = service;
     }
 
     /// <summary>
@@ -25,15 +25,8 @@ public class EndCommandHandler : IRequestHandler<EndCommand, Result>
     /// <param name="request">The end command.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The result of the operation.</returns>
-    public async Task<Result> Handle(EndCommand request, CancellationToken cancellationToken)
+    public Task<Result> Handle(EndCommand request, CancellationToken cancellationToken)
     {
-        try
-        {
-            return await _repository.DeleteGameAsync(request.PlayerId, cancellationToken);
-        }
-        catch (Exception ex)
-        {
-            return Result.Error(ex.Message);
-        }
+        return _service.EndAsync(cancellationToken);
     }
 }

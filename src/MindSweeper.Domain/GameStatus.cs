@@ -1,8 +1,11 @@
-﻿namespace MindSweeper.Domain;
+﻿using System.Text.Json.Serialization;
+
+namespace MindSweeper.Domain;
 
 /// <summary>
 /// Represents the status of a game.
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum GameStatus
 {
     /// <summary>

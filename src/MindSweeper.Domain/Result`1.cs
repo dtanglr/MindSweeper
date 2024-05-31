@@ -95,6 +95,12 @@ public class Result<T> : IResult<T>
     public static Result<T> Accepted(T value) => new(value, ResultStatus.Accepted);
 
     /// <summary>
+    /// Represents a conflict with the current state of the target resource.
+    /// </summary>
+    /// <returns>A result indicating the conflict situation.</returns>
+    public static Result<T> Conflict() => new(ResultStatus.Conflict);
+
+    /// <summary>
     /// Represents an error that occurred during the execution of the service.
     /// Error messages may be provided and will be exposed via the Errors property.
     /// </summary>

@@ -15,9 +15,8 @@ public sealed class StartCommandValidationBehavior : BaseValidationBehavior<Star
     /// </summary>
     /// <param name="validators">The validators to be used for validating the StartCommand.</param>
     /// <param name="logger">The logger.</param>
-    public StartCommandValidationBehavior(
-        IEnumerable<IValidator<StartCommand>> validators,
-        ILogger<StartCommandValidationBehavior> logger) : base(validators, logger)
+    public StartCommandValidationBehavior(IEnumerable<IValidator<StartCommand>> validators, ILogger<StartCommandValidationBehavior> logger)
+        : base(validators, logger)
     {
     }
 

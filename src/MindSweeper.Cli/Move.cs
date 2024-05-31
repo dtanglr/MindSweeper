@@ -20,7 +20,14 @@ partial class Program
                 {
                     (context) =>
                     {
-                        Direction[] completions = [ Direction.Up, Direction.Down, Direction.Left, Direction.Right ];
+                        Direction[] completions =
+                        [
+                            Direction.Up,
+                            Direction.Down,
+                            Direction.Left,
+                            Direction.Right
+                        ];
+
                         return completions.Select(c => new CompletionItem(c.ToString().ToLower()));
                     }
                 }
@@ -29,8 +36,8 @@ partial class Program
         Action = CommandHandler.Create<Direction, IHost>(async (direction, host) =>
         {
             var mediator = host.Services.GetRequiredService<IMediator>();
-            var command = new MoveCommand(Environment.MachineName, direction);
-            var result = await mediator.Send(command).ConfigureAwait(false);
+            var command = new MoveCommand(direction);
+            var result = await mediator.Send(command);
 
             Console.WriteLine();
 
@@ -39,19 +46,20 @@ partial class Program
                 case ResultStatus.Accepted:
                     var response = result.Value!;
                     var game = response.Game;
+                    var move = game.LastMove!;
 
                     Console.WriteLine(Resources.MoveCommandDetails,
-                        response.Direction.ToString().ToLowerInvariant(),
-                        response.FromSquare,
-                        response.ToSquare);
+                        move.Direction.ToString().ToLowerInvariant(),
+                        move.FromSquare,
+                        move.ToSquare);
 
                     Console.WriteLine();
 
                     switch (game.Status)
                     {
                         case GameStatus.InProgress:
-                            Console.WriteLine(response.HitBomb ? Resources.Boom : Resources.Yes);
-                            Console.WriteLine(response.HitBomb ? Resources.MoveCommandDidHitBomb : Resources.MoveCommandDidNotHitBomb);
+                            Console.WriteLine(move.HitBomb ? Resources.Boom : Resources.Yes);
+                            Console.WriteLine(move.HitBomb ? Resources.MoveCommandDidHitBomb : Resources.MoveCommandDidNotHitBomb);
                             Console.WriteLine();
                             Console.WriteLine(Resources.MoveCommandResultStatusAccepted);
                             break;

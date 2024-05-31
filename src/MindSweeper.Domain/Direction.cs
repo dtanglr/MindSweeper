@@ -1,8 +1,11 @@
-﻿namespace MindSweeper.Domain;
+﻿using System.Text.Json.Serialization;
+
+namespace MindSweeper.Domain;
 
 /// <summary>
 /// Represents the possible directions in a game.
 /// </summary>
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum Direction
 {
     /// <summary>

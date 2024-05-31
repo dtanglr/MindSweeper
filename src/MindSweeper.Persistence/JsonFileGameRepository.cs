@@ -58,10 +58,10 @@ public class JsonFileGameRepository : IGameRepository
     /// <summary>
     /// Deletes a game asynchronously.
     /// </summary>
-    /// <param name="playerId">The player ID of the game to delete.</param>
+    /// <param name="gameId">The player ID of the game to delete.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation with the result of the operation.</returns>
-    public async Task<Result> DeleteGameAsync(string playerId, CancellationToken cancellationToken)
+    public async Task<Result> DeleteGameAsync(Guid gameId, CancellationToken cancellationToken)
     {
         try
         {
@@ -74,7 +74,7 @@ public class JsonFileGameRepository : IGameRepository
 
                 await foreach (var existingGame in JsonSerializer.DeserializeAsyncEnumerable<Game>(stream, _options, cancellationToken))
                 {
-                    if (existingGame!.PlayerId == playerId)
+                    if (existingGame!.Id == gameId)
                     {
                         existed = true;
                         continue;

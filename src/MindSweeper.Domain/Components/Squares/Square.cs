@@ -19,6 +19,11 @@ internal sealed record Square(Field.Squares Squares, IColumn Column, IRow Row)
     public string Name => $"{Column.Name}{Row.Name}";
 
     /// <summary>
+    /// Determines if the square is on the last row.
+    /// </summary>
+    public bool IsOnLastRow => Row is not IHasRowAbove;
+
+    /// <summary>
     /// Checks if the square has a bomb.
     /// </summary>
     /// <param name="bombs">The bombs in the field.</param>

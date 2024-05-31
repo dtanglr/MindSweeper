@@ -16,10 +16,10 @@ public interface IGameRepository
     /// <summary>
     /// Deletes a game asynchronously.
     /// </summary>
-    /// <param name="playerId">The ID of the player.</param>
+    /// <param name="gameId">The ID of the game.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation with a Result indicating the success or failure of the operation.</returns>
-    Task<Result> DeleteGameAsync(string playerId, CancellationToken cancellationToken);
+    Task<Result> DeleteGameAsync(Guid gameId, CancellationToken cancellationToken);
 
     /// <summary>
     /// Gets a game asynchronously.

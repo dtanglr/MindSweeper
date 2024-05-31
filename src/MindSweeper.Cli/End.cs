@@ -13,7 +13,7 @@ partial class Program
         {
             var mediator = host.Services.GetRequiredService<IMediator>();
             var command = new EndCommand();
-            var result = await mediator.Send(command).ConfigureAwait(false);
+            var result = await mediator.Send(command);
 
             Console.WriteLine();
 
