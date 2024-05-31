@@ -1,7 +1,7 @@
 ﻿using MindSweeper.Domain.Components;
 using MindSweeper.Domain.Components.Columns;
 
-namespace MindSweeper.UnitTests;
+namespace MindSweeper.Domain.UnitTests.Components;
 
 public class ColumnTests
 {

@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Domain;
+﻿namespace MindSweeper.Domain.Results;
 
 /// <summary>
 /// Represents a result that contains a value of type T.

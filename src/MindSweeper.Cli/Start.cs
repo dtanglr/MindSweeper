@@ -1,4 +1,5 @@
 ﻿using MindSweeper.Application.Commands.Start;
+using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Cli;
 

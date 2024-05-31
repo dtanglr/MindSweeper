@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MindSweeper.Domain;
+using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application.Commands.End;
 

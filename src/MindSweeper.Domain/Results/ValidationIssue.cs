@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Domain;
+﻿namespace MindSweeper.Domain.Results;
 
 /// <summary>
 /// Represents an issue that occurred during validation.

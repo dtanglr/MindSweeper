@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Domain;
+﻿namespace MindSweeper.Domain.Results;
 
 /// <summary>
 /// Represents the result of an operation.

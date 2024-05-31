@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="MindSweeper.UnitTests" />
+    <InternalsVisibleTo Include="MindSweeper.Domain.UnitTests" />
     <InternalsVisibleTo Include="MindSweeper.Application" />
   </ItemGroup>
 

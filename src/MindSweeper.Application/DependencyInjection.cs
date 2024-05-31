@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MindSweeper.Application.Behaviors;
 using MindSweeper.Application.Commands.Start;
 using MindSweeper.Domain;
+using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application;
 

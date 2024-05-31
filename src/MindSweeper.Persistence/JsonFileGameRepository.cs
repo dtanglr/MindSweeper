@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using MindSweeper.Domain;
+using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Persistence;
 

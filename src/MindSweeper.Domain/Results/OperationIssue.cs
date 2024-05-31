@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace MindSweeper.Domain;
+namespace MindSweeper.Domain.Results;
 
 /// <summary>
 /// Represents an operation issue.

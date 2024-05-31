@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Logging;
-using MindSweeper.Domain;
+using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application.Behaviors;
 

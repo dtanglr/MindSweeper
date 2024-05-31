@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Logging;
 using MindSweeper.Application.Behaviors;
-using MindSweeper.Domain;
+using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application.Commands.Start;
 

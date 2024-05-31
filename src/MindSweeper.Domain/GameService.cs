@@ -1,4 +1,5 @@
 ﻿using MindSweeper.Domain.Components;
+using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Domain;
 

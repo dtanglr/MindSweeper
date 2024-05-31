@@ -1,7 +1,7 @@
 ﻿using MindSweeper.Domain.Components;
 using MindSweeper.Domain.Components.Rows;
 
-namespace MindSweeper.UnitTests;
+namespace MindSweeper.Domain.UnitTests.Components;
 
 public class SquareTests
 {

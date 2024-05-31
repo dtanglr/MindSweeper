@@ -1,4 +1,6 @@
-﻿namespace MindSweeper.Domain;
+﻿using MindSweeper.Domain.Results;
+
+namespace MindSweeper.Domain;
 
 /// <summary>
 /// Represents a game service interface.

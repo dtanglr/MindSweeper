@@ -1,6 +1,6 @@
 ﻿using MindSweeper.Domain.Components;
 
-namespace MindSweeper.UnitTests;
+namespace MindSweeper.Domain.UnitTests.Components;
 
 public class BombTests
 {
