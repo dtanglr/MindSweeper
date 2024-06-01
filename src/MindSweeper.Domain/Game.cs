@@ -18,7 +18,7 @@ public record Game
     /// <summary>
     /// Gets the game settings.
     /// </summary>
-    public required Settings Settings { get; init; }
+    public required GameSettings Settings { get; init; }
 
     /// <summary>
     /// Gets the collection of bomb positions.

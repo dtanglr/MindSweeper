@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="MindSweeper.UnitTests" />
     <InternalsVisibleTo Include="MindSweeper.Domain.UnitTests" />
-    <InternalsVisibleTo Include="MindSweeper.Application" />
+    <InternalsVisibleTo Include="MindSweeper.Application.Mediator" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>
 
 </Project>

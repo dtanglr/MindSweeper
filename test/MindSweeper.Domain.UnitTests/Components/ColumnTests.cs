@@ -21,7 +21,7 @@ public class ColumnTests
         {
             var column = sut[i];
             column.Index.Should().Be(i);
-            column.Name.Should().Be(Settings.ColumnNames[i]);
+            column.Name.Should().Be(GameSettings.ColumnNames[i]);
             column.Columns.Should().Be(sut);
 
             if (i == 0)

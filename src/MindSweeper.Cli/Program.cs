@@ -1,7 +1,7 @@
 ﻿using System.CommandLine.Hosting;
 using Microsoft.Extensions.Logging;
-using MindSweeper.Application;
-using MindSweeper.Persistence;
+using MindSweeper.Application.Mediator;
+using MindSweeper.Persistence.LocalFile;
 
 namespace MindSweeper.Cli;
 
@@ -17,8 +17,20 @@ partial class Program : IProgram
             host =>
             {
                 host.ConfigureServices(services =>
-                    services.AddMindGame(options =>
-                        options.UseRepository<JsonFileGameRepository>()));
+                {
+                    services.ConfigureMindSweeper(configure =>
+                    {
+                        configure.PlayerContextFactory = _ => new PlayerContext(Environment.MachineName);
+                    })
+                    .UseMediatorPipeline()
+                    .UseLocalFileStorage(configure =>
+                    {
+                        configure.JsonSerializerOptions = options =>
+                        {
+                            options.WriteIndented = true;
+                        };
+                    });
+                });
 
                 host.ConfigureLogging(logging =>
                     logging.SetMinimumLevel(LogLevel.Error));

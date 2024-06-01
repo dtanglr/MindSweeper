@@ -9,7 +9,7 @@ public class SquareTests
     public void GivenDefaultSettings_AboveTheMinimumRequired_SquaresInstantiateCorrectly()
     {
         // Arrange
-        var settings = new Settings();
+        var settings = new GameSettings();
 
         // Act
         var sut = new Field.Squares(settings);
@@ -34,7 +34,7 @@ public class SquareTests
     public void GivenACollectionOfSquares_SquareGetStartSquareMethod_CorrectlyReturnsASquareOnTheFirstRow()
     {
         // Arrange
-        var settings = new Settings();
+        var settings = new GameSettings();
         var squares = new Field.Squares(settings);
 
         // Act
@@ -51,7 +51,7 @@ public class SquareTests
     public void GivenACollectionOfBombs_SquareHasBombMethod_CorrectlyReturnsWhetherTheSquareHasABomb()
     {
         // Arrange
-        var settings = new Settings();
+        var settings = new GameSettings();
         var bombs = new Field.Bombs(settings);
         var listOfBombs = bombs.ToList();
         var squares = new Field.Squares(settings);

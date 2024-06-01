@@ -19,14 +19,14 @@ partial class Field
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the capacity is less than the minimum or exceeds the maximum number of columns.</exception>
         public Columns(int capacity)
         {
-            if (capacity < Settings.MinimumColumns)
+            if (capacity < GameSettings.MinimumColumns)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of columns must be at least {Settings.MinimumColumns}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of columns must be at least {GameSettings.MinimumColumns}.");
             }
 
-            if (capacity > Settings.MaximumColumns)
+            if (capacity > GameSettings.MaximumColumns)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of columns must not exceed {Settings.MaximumColumns}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of columns must not exceed {GameSettings.MaximumColumns}.");
             }
 
             _columns = new(() =>

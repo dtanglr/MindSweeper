@@ -13,7 +13,7 @@ internal interface IColumn
     /// <summary>
     /// Gets the name of the column.
     /// </summary>
-    char Name => Settings.ColumnNames[Index];
+    char Name => GameSettings.ColumnNames[Index];
 
     /// <summary>
     /// Gets the columns of the field.

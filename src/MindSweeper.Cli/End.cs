@@ -1,4 +1,4 @@
-﻿using MindSweeper.Application.Commands.End;
+﻿using MindSweeper.Application.Mediator.Commands.End;
 using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Cli;

@@ -1,4 +1,4 @@
-﻿using MindSweeper.Application.Queries.GetGame;
+﻿using MindSweeper.Application.Mediator.Queries.GetGame;
 using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Cli;

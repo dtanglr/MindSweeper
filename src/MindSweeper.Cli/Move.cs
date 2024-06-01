@@ -1,4 +1,4 @@
-﻿using MindSweeper.Application.Commands.Move;
+﻿using MindSweeper.Application.Mediator.Commands.Move;
 using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Cli;

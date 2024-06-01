@@ -28,7 +28,7 @@ public class GameService : IGameService
     /// <param name="settings">The game settings.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The result of the operation.</returns>
-    public async Task<Result<Game>> StartAsync(Settings settings, CancellationToken cancellationToken)
+    public async Task<Result<Game>> StartAsync(GameSettings settings, CancellationToken cancellationToken)
     {
         if (_context.HasGame)
         {

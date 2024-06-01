@@ -15,7 +15,7 @@ partial class Field
         /// Initializes a new instance of the <see cref="Bombs"/> class with the specified settings.
         /// </summary>
         /// <param name="settings">The game settings.</param>
-        public Bombs(Settings settings) : this(settings.Bombs, settings.Squares) { }
+        public Bombs(GameSettings settings) : this(settings.Bombs, settings.Squares) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Bombs"/> class with the specified bomb capacity and squares capacity.
@@ -25,9 +25,9 @@ partial class Field
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the bomb capacity is less than the minimum bombs or exceeds the squares capacity.</exception>
         private Bombs(int bombCapacity, int squaresCapacity)
         {
-            if (bombCapacity < Settings.MinimumBombs)
+            if (bombCapacity < GameSettings.MinimumBombs)
             {
-                throw new ArgumentOutOfRangeException(nameof(bombCapacity), $"The number of bombs must be at least {Settings.MinimumBombs}.");
+                throw new ArgumentOutOfRangeException(nameof(bombCapacity), $"The number of bombs must be at least {GameSettings.MinimumBombs}.");
             }
 
             if (bombCapacity > squaresCapacity)

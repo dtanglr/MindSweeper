@@ -8,7 +8,7 @@ public class BombTests
     public void GivenDefaultSettings_BombsInstantiateCorrectly()
     {
         // Arrange
-        var settings = new Settings();
+        var settings = new GameSettings();
 
         // Act
         var sut = new Field.Bombs(settings);
@@ -26,7 +26,7 @@ public class BombTests
     public void GivenAListOfBombs_BombsInstantiateCorrectly()
     {
         // Arrange
-        var settings = new Settings();
+        var settings = new GameSettings();
         var bombs = new Field.Bombs(settings);
         var listOfBombs = bombs.ToList();
 
@@ -41,7 +41,7 @@ public class BombTests
     public void GivenACollectionOfSquares_BombsOnSquareMethod_CorrectlyReturnsSquaresWithBombs()
     {
         // Arrange
-        var settings = new Settings();
+        var settings = new GameSettings();
         var squares = new Field.Squares(settings);
 
         // Act

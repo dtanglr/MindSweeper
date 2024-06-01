@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MindSweeper.Application\MindSweeper.Application.csproj" />
-    <ProjectReference Include="..\MindSweeper.Persistence\MindSweeper.Persistence.csproj" />
+    <ProjectReference Include="..\MindSweeper.Application.Mediator\MindSweeper.Application.Mediator.csproj" />
+    <ProjectReference Include="..\MindSweeper.Persistence.LocalFile\MindSweeper.Persistence.LocalFile.csproj" />
   </ItemGroup>
 
   <ItemGroup>

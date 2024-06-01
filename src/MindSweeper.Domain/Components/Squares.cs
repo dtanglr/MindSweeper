@@ -17,7 +17,7 @@ partial class Field
         /// Initializes a new instance of the <see cref="Squares"/> class.
         /// </summary>
         /// <param name="settings">The game settings.</param>
-        public Squares(Settings settings) : this(settings.Columns, settings.Rows, settings.Squares) { }
+        public Squares(GameSettings settings) : this(settings.Columns, settings.Rows, settings.Squares) { }
 
         private Squares(int columnCapacity, int rowCapacity, int squaresCapacity)
         {

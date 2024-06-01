@@ -19,14 +19,14 @@ partial class Field
         /// <exception cref="ArgumentOutOfRangeException">Thrown when the capacity is less than the minimum number of rows or exceeds the maximum number of rows.</exception>
         public Rows(int capacity)
         {
-            if (capacity < Settings.MinimumRows)
+            if (capacity < GameSettings.MinimumRows)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of rows must be at least {Settings.MinimumRows}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of rows must be at least {GameSettings.MinimumRows}.");
             }
 
-            if (capacity > Settings.MaximumRows)
+            if (capacity > GameSettings.MaximumRows)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of rows must not exceed {Settings.MaximumRows}.");
+                throw new ArgumentOutOfRangeException(nameof(capacity), $"The number of rows must not exceed {GameSettings.MaximumRows}.");
             }
 
             _rows = new(() =>

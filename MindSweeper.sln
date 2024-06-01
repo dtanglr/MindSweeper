@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Cli", "src\MindSweeper.Cli\MindSweeper.Cli.csproj", "{880130CC-CD73-4720-84E1-C7B0138683CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Application", "src\MindSweeper.Application\MindSweeper.Application.csproj", "{A8BBBC97-6865-4474-AEF1-5942312B05E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Application.Mediator", "src\MindSweeper.Application.Mediator\MindSweeper.Application.Mediator.csproj", "{A8BBBC97-6865-4474-AEF1-5942312B05E0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Hosts", "1. Hosts", "{31D85BB5-93FF-4AEA-9BF4-8879E2D9E4A5}"
 EndProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Infrastructure", "2. Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Domain", "src\MindSweeper.Domain\MindSweeper.Domain.csproj", "{6E126DCC-CD99-4F42-AF80-8F40898459F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Persistence", "src\MindSweeper.Persistence\MindSweeper.Persistence.csproj", "{92DDFF65-3168-4422-BF86-E91C494F2F69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Persistence.LocalFile", "src\MindSweeper.Persistence.LocalFile\MindSweeper.Persistence.LocalFile.csproj", "{92DDFF65-3168-4422-BF86-E91C494F2F69}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8423C9C2-8323-4715-80A1-868F06842852}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,11 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{89C2339A-F0C6-4163-828E-281FE8631B24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindSweeper.Domain.UnitTests", "test\MindSweeper.Domain.UnitTests\MindSweeper.Domain.UnitTests.csproj", "{B9CECD94-FFEE-40A9-A2FE-5FDE84B9202E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Domain.UnitTests", "test\MindSweeper.Domain.UnitTests\MindSweeper.Domain.UnitTests.csproj", "{B9CECD94-FFEE-40A9-A2FE-5FDE84B9202E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindSweeper.Persistence.UnitTests", "test\MindSweeper.Persistence.UnitTests\MindSweeper.Persistence.UnitTests.csproj", "{24DBBB79-B7BF-42BA-85FB-E0A8C8406B30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Persistence.LocalFile.UnitTests", "test\MindSweeper.Persistence.LocalFile.UnitTests\MindSweeper.Persistence.LocalFile.UnitTests.csproj", "{24DBBB79-B7BF-42BA-85FB-E0A8C8406B30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindSweeper.Application.UnitTests", "test\MindSweeper.Application.UnitTests\MindSweeper.Application.UnitTests.csproj", "{FEB60A0A-BEEA-4A05-BAA0-263FCDDB8536}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Application.Mediator.UnitTests", "test\MindSweeper.Application.Mediator.UnitTests\MindSweeper.Application.Mediator.UnitTests.csproj", "{FEB60A0A-BEEA-4A05-BAA0-263FCDDB8536}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

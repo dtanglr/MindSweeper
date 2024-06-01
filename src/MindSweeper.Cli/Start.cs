@@ -1,4 +1,4 @@
-﻿using MindSweeper.Application.Commands.Start;
+﻿using MindSweeper.Application.Mediator.Commands.Start;
 using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Cli;
@@ -18,7 +18,7 @@ partial class Program
                 Description = Resources.StartCommandColumnsOptionDescription,
                 HelpName = Resources.StartCommandColumnsOptionHelpName,
                 Required = false,
-                DefaultValueFactory = (arg) => Settings.DefaultColumns
+                DefaultValueFactory = (arg) => GameSettings.DefaultColumns
             },
             new CliOption<int>("--rows", "-r")
             {
@@ -26,7 +26,7 @@ partial class Program
                 Description = Resources.StartCommandRowsOptionDescription,
                 HelpName = Resources.StartCommandRowsOptionHelpName,
                 Required = false,
-                DefaultValueFactory = (arg) => Settings.DefaultRows
+                DefaultValueFactory = (arg) => GameSettings.DefaultRows
             },
             new CliOption<int>("--bombs", "-b")
             {
@@ -41,7 +41,7 @@ partial class Program
                 Description = Resources.StartCommandLivesOptionDescription,
                 HelpName = Resources.StartCommandLivesOptionHelpName,
                 Required = false,
-                DefaultValueFactory = (arg) => Settings.DefaultLives
+                DefaultValueFactory = (arg) => GameSettings.DefaultLives
             }
         },
         Action = CommandHandler.Create<StartOptions, IHost>(async (options, host) =>
