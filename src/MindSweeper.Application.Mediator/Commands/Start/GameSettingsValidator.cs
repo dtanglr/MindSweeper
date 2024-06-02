@@ -4,14 +4,14 @@ using MindSweeper.Domain;
 namespace MindSweeper.Application.Mediator.Commands.Start;
 
 /// <summary>
-/// Validator for the Settings class.
+/// Validator for the GameSettings class.
 /// </summary>
-public class SettingsValidator : AbstractValidator<GameSettings>
+public class GameSettingsValidator : AbstractValidator<GameSettings>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="SettingsValidator"/> class.
+    /// Initializes a new instance of the <see cref="GameSettingsValidator"/> class.
     /// </summary>
-    public SettingsValidator()
+    public GameSettingsValidator()
     {
         RuleFor(x => x.Rows).GreaterThanOrEqualTo(GameSettings.MinimumRows);
         RuleFor(x => x.Rows).LessThanOrEqualTo(GameSettings.MaximumRows);
