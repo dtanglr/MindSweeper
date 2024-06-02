@@ -21,13 +21,7 @@ partial class Program
                 {
                     (context) =>
                     {
-                        Direction[] completions =
-                        [
-                            Direction.Up,
-                            Direction.Down,
-                            Direction.Left,
-                            Direction.Right
-                        ];
+                        var completions = Enum.GetValues<Direction>();
 
                         return completions.Select(c => new CompletionItem(c.ToString().ToLower()));
                     }

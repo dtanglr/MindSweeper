@@ -19,6 +19,12 @@ partial class Field
         /// <param name="settings">The game settings.</param>
         public Squares(GameSettings settings) : this(settings.Columns, settings.Rows, settings.Squares) { }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Squares"/> class.
+        /// </summary>
+        /// <param name="columnCapacity">The number of columns in the field.</param>
+        /// <param name="rowCapacity">The number of rows in the field.</param>
+        /// <param name="squaresCapacity">The capacity of the squares collection.</param>
         private Squares(int columnCapacity, int rowCapacity, int squaresCapacity)
         {
             _columnCapacity = columnCapacity;
