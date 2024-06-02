@@ -4,6 +4,9 @@ using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application.Mediator.Behaviors;
 
+/// <summary>
+/// Provides extension methods for converting validation failures to validation issues.
+/// </summary>
 internal static class ValidationIssueExtensions
 {
     /// <summary>
