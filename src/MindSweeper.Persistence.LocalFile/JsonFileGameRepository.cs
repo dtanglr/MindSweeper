@@ -38,7 +38,7 @@ public class JsonFileGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
+                var game = await ReadJsonFileDataAsync(cancellationToken);
                 var exists = game is not null;
 
                 if (exists)
@@ -69,7 +69,7 @@ public class JsonFileGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
+                var game = await ReadJsonFileDataAsync(cancellationToken);
                 var exists = game?.Id == gameId;
 
                 if (exists)
@@ -100,7 +100,7 @@ public class JsonFileGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
+                var game = await ReadJsonFileDataAsync(cancellationToken);
                 var exists = game?.PlayerId == playerId;
 
                 if (exists)
@@ -129,7 +129,7 @@ public class JsonFileGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
+                var game = await ReadJsonFileDataAsync(cancellationToken);
                 var exists = game?.Id == updatedGame.Id;
 
                 if (exists)
@@ -149,18 +149,6 @@ public class JsonFileGameRepository : IGameRepository
     }
 
     /// <summary>
-    /// Gets the JSON file data asynchronously.
-    /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task representing the asynchronous operation with the JSON file data.</returns>
-    private ValueTask<Game?> GetJsonFileDataAsync(CancellationToken cancellationToken)
-    {
-        var data = ReadJsonFileData();
-
-        return JsonSerializer.DeserializeAsync<Game>(new MemoryStream(data), _options, cancellationToken);
-    }
-
-    /// <summary>
     /// Determines whether the JSON file exists.
     /// </summary>
     /// <returns><c>true</c> if the JSON file exists; otherwise, <c>false</c>.</returns>
@@ -170,13 +158,17 @@ public class JsonFileGameRepository : IGameRepository
     }
 
     /// <summary>
-    /// Gets the data of the JSON file.
+    /// Gets the JSON file data asynchronously.
     /// </summary>
-    /// <returns>The byte array containing the JSON file data.</returns>
-    private byte[] ReadJsonFileData()
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task representing the asynchronous operation with the JSON file data.</returns>
+    private ValueTask<Game?> ReadJsonFileDataAsync(CancellationToken cancellationToken)
     {
-        return _fileSystem.File.ReadAllBytes(_file.Value);
+        var data = _fileSystem.File.ReadAllBytes(_file.Value);
+
+        return JsonSerializer.DeserializeAsync<Game>(new MemoryStream(data), _options, cancellationToken);
     }
+
     /// <summary>
     /// Writes an empty JSON file data asynchronously.
     /// </summary>
@@ -184,7 +176,7 @@ public class JsonFileGameRepository : IGameRepository
     /// <returns>A task representing the asynchronous operation.</returns>
     private Task WriteEmptyJsonFileDataAsync(CancellationToken cancellationToken)
     {
-        return _fileSystem.File.WriteAllBytesAsync(_file.Value, Array.Empty<byte>(), cancellationToken);
+        return _fileSystem.File.WriteAllBytesAsync(_file.Value, [], cancellationToken);
     }
 
     /// <summary>

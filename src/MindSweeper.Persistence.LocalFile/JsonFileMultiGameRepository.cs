@@ -9,7 +9,7 @@ namespace MindSweeper.Persistence.LocalFile;
 /// Represents a JSON file game repository.
 /// </summary>
 /// <remarks>
-/// This was originally developed as a multi-game repository to emulate a database, but it was later decided to use a single game repository.
+/// This was originally developed as a multi-game repository to emulate a database, but it was later decided to use a single game store..
 /// </remarks>
 public class JsonFileMultiGameRepository : IGameRepository
 {
@@ -43,7 +43,7 @@ public class JsonFileMultiGameRepository : IGameRepository
 
             if (JsonFileExists())
             {
-                await foreach (var existingGame in JsonFileData(cancellationToken))
+                await foreach (var existingGame in ReadJsonFileData(cancellationToken))
                 {
                     if (existingGame!.PlayerId == newGame.PlayerId)
                     {
@@ -81,7 +81,7 @@ public class JsonFileMultiGameRepository : IGameRepository
                 var games = new List<Game>();
                 var existed = false;
 
-                await foreach (var existingGame in JsonFileData(cancellationToken))
+                await foreach (var existingGame in ReadJsonFileData(cancellationToken))
                 {
                     if (existingGame!.Id == gameId)
                     {
@@ -120,7 +120,7 @@ public class JsonFileMultiGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                await foreach (var game in JsonFileData(cancellationToken))
+                await foreach (var game in ReadJsonFileData(cancellationToken))
                 {
                     if (game!.PlayerId == playerId)
                     {
@@ -152,7 +152,7 @@ public class JsonFileMultiGameRepository : IGameRepository
                 var games = new List<Game>();
                 var exists = false;
 
-                await foreach (var existingGame in JsonFileData(cancellationToken))
+                await foreach (var existingGame in ReadJsonFileData(cancellationToken))
                 {
                     if (existingGame!.PlayerId == updatedGame.PlayerId)
                     {
@@ -181,12 +181,12 @@ public class JsonFileMultiGameRepository : IGameRepository
     }
 
     /// <summary>
-    /// Gets the data of the JSON file.
+    /// Determines whether the JSON file exists.
     /// </summary>
-    /// <returns>The byte array containing the JSON file data.</returns>
-    private byte[] ReadJsonFileData()
+    /// <returns><c>true</c> if the JSON file exists; otherwise, <c>false</c>.</returns>
+    private bool JsonFileExists()
     {
-        return _fileSystem.File.ReadAllBytes(_file.Value);
+        return _fileSystem.File.Exists(_file.Value);
     }
 
     /// <summary>
@@ -194,20 +194,11 @@ public class JsonFileMultiGameRepository : IGameRepository
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>An asynchronous enumerable of Game objects.</returns>
-    private IAsyncEnumerable<Game?> JsonFileData(CancellationToken cancellationToken)
+    private IAsyncEnumerable<Game?> ReadJsonFileData(CancellationToken cancellationToken)
     {
-        var data = ReadJsonFileData();
+        var data = _fileSystem.File.ReadAllBytes(_file.Value);
 
         return JsonSerializer.DeserializeAsyncEnumerable<Game>(new MemoryStream(data), _options, cancellationToken);
-    }
-
-    /// <summary>
-    /// Determines whether the JSON file exists.
-    /// </summary>
-    /// <returns><c>true</c> if the JSON file exists; otherwise, <c>false</c>.</returns>
-    private bool JsonFileExists()
-    {
-        return _fileSystem.File.Exists(_file.Value);
     }
 
     /// <summary>
