@@ -25,10 +25,7 @@ partial class Program : IProgram
                     .UseMediatorPipeline()
                     .UseLocalFileStorage(configure =>
                     {
-                        configure.JsonSerializerOptions = options =>
-                        {
-                            options.WriteIndented = true;
-                        };
+                        configure.JsonSerializerOptions = options => options.WriteIndented = true;
                     });
                 });
 

@@ -8,7 +8,10 @@ namespace MindSweeper.Persistence.LocalFile;
 /// <summary>
 /// Represents a JSON file game repository.
 /// </summary>
-public class JsonFileGameRepository : IGameRepository
+/// <remarks>
+/// This was originally developed as a multi-game repository to emulate a database, but it was later decided to use a single game repository.
+/// </remarks>
+public class JsonFileMultiGameRepository : IGameRepository
 {
     private readonly IFileSystem _fileSystem;
     private readonly Lazy<string> _file;
@@ -19,7 +22,7 @@ public class JsonFileGameRepository : IGameRepository
     /// </summary>
     /// <param name="fileSystem">The file system.</param>
     /// <param name="options">The JSON serializer options.</param>
-    public JsonFileGameRepository(IFileSystem fileSystem, JsonSerializerOptions? options = null)
+    public JsonFileMultiGameRepository(IFileSystem fileSystem, JsonSerializerOptions? options = null)
     {
         _fileSystem = fileSystem;
         _file = new(() => _fileSystem.Path.Combine(_fileSystem.Directory.GetCurrentDirectory(), "game.json"));
@@ -36,18 +39,24 @@ public class JsonFileGameRepository : IGameRepository
     {
         try
         {
+            var games = new List<Game>();
+
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
-                var exists = game is not null;
-
-                if (exists)
+                await foreach (var existingGame in JsonFileData(cancellationToken))
                 {
-                    return Result.Conflict();
+                    if (existingGame!.PlayerId == newGame.PlayerId)
+                    {
+                        return Result.Conflict();
+                    }
+
+                    games.Add(existingGame);
                 }
             }
 
-            await WriteJsonFileDataAsync(newGame, cancellationToken);
+            games.Add(newGame);
+
+            await WriteJsonFileData(games, cancellationToken);
 
             return Result.Accepted();
         }
@@ -60,7 +69,7 @@ public class JsonFileGameRepository : IGameRepository
     /// <summary>
     /// Deletes a game asynchronously.
     /// </summary>
-    /// <param name="gameId">The ID of the game to delete.</param>
+    /// <param name="gameId">The player ID of the game to delete.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation with the result of the operation.</returns>
     public async Task<Result> DeleteGameAsync(Guid gameId, CancellationToken cancellationToken)
@@ -69,12 +78,23 @@ public class JsonFileGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
-                var exists = game?.Id == gameId;
+                var games = new List<Game>();
+                var existed = false;
 
-                if (exists)
+                await foreach (var existingGame in JsonFileData(cancellationToken))
                 {
-                    await WriteEmptyJsonFileDataAsync(cancellationToken);
+                    if (existingGame!.Id == gameId)
+                    {
+                        existed = true;
+                        continue;
+                    }
+
+                    games.Add(existingGame);
+                }
+
+                if (existed)
+                {
+                    await WriteJsonFileData(games, cancellationToken);
 
                     return Result.Accepted();
                 }
@@ -100,12 +120,12 @@ public class JsonFileGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
-                var exists = game?.PlayerId == playerId;
-
-                if (exists)
+                await foreach (var game in JsonFileData(cancellationToken))
                 {
-                    return Result<Game>.Success(game!);
+                    if (game!.PlayerId == playerId)
+                    {
+                        return Result<Game>.Success(game);
+                    }
                 }
             }
 
@@ -129,12 +149,24 @@ public class JsonFileGameRepository : IGameRepository
         {
             if (JsonFileExists())
             {
-                var game = await GetJsonFileDataAsync(cancellationToken);
-                var exists = game?.Id == updatedGame.Id;
+                var games = new List<Game>();
+                var exists = false;
+
+                await foreach (var existingGame in JsonFileData(cancellationToken))
+                {
+                    if (existingGame!.PlayerId == updatedGame.PlayerId)
+                    {
+                        exists = true;
+                        games.Add(updatedGame);
+                        continue;
+                    }
+
+                    games.Add(existingGame);
+                }
 
                 if (exists)
                 {
-                    await WriteJsonFileDataAsync(updatedGame, cancellationToken);
+                    await WriteJsonFileData(games, cancellationToken);
 
                     return Result.Accepted();
                 }
@@ -149,15 +181,24 @@ public class JsonFileGameRepository : IGameRepository
     }
 
     /// <summary>
-    /// Gets the JSON file data asynchronously.
+    /// Gets the data of the JSON file.
+    /// </summary>
+    /// <returns>The byte array containing the JSON file data.</returns>
+    private byte[] ReadJsonFileData()
+    {
+        return _fileSystem.File.ReadAllBytes(_file.Value);
+    }
+
+    /// <summary>
+    /// Retrieves the data from the JSON file as an asynchronous enumerable of Game objects.
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task representing the asynchronous operation with the JSON file data.</returns>
-    private ValueTask<Game?> GetJsonFileDataAsync(CancellationToken cancellationToken)
+    /// <returns>An asynchronous enumerable of Game objects.</returns>
+    private IAsyncEnumerable<Game?> JsonFileData(CancellationToken cancellationToken)
     {
         var data = ReadJsonFileData();
 
-        return JsonSerializer.DeserializeAsync<Game>(new MemoryStream(data), _options, cancellationToken);
+        return JsonSerializer.DeserializeAsyncEnumerable<Game>(new MemoryStream(data), _options, cancellationToken);
     }
 
     /// <summary>
@@ -170,31 +211,13 @@ public class JsonFileGameRepository : IGameRepository
     }
 
     /// <summary>
-    /// Gets the data of the JSON file.
-    /// </summary>
-    /// <returns>The byte array containing the JSON file data.</returns>
-    private byte[] ReadJsonFileData()
-    {
-        return _fileSystem.File.ReadAllBytes(_file.Value);
-    }
-    /// <summary>
-    /// Writes an empty JSON file data asynchronously.
-    /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    private Task WriteEmptyJsonFileDataAsync(CancellationToken cancellationToken)
-    {
-        return _fileSystem.File.WriteAllBytesAsync(_file.Value, Array.Empty<byte>(), cancellationToken);
-    }
-
-    /// <summary>
     /// Writes the JSON file data asynchronously.
     /// </summary>
-    /// <param name="game">The game data to write.</param>
+    /// <param name="games">The list of games to write.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task representing the asynchronous operation.</returns>
-    private Task WriteJsonFileDataAsync(Game game, CancellationToken cancellationToken)
+    private Task WriteJsonFileData(List<Game> games, CancellationToken cancellationToken)
     {
-        return _fileSystem.File.WriteAllBytesAsync(_file.Value, JsonSerializer.SerializeToUtf8Bytes(game, _options), cancellationToken);
+        return _fileSystem.File.WriteAllBytesAsync(_file.Value, JsonSerializer.SerializeToUtf8Bytes(games, _options), cancellationToken);
     }
 }
