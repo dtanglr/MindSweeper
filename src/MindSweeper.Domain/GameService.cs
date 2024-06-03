@@ -86,7 +86,7 @@ public class GameService : IGameService
 
         try
         {
-            var game = _context.Game!;
+            var game = _context.Game!.DeepCopy();
             var squares = new Field.Squares(game.Settings);
             var fromSquare = squares[game.CurrentSquare];
 
@@ -128,6 +128,8 @@ public class GameService : IGameService
                 }
             }
 
+            _context.Game = game;
+
             return Result<Game>.Accepted(game);
         }
         catch (Exception ex)
@@ -148,13 +150,20 @@ public class GameService : IGameService
             return Result.NotFound();
         }
 
-        var result = await _repository.DeleteGameAsync(_context.Game!.Id, cancellationToken);
-
-        if (result.IsSuccess)
+        try
         {
-            _context.Game = null;
-        }
+            var result = await _repository.DeleteGameAsync(_context.Game!.Id, cancellationToken);
 
-        return result;
+            if (result.IsSuccess)
+            {
+                _context.Game = null;
+            }
+
+            return result;
+        }
+        catch (Exception ex)
+        {
+            return Result.Error(ex.Message);
+        }
     }
 }

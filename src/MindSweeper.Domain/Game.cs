@@ -58,10 +58,22 @@ public record Game
     /// <summary>
     /// Gets or sets the moves made in the game.
     /// </summary>
-    public List<Move> MovesMade { get; init; } = [];
+    public List<Move> MovesMade { get; set; } = [];
 
     /// <summary>
     /// Gets or sets the status of the game.
     /// </summary>
     public GameStatus Status { get; set; } = GameStatus.InProgress;
+
+    /// <summary>
+    /// Creates a deep copy of the game instance.
+    /// </summary>
+    /// <returns>A deep copy of the game instance.</returns>
+    public Game DeepCopy()
+    {
+        var game = (Game)MemberwiseClone();
+        game.MovesMade = new List<Move>(MovesMade);
+
+        return game;
+    }
 }

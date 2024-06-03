@@ -73,7 +73,7 @@ partial class Field
         /// </summary>
         /// <param name="square">The square to check.</param>
         /// <returns><c>true</c> if a bomb is present on the square; otherwise, <c>false</c>.</returns>
-        public bool OnSquare(Square square) => _bombs.Value.Contains(square.Index);
+        public bool OnSquare(ISquare square) => _bombs.Value.Contains(square.Index);
 
         /// <summary>
         /// Implicitly converts the <see cref="Bombs"/> object to a list of bomb indices.

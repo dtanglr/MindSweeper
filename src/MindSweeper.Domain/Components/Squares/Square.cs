@@ -6,7 +6,7 @@ namespace MindSweeper.Domain.Components.Squares;
 /// <summary>
 /// Represents a square in the field.
 /// </summary>
-internal sealed record Square(Field.Squares Squares, IColumn Column, IRow Row)
+internal sealed record Square(Field.Squares Squares, IColumn Column, IRow Row) : ISquare
 {
     /// <summary>
     /// Gets the index of the square.
@@ -36,7 +36,7 @@ internal sealed record Square(Field.Squares Squares, IColumn Column, IRow Row)
     /// <param name="move">The direction to move.</param>
     /// <param name="square">The neighboring square, if the move is successful.</param>
     /// <returns>True if the move is successful, otherwise false.</returns>
-    public bool TryMove(Direction move, out Square? square)
+    public bool TryMove(Direction move, out ISquare? square)
     {
         square = move switch
         {

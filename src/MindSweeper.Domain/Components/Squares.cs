@@ -10,7 +10,7 @@ partial class Field
     /// </summary>
     public sealed class Squares
     {
-        private readonly Lazy<Dictionary<string, Square>> _squares;
+        private readonly Lazy<Dictionary<string, ISquare>> _squares;
         private readonly int _columnCapacity;
 
         /// <summary>
@@ -32,7 +32,7 @@ partial class Field
             {
                 var columns = new Columns(columnCapacity);
                 var rows = new Rows(rowCapacity);
-                var squares = new Dictionary<string, Square>(squaresCapacity);
+                var squares = new Dictionary<string, ISquare>(squaresCapacity);
 
                 for (var i = 0; i < rows.Length; i++)
                 {
@@ -58,7 +58,7 @@ partial class Field
         /// <param name="index">The index of the square.</param>
         /// <returns>The square at the specified index.</returns>
         /// <exception cref="SquareIndexOutOfRangeException">Thrown when the index is out of range.</exception>
-        public Square this[int index]
+        public ISquare this[int index]
         {
             get
             {
@@ -74,7 +74,7 @@ partial class Field
         /// <param name="index">The name of the square.</param>
         /// <returns>The square with the specified name.</returns>
         /// <exception cref="SquareIndexOutOfRangeException">Thrown when the index is out of range.</exception>
-        public Square this[string index]
+        public ISquare this[string index]
         {
             get
             {
@@ -88,7 +88,7 @@ partial class Field
         /// Gets a random square from the first row.
         /// </summary>
         /// <returns>A random square from the first row.</returns>
-        public Square GetStartSquare()
+        public ISquare GetStartSquare()
         {
             var randomFirstRowSquareIndex = Random.Shared.Next(0, _columnCapacity - 1);
             return _squares.Value.ElementAt(randomFirstRowSquareIndex).Value;
