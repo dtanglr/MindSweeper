@@ -51,6 +51,10 @@ public class JsonFileGameRepository : IGameRepository
 
             return Result.Accepted();
         }
+        catch (JsonException ex)
+        {
+            return Result.Unprocessable(ex.Message);
+        }
         catch (Exception ex)
         {
             return Result.Error(ex.Message);
@@ -82,6 +86,10 @@ public class JsonFileGameRepository : IGameRepository
 
             return Result.NotFound();
         }
+        catch (JsonException ex)
+        {
+            return Result.Unprocessable(ex.Message);
+        }
         catch (Exception ex)
         {
             return Result.Error(ex.Message);
@@ -110,6 +118,10 @@ public class JsonFileGameRepository : IGameRepository
             }
 
             return Result<Game>.NotFound();
+        }
+        catch (JsonException ex)
+        {
+            return Result<Game>.Unprocessable(ex.Message);
         }
         catch (Exception ex)
         {
@@ -142,6 +154,10 @@ public class JsonFileGameRepository : IGameRepository
 
             return Result.NotFound();
         }
+        catch (JsonException ex)
+        {
+            return Result.Unprocessable(ex.Message);
+        }
         catch (Exception ex)
         {
             return Result.Error(ex.Message);
@@ -166,7 +182,14 @@ public class JsonFileGameRepository : IGameRepository
     {
         var data = _fileSystem.File.ReadAllBytes(_file.Value);
 
-        return JsonSerializer.DeserializeAsync<Game>(new MemoryStream(data), _options, cancellationToken);
+        if (data.Length == 0)
+        {
+            return ValueTask.FromResult<Game?>(null);
+        }
+
+        using var stream = new MemoryStream(data);
+
+        return JsonSerializer.DeserializeAsync<Game>(stream, _options, cancellationToken);
     }
 
     /// <summary>
@@ -187,6 +210,8 @@ public class JsonFileGameRepository : IGameRepository
     /// <returns>A task representing the asynchronous operation.</returns>
     private Task WriteJsonFileDataAsync(Game game, CancellationToken cancellationToken)
     {
-        return _fileSystem.File.WriteAllBytesAsync(_file.Value, JsonSerializer.SerializeToUtf8Bytes(game, _options), cancellationToken);
+        var data = JsonSerializer.SerializeToUtf8Bytes(game, _options);
+
+        return _fileSystem.File.WriteAllBytesAsync(_file.Value, data, cancellationToken);
     }
 }
