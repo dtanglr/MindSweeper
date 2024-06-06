@@ -8,7 +8,6 @@ public class GetGameAsyncTests : JsonFileGameRepositoryTests
     public async Task GetGameAsync_WhenJsonFileMissing_ReturnsNotFound()
     {
         // Arrange
-        var fixture = new Fixture();
         var playerId = "playerId";
         var existingGameInBytes = Array.Empty<byte>();
         var fileExists = false;
@@ -75,7 +74,6 @@ public class GetGameAsyncTests : JsonFileGameRepositoryTests
     public async Task GetGameAsync_WhenJsonFileExists_WithInvalidContent_AJsonExceptionOccurs_ReturnsUnprocessable()
     {
         // Arrange
-        var fixture = new Fixture();
         var playerId = "playerId";
         var existingGameInBytes = JsonSerializer.SerializeToUtf8Bytes(string.Empty, SerializerOptions);
         var fileExists = true;
@@ -101,7 +99,6 @@ public class GetGameAsyncTests : JsonFileGameRepositoryTests
         const string ErrorMessage = "error";
         var fixture = new Fixture();
         var existingGame = fixture.Create<Game>();
-        var existingGameInBytes = JsonSerializer.SerializeToUtf8Bytes(existingGame, SerializerOptions);
         var fileExists = true;
         FileSystem.File.Exists(Arg.Any<string>()).Returns(fileExists);
         FileSystem.File.ReadAllBytes(Arg.Any<string>()).Throws(new Exception(ErrorMessage));

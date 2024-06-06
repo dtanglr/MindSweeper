@@ -8,7 +8,6 @@ public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
     public async Task DeleteGameAsync_WhenJsonFileMissing_ReturnsNotFound()
     {
         // Arrange
-        var fixture = new Fixture();
         var existingGameInBytes = Array.Empty<byte>();
         var fileExists = false;
         FileSystem.File.Exists(Arg.Any<string>()).Returns(fileExists);
@@ -73,7 +72,6 @@ public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
     public async Task DeleteGameAsync_WhenJsonFileExists_WithInvalidContent_AJsonExceptionOccurs_ReturnsUnprocessable()
     {
         // Arrange
-        var fixture = new Fixture();
         var existingGameInBytes = JsonSerializer.SerializeToUtf8Bytes(string.Empty, SerializerOptions);
         var fileExists = true;
         FileSystem.File.Exists(Arg.Any<string>()).Returns(fileExists);
