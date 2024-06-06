@@ -10,36 +10,35 @@ partial class Program
     /// </summary>
     public static CliCommand EndCommand => new("end", Resources.EndCommandDescription)
     {
-        Action = CommandHandler.Create<IHost>(async (host) =>
+        Action = CommandHandler.Create<IConsole, IMediator>(async (console, mediator) =>
         {
-            var mediator = host.Services.GetRequiredService<IMediator>();
             var command = new EndCommand();
             var result = await mediator.Send(command);
 
-            Console.WriteLine();
+            console.WriteLine();
 
             switch (result.Status)
             {
                 case ResultStatus.Accepted:
-                    Console.WriteLine(Resources.EndCommandResultStatusAccepted);
+                    console.WriteLine(Resources.EndCommandResultStatusAccepted);
                     break;
                 case ResultStatus.NotFound:
-                    Console.WriteLine(Resources.EndCommandResultStatusNotFound);
+                    console.WriteLine(Resources.EndCommandResultStatusNotFound);
                     break;
                 case ResultStatus.Invalid:
-                    Console.WriteLine(Resources.CommandResultStatusInvalid);
-                    result.ValidationIssues.ForEach(e => Console.WriteLine(e.Message));
+                    console.WriteLine(Resources.CommandResultStatusInvalid);
+                    result.ValidationIssues.ForEach(e => console.WriteLine(e.Message));
                     break;
                 case ResultStatus.Error:
-                    Console.WriteLine(Resources.CommandResultStatusError);
-                    result.Errors.ForEach(Console.WriteLine);
+                    console.WriteLine(Resources.CommandResultStatusError);
+                    result.Errors.ForEach(console.WriteLine);
                     break;
                 default:
-                    Console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
+                    console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
                     break;
             }
 
-            Console.WriteLine();
+            console.WriteLine();
         })
     };
 }

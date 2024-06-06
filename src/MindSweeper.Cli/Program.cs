@@ -18,6 +18,7 @@ partial class Program : IProgram
             {
                 host.ConfigureServices(services =>
                 {
+                    services.AddSingleton<IConsole, SystemConsole>();
                     services.ConfigureMindSweeper(configure =>
                     {
                         configure.PlayerContextFactory = _ => new PlayerContext(Environment.MachineName);

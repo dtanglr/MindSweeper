@@ -28,13 +28,12 @@ partial class Program
                 }
             }
         },
-        Action = CommandHandler.Create<Direction, IHost>(async (direction, host) =>
+        Action = CommandHandler.Create<Direction, IConsole, IMediator>(async (direction, console, mediator) =>
         {
-            var mediator = host.Services.GetRequiredService<IMediator>();
             var command = new MoveCommand(direction);
             var result = await mediator.Send(command);
 
-            Console.WriteLine();
+            console.WriteLine();
 
             switch (result.Status)
             {
@@ -43,57 +42,57 @@ partial class Program
                     var game = response.Game;
                     var move = game.LastMove!;
 
-                    Console.WriteLine(Resources.MoveCommandDetails,
+                    console.WriteLine(Resources.MoveCommandDetails,
                         move.Direction.ToString().ToLowerInvariant(),
                         move.FromSquare,
                         move.ToSquare);
 
-                    Console.WriteLine();
+                    console.WriteLine();
 
                     switch (game.Status)
                     {
                         case GameStatus.InProgress:
-                            Console.WriteLine(move.HitBomb ? Resources.Boom : Resources.Yes);
-                            Console.WriteLine(move.HitBomb ? Resources.MoveCommandDidHitBomb : Resources.MoveCommandDidNotHitBomb);
-                            Console.WriteLine();
-                            Console.WriteLine(Resources.MoveCommandResultStatusAccepted);
+                            console.WriteLine(move.HitBomb ? Resources.Boom : Resources.Yes);
+                            console.WriteLine(move.HitBomb ? Resources.MoveCommandDidHitBomb : Resources.MoveCommandDidNotHitBomb);
+                            console.WriteLine();
+                            console.WriteLine(Resources.MoveCommandResultStatusAccepted);
                             break;
                         case GameStatus.Won:
-                            Console.Write(Resources.GameOver);
-                            Console.Write(Resources.YouWin);
+                            console.Write(Resources.GameOver);
+                            console.Write(Resources.YouWin);
                             break;
                         case GameStatus.Lost:
-                            Console.Write(Resources.Boom);
-                            Console.Write(Resources.GameOver);
-                            Console.Write(Resources.YouLose);
+                            console.Write(Resources.Boom);
+                            console.Write(Resources.GameOver);
+                            console.Write(Resources.YouLose);
                             break;
                         default:
                             break;
                     }
 
-                    Console.WriteLine();
-                    Console.WriteLine(game.GetGameStatus());
+                    console.WriteLine();
+                    console.WriteGameStatus(game);
                     break;
                 case ResultStatus.Unprocessable:
-                    Console.WriteLine(Resources.MoveCommandResultStatusUnprocessable, direction);
+                    console.WriteLine(Resources.MoveCommandResultStatusUnprocessable, direction);
                     break;
                 case ResultStatus.NotFound:
-                    Console.WriteLine(Resources.MoveCommandResultStatusNotFound);
+                    console.WriteLine(Resources.MoveCommandResultStatusNotFound);
                     break;
                 case ResultStatus.Invalid:
-                    Console.WriteLine(Resources.CommandResultStatusInvalid);
-                    result.ValidationIssues.ForEach(e => Console.WriteLine(e.Message));
+                    console.WriteLine(Resources.CommandResultStatusInvalid);
+                    result.ValidationIssues.ForEach(e => console.WriteLine(e.Message));
                     break;
                 case ResultStatus.Error:
-                    Console.WriteLine(Resources.CommandResultStatusError);
-                    result.Errors.ForEach(Console.WriteLine);
+                    console.WriteLine(Resources.CommandResultStatusError);
+                    result.Errors.ForEach(console.WriteLine);
                     break;
                 default:
-                    Console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
+                    console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
                     break;
             }
 
-            Console.WriteLine();
+            console.WriteLine();
         })
     };
 }

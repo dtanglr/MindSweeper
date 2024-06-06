@@ -44,39 +44,38 @@ partial class Program
                 DefaultValueFactory = (arg) => GameSettings.DefaultLives
             }
         },
-        Action = CommandHandler.Create<StartOptions, IHost>(async (options, host) =>
+        Action = CommandHandler.Create<StartOptions, IConsole, IMediator>(async (options, console, mediator) =>
         {
-            var mediator = host.Services.GetRequiredService<IMediator>();
             var command = new StartCommand(options.Settings);
             var result = await mediator.Send(command);
 
-            Console.WriteLine();
+            console.WriteLine();
 
             switch (result.Status)
             {
                 case ResultStatus.Accepted:
                     var game = result.Value!.Game;
-                    Console.WriteLine(Resources.StartCommandResultStatusAccepted);
-                    Console.WriteLine();
-                    Console.WriteLine(game.GetGameStatus());
+                    console.WriteLine(Resources.StartCommandResultStatusAccepted);
+                    console.WriteLine();
+                    console.WriteGameStatus(game);
                     break;
                 case ResultStatus.Conflict:
-                    Console.WriteLine(Resources.StartCommandResultStatusConflict);
+                    console.WriteLine(Resources.StartCommandResultStatusConflict);
                     break;
                 case ResultStatus.Invalid:
-                    Console.WriteLine(Resources.CommandResultStatusInvalid);
-                    result.ValidationIssues.ForEach(e => Console.WriteLine(e.Message));
+                    console.WriteLine(Resources.CommandResultStatusInvalid);
+                    result.ValidationIssues.ForEach(e => console.WriteLine(e.Message));
                     break;
                 case ResultStatus.Error:
-                    Console.WriteLine(Resources.CommandResultStatusError);
-                    result.Errors.ForEach(Console.WriteLine);
+                    console.WriteLine(Resources.CommandResultStatusError);
+                    result.Errors.ForEach(console.WriteLine);
                     break;
                 default:
-                    Console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
+                    console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
                     break;
             }
 
-            Console.WriteLine();
+            console.WriteLine();
         }),
     };
 }

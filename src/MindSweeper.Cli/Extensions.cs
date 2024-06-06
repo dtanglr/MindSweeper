@@ -1,45 +1,98 @@
-﻿using System.Text;
+﻿namespace MindSweeper.Cli;
 
-namespace MindSweeper.Cli;
-
+/// <summary>
+/// Provides extension methods for the IConsole interface.
+/// </summary>
 internal static class Extensions
 {
     /// <summary>
-    /// Gets the game status as a formatted string.
+    /// Writes a string value to the console.
     /// </summary>
-    /// <param name="game">The game object.</param>
-    /// <returns>A StringBuilder containing the formatted game status.</returns>
-    public static StringBuilder GetGameStatus(this Game game)
-    {
-        var sb = new StringBuilder();
+    /// <param name="console">The console object.</param>
+    /// <param name="value">The string value to write.</param>
+    public static void Write(this IConsole console, string value) => console.Out.Write(value);
 
+    /// <summary>
+    /// Writes a formatted string to the console.
+    /// </summary>
+    /// <param name="console">The console object.</param>
+    /// <param name="format">The format string.</param>
+    /// <param name="args">The arguments to format the string.</param>
+    public static void Write(this IConsole console, string format, params object?[] args)
+    {
+        if (args.Length == 0)
+        {
+            console.Out.Write(format);
+            return;
+        }
+
+        var formatted = string.Format(format, args);
+        console.Out.Write(formatted);
+    }
+
+    /// <summary>
+    /// Writes a new line to the console.
+    /// </summary>
+    /// <param name="console">The console object.</param>
+    public static void WriteLine(this IConsole console) => console.Out.WriteLine();
+
+    /// <summary>
+    /// Writes a string value followed by a new line to the console.
+    /// </summary>
+    /// <param name="console">The console object.</param>
+    /// <param name="value">The string value to write.</param>
+    public static void WriteLine(this IConsole console, string value) => console.Out.WriteLine(value);
+
+    /// <summary>
+    /// Writes a formatted string followed by a new line to the console.
+    /// </summary>
+    /// <param name="console">The console object.</param>
+    /// <param name="format">The format string.</param>
+    /// <param name="args">The arguments to format the string.</param>
+    public static void WriteLine(this IConsole console, string format, params object?[] args)
+    {
+        if (args.Length == 0)
+        {
+            console.Out.WriteLine(format);
+            return;
+        }
+
+        var formatted = string.Format(format, args);
+        console.Out.WriteLine(formatted);
+    }
+
+    /// <summary>
+    /// Writes the game status to the console based on the current game state.
+    /// </summary>
+    /// <param name="console">The console object.</param>
+    /// <param name="game">The game object.</param>
+    public static void WriteGameStatus(this IConsole console, Game game)
+    {
         switch (game.Status)
         {
             case GameStatus.InProgress:
-                sb.AppendLine(string.Format(Resources.GameStatusRows, game.Settings.Rows));
-                sb.AppendLine(string.Format(Resources.GameStatusColumns, game.Settings.Columns));
-                sb.AppendLine(string.Format(Resources.GameStatusSquares, game.Settings.Squares));
-                sb.AppendLine(string.Format(Resources.GameStatusBombs, game.Settings.Bombs));
-                sb.AppendLine(string.Format(Resources.GameStatusCurrentSquare, game.CurrentSquare));
-                sb.AppendLine(string.Format(Resources.GameStatusAvailableMoves, string.Join(", ", game.AvailableMoves.Select(m => $"{Environment.NewLine}    {m.Key} to {m.Value}"))));
-                sb.AppendLine(string.Format(Resources.GameStatusMoves, game.Moves));
-                sb.AppendLine(string.Format(Resources.GameStatusBombsHit, game.BombsHit));
-                sb.AppendLine(string.Format(Resources.GameStatusLives, game.Lives));
+                console.WriteLine(Resources.GameStatusRows, game.Settings.Rows);
+                console.WriteLine(Resources.GameStatusColumns, game.Settings.Columns);
+                console.WriteLine(Resources.GameStatusSquares, game.Settings.Squares);
+                console.WriteLine(Resources.GameStatusBombs, game.Settings.Bombs);
+                console.WriteLine(Resources.GameStatusCurrentSquare, game.CurrentSquare);
+                console.WriteLine(Resources.GameStatusAvailableMoves, string.Join(", ", game.AvailableMoves.Select(m => $"{Environment.NewLine}    {m.Key} to {m.Value}")));
+                console.WriteLine(Resources.GameStatusMoves, game.Moves);
+                console.WriteLine(Resources.GameStatusBombsHit, game.BombsHit);
+                console.WriteLine(Resources.GameStatusLives, game.Lives);
                 break;
             case GameStatus.Won:
-                sb.AppendLine(string.Format(Resources.GameStatusMoves, game.Moves));
-                sb.AppendLine(string.Format(Resources.GameStatusBombsHit, game.BombsHit));
-                sb.AppendLine(string.Format(Resources.GameStatusLives, game.Lives));
+                console.WriteLine(Resources.GameStatusMoves, game.Moves);
+                console.WriteLine(Resources.GameStatusBombsHit, game.BombsHit);
+                console.WriteLine(Resources.GameStatusLives, game.Lives);
                 break;
             case GameStatus.Lost:
-                sb.AppendLine(string.Format(Resources.GameStatusMoves, game.Moves));
-                sb.AppendLine(string.Format(Resources.GameStatusBombsHit, game.BombsHit));
+                console.WriteLine(Resources.GameStatusMoves, game.Moves);
+                console.WriteLine(Resources.GameStatusBombsHit, game.BombsHit);
                 break;
             default:
                 break;
         }
-
-        return sb;
     }
 
     /// <summary>

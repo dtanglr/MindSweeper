@@ -12,6 +12,7 @@
   <ItemGroup>
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.24209.3" />
     <PackageReference Include="System.CommandLine.Hosting" Version="0.4.0-alpha.24209.3" />
+    <PackageReference Include="System.CommandLine.Rendering" Version="0.4.0-alpha.24209.3" />
   </ItemGroup>
 
   <ItemGroup>
