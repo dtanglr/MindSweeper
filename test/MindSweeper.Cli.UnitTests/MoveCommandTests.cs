@@ -29,7 +29,7 @@ public class MoveCommandTests
     [InlineData(Direction.Down)]
     [InlineData(Direction.Left)]
     [InlineData(Direction.Right)]
-    public void MoveCommand_With_Direction_Argument_Produces_No_Error(Direction direction)
+    public void MoveCommand_With_Direction_Argument_Produces_No_Errors(Direction direction)
     {
         // Act
         var result = _rootCommand.Parse($"testhost move {direction}");

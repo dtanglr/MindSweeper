@@ -13,7 +13,7 @@ public class StartCommandTests
     [InlineData("testhost start")]
     [InlineData("testhost start --columns 8 --rows 8 --bombs 21 --lives 3")]
     [InlineData("testhost start -c 8 -r 8 -b 21 -l 3")]
-    public void StartCommand_With_Valid_Options_Produces_Error(string commandLine)
+    public void StartCommand_With_Valid_Options_Produces_No_Errors(string commandLine)
     {
         // Act
         var result = _rootCommand.Parse(commandLine);
