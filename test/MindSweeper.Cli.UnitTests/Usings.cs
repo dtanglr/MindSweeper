@@ -1,8 +1,5 @@
-﻿global using AutoFixture;
+﻿global using System.CommandLine;
+global using System.CommandLine.Parsing;
 global using FluentAssertions;
-global using MindSweeper.Cli;
 global using MindSweeper.Domain;
-global using MindSweeper.Domain.Results;
-global using NSubstitute;
-global using NSubstitute.ExceptionExtensions;
 global using Xunit;

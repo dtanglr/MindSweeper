@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents the interface for the MindSweeper CLI program.
 /// </summary>
-public interface IProgram
+internal interface IProgram
 {
     /// <summary>
     /// Gets the end command of the CLI program.

@@ -5,7 +5,7 @@ using MindSweeper.Persistence.LocalFile;
 
 namespace MindSweeper.Cli;
 
-partial class Program : IProgram
+internal partial class Program : IProgram
 {
     /// <summary>
     /// Entry point of the application.

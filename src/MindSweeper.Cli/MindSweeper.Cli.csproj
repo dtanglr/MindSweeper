@@ -21,11 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Ascii.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Ascii.resx</DependentUpon>
-    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -34,14 +29,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Ascii.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Ascii.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="MindSweeper.Cli.UnitTests" />
   </ItemGroup>
 
 </Project>
