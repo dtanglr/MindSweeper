@@ -1,7 +1,5 @@
-﻿using AutoFixture;
-using MindSweeper.Domain.Components;
+﻿using MindSweeper.Domain.Components;
 using MindSweeper.Domain.Results;
-using Moq;
 
 namespace MindSweeper.Domain.UnitTests.GameServiceTests;
 
@@ -13,8 +11,8 @@ public class MoveAsyncTests
         // Arrange
         var fixture = new Fixture();
         var context = fixture.Create<PlayerContext>();
-        var repository = new Mock<IGameRepository>();
-        var service = new GameService(context, repository.Object);
+        var repository = Substitute.For<IGameRepository>();
+        var service = new GameService(context, repository);
 
         // Act
         var result = await service.MoveAsync(Direction.Up, CancellationToken.None);
@@ -35,8 +33,8 @@ public class MoveAsyncTests
             .Create();
 
         var context = new PlayerContext(game.PlayerId) { Game = game };
-        var repository = new Mock<IGameRepository>();
-        var service = new GameService(context, repository.Object);
+        var repository = Substitute.For<IGameRepository>();
+        var service = new GameService(context, repository);
         var impossibleMoveDirection = Direction.Down;
 
         // Act
@@ -74,13 +72,11 @@ public class MoveAsyncTests
 
         var context = new PlayerContext(game.PlayerId) { Game = game };
 
-        var repository = new Mock<IGameRepository>();
-        repository.Setup(x => x.UpdateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Accepted());
-        repository.Setup(x => x.DeleteGameAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Accepted());
+        var repository = Substitute.For<IGameRepository>();
+        repository.UpdateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>()).Returns(Result.Accepted());
+        repository.DeleteGameAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>()).Returns(Result.Accepted());
 
-        var service = new GameService(context, repository.Object);
+        var service = new GameService(context, repository);
 
         // Act
         var result = await service.MoveAsync(direction, CancellationToken.None);
@@ -89,8 +85,8 @@ public class MoveAsyncTests
         var hitBomb = lastMove!.HitBomb;
 
         // Assert
-        repository.Verify(x => x.UpdateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()), shouldBeInProgressAfterMove ? Times.Once : Times.Never);
-        repository.Verify(x => x.DeleteGameAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()), shouldBeInProgressAfterMove ? Times.Never : Times.Once);
+        await repository.Received(shouldBeInProgressAfterMove ? 1 : 0).UpdateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>());
+        await repository.Received(shouldBeInProgressAfterMove ? 0 : 1).DeleteGameAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>());
 
         result.Status.Should().Be(ResultStatus.Accepted);
 

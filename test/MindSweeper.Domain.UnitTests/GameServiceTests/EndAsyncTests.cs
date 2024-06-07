@@ -1,6 +1,4 @@
-﻿using AutoFixture;
-using MindSweeper.Domain.Results;
-using Moq;
+﻿using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Domain.UnitTests.GameServiceTests;
 
@@ -12,8 +10,8 @@ public class EndAsyncTests
         // Arrange
         var fixture = new Fixture();
         var context = fixture.Create<PlayerContext>();
-        var repository = new Mock<IGameRepository>();
-        var service = new GameService(context, repository.Object);
+        var repository = Substitute.For<IGameRepository>();
+        var service = new GameService(context, repository);
 
         // Act
         var result = await service.EndAsync(CancellationToken.None);
@@ -30,17 +28,16 @@ public class EndAsyncTests
         var game = fixture.Create<Game>();
         var context = new PlayerContext(game.PlayerId) { Game = game };
 
-        var repository = new Mock<IGameRepository>();
-        repository.Setup(x => x.DeleteGameAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Error());
+        var repository = Substitute.For<IGameRepository>();
+        repository.DeleteGameAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>()).Returns(Result.Error());
 
-        var service = new GameService(context, repository.Object);
+        var service = new GameService(context, repository);
 
         // Act
         var result = await service.EndAsync(CancellationToken.None);
 
         // Assert
-        repository.Verify(x => x.DeleteGameAsync(game.Id, It.IsAny<CancellationToken>()), Times.Once);
+        await repository.Received(1).DeleteGameAsync(game.Id, Arg.Any<CancellationToken>());
         result.Should().BeEquivalentTo(Result.Error());
     }
 
@@ -53,17 +50,16 @@ public class EndAsyncTests
         var game = fixture.Create<Game>();
         var context = new PlayerContext(game.PlayerId) { Game = game };
 
-        var repository = new Mock<IGameRepository>();
-        repository.Setup(x => x.DeleteGameAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-            .ThrowsAsync(new Exception(ErrorMessage));
+        var repository = Substitute.For<IGameRepository>();
+        repository.DeleteGameAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>()).ThrowsAsync(new Exception(ErrorMessage));
 
-        var service = new GameService(context, repository.Object);
+        var service = new GameService(context, repository);
 
         // Act
         var result = await service.EndAsync(CancellationToken.None);
 
         // Assert
-        repository.Verify(x => x.DeleteGameAsync(game.Id, It.IsAny<CancellationToken>()), Times.Once);
+        await repository.Received(1).DeleteGameAsync(game.Id, Arg.Any<CancellationToken>());
         result.Should().BeEquivalentTo(Result.Error(ErrorMessage));
     }
 
@@ -75,17 +71,16 @@ public class EndAsyncTests
         var game = fixture.Create<Game>();
         var context = new PlayerContext(game.PlayerId) { Game = game };
 
-        var repository = new Mock<IGameRepository>();
-        repository.Setup(x => x.DeleteGameAsync(It.IsAny<Guid>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Accepted());
+        var repository = Substitute.For<IGameRepository>();
+        repository.DeleteGameAsync(Arg.Any<Guid>(), Arg.Any<CancellationToken>()).Returns(Result.Accepted());
 
-        var service = new GameService(context, repository.Object);
+        var service = new GameService(context, repository);
 
         // Act
         var result = await service.EndAsync(CancellationToken.None);
 
         // Assert
-        repository.Verify(x => x.DeleteGameAsync(game.Id, It.IsAny<CancellationToken>()), Times.Once);
+        await repository.Received(1).DeleteGameAsync(game.Id, Arg.Any<CancellationToken>());
         result.Status.Should().Be(ResultStatus.Accepted);
     }
 }

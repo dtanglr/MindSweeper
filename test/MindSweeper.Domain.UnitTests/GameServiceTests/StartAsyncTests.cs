@@ -1,7 +1,5 @@
-﻿using AutoFixture;
-using MindSweeper.Domain.Components;
+﻿using MindSweeper.Domain.Components;
 using MindSweeper.Domain.Results;
-using Moq;
 
 namespace MindSweeper.Domain.UnitTests.GameServiceTests;
 
@@ -14,8 +12,8 @@ public class StartAsyncTests
         var fixture = new Fixture();
         var game = fixture.Create<Game>();
         var context = new PlayerContext(game.PlayerId) { Game = game };
-        var repository = new Mock<IGameRepository>();
-        var service = new GameService(context, repository.Object);
+        var repository = Substitute.For<IGameRepository>();
+        var service = new GameService(context, repository);
         var settings = new GameSettings();
 
         // Act
@@ -32,18 +30,17 @@ public class StartAsyncTests
         var fixture = new Fixture();
         var context = fixture.Create<PlayerContext>();
 
-        var repository = new Mock<IGameRepository>();
-        repository.Setup(x => x.CreateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Error());
+        var repository = Substitute.For<IGameRepository>();
+        repository.CreateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>()).Returns(Result.Error());
 
-        var service = new GameService(context, repository.Object);
+        var service = new GameService(context, repository);
         var settings = new GameSettings();
 
         // Act
         var result = await service.StartAsync(settings, CancellationToken.None);
 
         // Assert
-        repository.Verify(x => x.CreateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()), Times.Once);
+        await repository.Received(1).CreateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>());
         result.Should().BeEquivalentTo(Result<Game>.Error());
     }
 
@@ -55,18 +52,17 @@ public class StartAsyncTests
         var fixture = new Fixture();
         var context = fixture.Create<PlayerContext>();
 
-        var repository = new Mock<IGameRepository>();
-        repository.Setup(x => x.CreateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()))
-            .ThrowsAsync(new Exception(ErrorMessage));
+        var repository = Substitute.For<IGameRepository>();
+        repository.CreateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>()).ThrowsAsync(new Exception(ErrorMessage));
 
-        var service = new GameService(context, repository.Object);
+        var service = new GameService(context, repository);
         var settings = new GameSettings();
 
         // Act
         var result = await service.StartAsync(settings, CancellationToken.None);
 
         // Assert
-        repository.Verify(x => x.CreateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()), Times.Once);
+        await repository.Received(1).CreateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>());
         result.Should().BeEquivalentTo(Result<Game>.Error(ErrorMessage));
     }
 
@@ -77,11 +73,10 @@ public class StartAsyncTests
         var fixture = new Fixture();
         var context = fixture.Create<PlayerContext>();
 
-        var repository = new Mock<IGameRepository>();
-        repository.Setup(x => x.CreateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()))
-            .ReturnsAsync(Result.Accepted());
+        var repository = Substitute.For<IGameRepository>();
+        repository.CreateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>()).Returns(Result.Accepted());
 
-        var service = new GameService(context, repository.Object);
+        var service = new GameService(context, repository);
         var settings = new GameSettings();
         var squares = new Field.Squares(settings);
 
@@ -89,7 +84,7 @@ public class StartAsyncTests
         var result = await service.StartAsync(settings, CancellationToken.None);
 
         // Assert
-        repository.Verify(x => x.CreateGameAsync(It.IsAny<Game>(), It.IsAny<CancellationToken>()), Times.Once);
+        await repository.Received(1).CreateGameAsync(Arg.Any<Game>(), Arg.Any<CancellationToken>());
         result.Status.Should().Be(ResultStatus.Accepted);
         context.Game.Should().NotBeNull();
         context.Game!.Id.Should().NotBe(Guid.Empty);

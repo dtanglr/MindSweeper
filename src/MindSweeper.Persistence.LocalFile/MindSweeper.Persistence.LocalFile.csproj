@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NSubstitute" Version="5.1.0" />
-    <PackageReference Include="NSubstitute.Analyzers.CSharp" Version="1.0.17">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="System.IO.Abstractions" Version="21.0.2" />
   </ItemGroup>
 

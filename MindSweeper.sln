@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Persistence.Loc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MindSweeper.Application.Mediator.UnitTests", "test\MindSweeper.Application.Mediator.UnitTests\MindSweeper.Application.Mediator.UnitTests.csproj", "{FEB60A0A-BEEA-4A05-BAA0-263FCDDB8536}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MindSweeper.Cli.UnitTests", "test\MindSweeper.Cli.UnitTests\MindSweeper.Cli.UnitTests.csproj", "{7B707615-76A0-4354-96C5-3BF3F7108045}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{FEB60A0A-BEEA-4A05-BAA0-263FCDDB8536}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEB60A0A-BEEA-4A05-BAA0-263FCDDB8536}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEB60A0A-BEEA-4A05-BAA0-263FCDDB8536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B707615-76A0-4354-96C5-3BF3F7108045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B707615-76A0-4354-96C5-3BF3F7108045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B707615-76A0-4354-96C5-3BF3F7108045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B707615-76A0-4354-96C5-3BF3F7108045}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +89,7 @@ Global
 		{B9CECD94-FFEE-40A9-A2FE-5FDE84B9202E} = {0914852C-F365-417C-A4C4-062CE0B7F569}
 		{24DBBB79-B7BF-42BA-85FB-E0A8C8406B30} = {C288C882-F901-4948-9FAC-850C66AEA9F1}
 		{FEB60A0A-BEEA-4A05-BAA0-263FCDDB8536} = {2D53E116-55B1-420C-AFC2-16A11B4C0B9E}
+		{7B707615-76A0-4354-96C5-3BF3F7108045} = {31D85BB5-93FF-4AEA-9BF4-8879E2D9E4A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9B3C9DFF-1B9D-47EA-A2C2-091BAA8D334E}

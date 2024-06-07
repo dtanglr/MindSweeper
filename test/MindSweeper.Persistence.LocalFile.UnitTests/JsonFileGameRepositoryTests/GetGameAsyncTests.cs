@@ -1,6 +1,4 @@
-﻿using NSubstitute.ExceptionExtensions;
-
-namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
+﻿namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
 
 public class GetGameAsyncTests : JsonFileGameRepositoryTests
 {

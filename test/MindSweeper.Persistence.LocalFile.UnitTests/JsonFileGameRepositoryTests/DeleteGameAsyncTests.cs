@@ -1,6 +1,4 @@
-﻿using NSubstitute.ExceptionExtensions;
-
-namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
+﻿namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
 
 public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
 {
@@ -100,7 +98,7 @@ public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
         var fileExists = true;
         FileSystem.File.Exists(Arg.Any<string>()).Returns(fileExists);
         FileSystem.File.ReadAllBytes(Arg.Any<string>()).Returns(existingGameInBytes);
-        FileSystem.File.WriteAllBytesAsync(Arg.Any<string>(), Arg.Any<byte[]>(), Arg.Any<CancellationToken>()).Throws(new Exception(ErrorMessage));
+        FileSystem.File.WriteAllBytesAsync(Arg.Any<string>(), Arg.Any<byte[]>(), Arg.Any<CancellationToken>()).ThrowsAsync(new Exception(ErrorMessage));
 
         // Act
         var result = await Repository.DeleteGameAsync(existingGame.Id, CancellationToken.None);
