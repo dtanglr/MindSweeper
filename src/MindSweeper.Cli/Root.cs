@@ -18,13 +18,12 @@ partial class Program
             EndCommand,
             StatusCommand
         },
-        Action = CommandHandler.Create<IHost>((host) =>
+        Action = CommandHandler.Create<IConsole, ParseResult>((console, parseResult) =>
         {
             // Display the logo.
-            Console.Write(Resources.Logo);
+            console.Write(Resources.Logo);
 
             // Get and display the help text for the root command.
-            var parseResult = host.Services.GetRequiredService<ParseResult>();
             var availableHelpOptions = parseResult
                 .CommandResult
                 .RecurseWhileNotNull(r => r.Parent as CommandResult)
