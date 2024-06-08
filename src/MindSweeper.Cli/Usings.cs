@@ -1,5 +1,4 @@
 ﻿global using System.CommandLine;
-global using System.CommandLine.Completions;
 global using System.CommandLine.IO;
 global using System.CommandLine.NamingConventionBinder;
 global using MediatR;
