@@ -16,16 +16,7 @@ partial class Program
             {
                 Arity = ArgumentArity.ExactlyOne,
                 Description = Resources.MoveCommandDirectionArgumentDescription,
-                HelpName = Resources.MoveCommandDirectionArgumentHelpName,
-                CompletionSources =
-                {
-                    (context) =>
-                    {
-                        var completions = Enum.GetValues<Direction>();
-
-                        return completions.Select(c => new CompletionItem(c.ToString().ToLower()));
-                    }
-                }
+                HelpName = Resources.MoveCommandDirectionArgumentHelpName
             }
         },
         Action = CommandHandler.Create<Direction, IConsole, IMediator>(async (direction, console, mediator) =>
