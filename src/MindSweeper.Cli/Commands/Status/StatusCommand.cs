@@ -13,7 +13,7 @@ public class StatusCommand : CliCommand
     /// </summary>
     public StatusCommand() : base("status", Resources.StatusCommandDescription)
     {
-        Action = CommandHandler.Create<IConsole, IMediator>(async (console, mediator) =>
+        Action = CommandHandler.Create<IGameConsole, IMediator>(async (console, mediator) =>
         {
             var query = new GetGameQuery();
             var result = await mediator.Send(query);

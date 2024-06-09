@@ -14,7 +14,7 @@ public class MoveCommand : CliCommand
     public MoveCommand() : base("move", Resources.MoveCommandDescription)
     {
         Arguments.Add(new DirectionArgument());
-        Action = CommandHandler.Create<Direction, IConsole, IMediator>(async (direction, console, mediator) =>
+        Action = CommandHandler.Create<Direction, IGameConsole, IMediator>(async (direction, console, mediator) =>
         {
             var command = new Request(direction);
             var result = await mediator.Send(command);

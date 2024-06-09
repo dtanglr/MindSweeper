@@ -1,6 +1,5 @@
 ﻿using System.CommandLine.Help;
 using System.CommandLine.Invocation;
-using System.CommandLine.Parsing;
 using MindSweeper.Cli.Commands.End;
 using MindSweeper.Cli.Commands.Move;
 using MindSweeper.Cli.Commands.Start;
@@ -27,16 +26,13 @@ public class RootCommand : CliRootCommand
 
         // Add an action to the root command.
         // Displays the game logo and help text for the root command.
-        Action = CommandHandler.Create<IConsole, ParseResult>((console, parseResult) =>
+        Action = CommandHandler.Create<IGameConsole, ParseResult>((console, parseResult) =>
         {
             // Display the logo.
             console.Write(Resources.Logo);
 
             // Get and display the help text for the root command.
-            var availableHelpOptions = parseResult
-                .CommandResult
-                .RecurseWhileNotNull(r => r.Parent as CommandResult)
-                .Select(r => r.Command.Options.OfType<HelpOption>().FirstOrDefault());
+            var availableHelpOptions = parseResult.RootCommandResult.Command.Options.OfType<HelpOption>();
 
             if (availableHelpOptions.FirstOrDefault(o => o is not null) is { Action: not null } helpOption)
             {

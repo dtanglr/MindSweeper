@@ -6,6 +6,11 @@ using MindSweeper.Persistence.LocalFile;
 
 namespace MindSweeper.Cli;
 
+/// <summary>
+/// Entry point of the application.
+/// </summary>
+/// <param name="args">Command-line arguments.</param>
+/// <returns>Exit code of the application.</returns>
 internal class Program
 {
     /// <summary>
@@ -19,7 +24,7 @@ internal class Program
             {
                 host.ConfigureServices(services =>
                 {
-                    services.AddSingleton<IConsole, SystemConsole>();
+                    services.AddSingleton<IGameConsole, GameConsole>();
                     services.ConfigureMindSweeper(configure =>
                     {
                         configure.PlayerContextFactory = _ => new PlayerContext(Environment.MachineName);

@@ -13,7 +13,7 @@ public class EndCommand : CliCommand
     /// </summary>
     public EndCommand() : base("end", Resources.EndCommandDescription)
     {
-        Action = CommandHandler.Create<IConsole, IMediator>(async (console, mediator) =>
+        Action = CommandHandler.Create<IGameConsole, IMediator>(async (console, mediator) =>
         {
             var command = new Request();
             var result = await mediator.Send(command);

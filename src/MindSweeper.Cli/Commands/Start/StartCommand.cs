@@ -20,7 +20,7 @@ public class StartCommand : CliCommand
         Options.Add(new LivesOption());
 
         //Add action
-        Action = CommandHandler.Create<StartOptions, IConsole, IMediator>(async (options, console, mediator) =>
+        Action = CommandHandler.Create<StartOptions, IGameConsole, IMediator>(async (options, console, mediator) =>
         {
             var command = new Request(options.Settings);
             var result = await mediator.Send(command);
