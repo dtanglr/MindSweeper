@@ -10,7 +10,7 @@ namespace MindSweeper.Cli.Commands.Root;
 /// <summary>
 /// Represents the root command for the MindSweeper CLI.
 /// </summary>
-public class RootCommand : CliRootCommand
+internal class RootCommand : CliRootCommand
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RootCommand"/> class.

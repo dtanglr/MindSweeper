@@ -6,7 +6,7 @@ namespace MindSweeper.Cli.Commands.Move;
 /// <summary>
 /// Represents a command to move in the MindSweeper game.
 /// </summary>
-public class MoveCommand : CliCommand
+internal class MoveCommand : CliCommand
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MoveCommand"/> class.

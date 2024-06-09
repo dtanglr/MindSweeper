@@ -5,7 +5,7 @@ namespace MindSweeper.Cli.Commands;
 /// <summary>
 /// Provides extension methods for validating symbol results.
 /// </summary>
-public static class ValidatorExtensions
+internal static class ValidatorExtensions
 {
     /// <summary>
     /// Adds an error message to the symbol result.

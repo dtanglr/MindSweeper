@@ -6,7 +6,7 @@ namespace MindSweeper.Cli.Commands.End;
 /// <summary>
 /// Represents the command to end the game.
 /// </summary>
-public class EndCommand : CliCommand
+internal class EndCommand : CliCommand
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="EndCommand"/> class.

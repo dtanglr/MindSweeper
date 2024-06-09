@@ -1,7 +1,13 @@
 ﻿namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
 
+/// <summary>
+/// Unit tests for the GetGameAsync method in the JsonFileGameRepository class.
+/// </summary>
 public class GetGameAsyncTests : JsonFileGameRepositoryTests
 {
+    /// <summary>
+    /// Tests the scenario when the JSON file is missing.
+    /// </summary>
     [Fact]
     public async Task GetGameAsync_WhenJsonFileMissing_ReturnsNotFound()
     {
@@ -23,6 +29,9 @@ public class GetGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result<Game>.NotFound());
     }
 
+    /// <summary>
+    /// Tests the scenario when the JSON file exists but the game has a non-matching ID.
+    /// </summary>
     [Fact]
     public async Task GetGameAsync_WhenJsonFileExists_WithAnExistingGame_WithNonMatchingId_ReturnsNotFound()
     {
@@ -46,6 +55,9 @@ public class GetGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result<Game>.NotFound());
     }
 
+    /// <summary>
+    /// Tests the scenario when the JSON file exists and the game has a matching ID.
+    /// </summary>
     [Fact]
     public async Task GetGameAsync_WhenJsonFileExists_WithAnExistingGame_WithMatchingId_ReturnsSuccess()
     {
@@ -68,6 +80,9 @@ public class GetGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result<Game>.Success(existingGame!));
     }
 
+    /// <summary>
+    /// Tests the scenario when the JSON file exists but contains invalid content that causes a JsonException.
+    /// </summary>
     [Fact]
     public async Task GetGameAsync_WhenJsonFileExists_WithInvalidContent_AJsonExceptionOccurs_ReturnsUnprocessable()
     {
@@ -90,6 +105,9 @@ public class GetGameAsyncTests : JsonFileGameRepositoryTests
         result.Errors.Count.Should().Be(1);
     }
 
+    /// <summary>
+    /// Tests the scenario when an exception occurs while writing the JSON file.
+    /// </summary>
     [Fact]
     public async Task GetGameAsync_WhenWritingJsonFile_AnExceptionOccurs_ReturnsError()
     {

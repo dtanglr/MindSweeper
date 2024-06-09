@@ -3,4 +3,4 @@
 /// <summary>
 /// Represents the start options for the MindSweeper game.
 /// </summary>
-public record StartOptions(GameSettings Settings);
+internal record StartOptions(GameSettings Settings);

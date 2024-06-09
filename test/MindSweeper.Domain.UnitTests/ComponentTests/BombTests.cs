@@ -2,8 +2,14 @@
 
 namespace MindSweeper.Domain.UnitTests.ComponentTests;
 
+/// <summary>
+/// Unit tests for the Bomb class.
+/// </summary>
 public class BombTests
 {
+    /// <summary>
+    /// Tests that bombs instantiate correctly with default settings.
+    /// </summary>
     [Fact]
     public void GivenDefaultSettings_BombsInstantiateCorrectly()
     {
@@ -22,6 +28,9 @@ public class BombTests
         });
     }
 
+    /// <summary>
+    /// Tests that bombs instantiate correctly with a list of bombs.
+    /// </summary>
     [Fact]
     public void GivenAListOfBombs_BombsInstantiateCorrectly()
     {
@@ -37,6 +46,9 @@ public class BombTests
         sut.ToList().Should().BeEquivalentTo(listOfBombs);
     }
 
+    /// <summary>
+    /// Tests that the Bombs.OnSquare method correctly returns squares with bombs.
+    /// </summary>
     [Fact]
     public void GivenACollectionOfSquares_BombsOnSquareMethod_CorrectlyReturnsSquaresWithBombs()
     {

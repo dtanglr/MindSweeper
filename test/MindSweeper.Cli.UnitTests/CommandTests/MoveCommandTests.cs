@@ -1,14 +1,23 @@
 ﻿namespace MindSweeper.Cli.UnitTests.CommandTests;
 
+/// <summary>
+/// Unit tests for the MoveCommand class.
+/// </summary>
 public class MoveCommandTests
 {
     private readonly CliRootCommand _rootCommand;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MoveCommandTests"/> class.
+    /// </summary>
     public MoveCommandTests()
     {
         _rootCommand = new RootCommand();
     }
 
+    /// <summary>
+    /// Tests the MoveCommand without the required direction argument and verifies that it produces an error.
+    /// </summary>
     [Fact]
     public void MoveCommand_Without_Required_Direction_Argument_Produces_Error()
     {
@@ -24,6 +33,10 @@ public class MoveCommandTests
         result.UnmatchedTokens.Should().BeEmpty();
     }
 
+    /// <summary>
+    /// Tests the MoveCommand with the specified direction argument and verifies that it produces no errors.
+    /// </summary>
+    /// <param name="direction">The direction argument.</param>
     [Theory]
     [InlineData(Direction.Up)]
     [InlineData(Direction.Down)]
@@ -43,6 +56,9 @@ public class MoveCommandTests
         result.UnmatchedTokens.Should().BeEmpty();
     }
 
+    /// <summary>
+    /// Tests the MoveCommand with multiple direction arguments and verifies that it produces an error.
+    /// </summary>
     [Fact]
     public void MoveCommand_With_Mulitple_Direction_Arguments_Produces_Error()
     {

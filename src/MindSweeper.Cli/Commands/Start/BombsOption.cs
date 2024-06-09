@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents an option for specifying the number of bombs in the game.
 /// </summary>
-public class BombsOption : CliOption<int>
+internal class BombsOption : CliOption<int>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BombsOption"/> class.

@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents an option for specifying the number of rows in the game.
 /// </summary>
-public class RowsOption : CliOption<int>
+internal class RowsOption : CliOption<int>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RowsOption"/> class.

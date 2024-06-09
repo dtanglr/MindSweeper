@@ -6,7 +6,7 @@ namespace MindSweeper.Cli.Commands.Start;
 /// <summary>
 /// Represents a command to start the game.
 /// </summary>
-public class StartCommand : CliCommand
+internal class StartCommand : CliCommand
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="StartCommand"/> class.

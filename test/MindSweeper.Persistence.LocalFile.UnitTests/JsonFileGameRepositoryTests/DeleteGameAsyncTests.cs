@@ -1,7 +1,13 @@
 ﻿namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
 
+/// <summary>
+/// Tests the DeleteGameAsync method when the JSON file is missing and expects a NotFound result.
+/// </summary>
 public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
 {
+    /// <summary>
+    /// Tests the DeleteGameAsync method when the JSON file is missing and expects a NotFound result.
+    /// </summary>
     [Fact]
     public async Task DeleteGameAsync_WhenJsonFileMissing_ReturnsNotFound()
     {
@@ -22,6 +28,9 @@ public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.NotFound());
     }
 
+    /// <summary>
+    /// Tests the DeleteGameAsync method when the JSON file exists with an existing game but the IDs do not match, and expects a NotFound result.
+    /// </summary>
     [Fact]
     public async Task DeleteGameAsync_WhenJsonFileExists_WithAnExistingGame_WithNonMatchingId_ReturnsNotFound()
     {
@@ -44,6 +53,9 @@ public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.NotFound());
     }
 
+    /// <summary>
+    /// Tests the DeleteGameAsync method when the JSON file exists with an existing game and the IDs match, and expects an Accepted result.
+    /// </summary>
     [Fact]
     public async Task DeleteGameAsync_WhenJsonFileExists_WithAnExistingGame_WithMatchingId_ReturnsAccepted()
     {
@@ -66,6 +78,9 @@ public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.Accepted());
     }
 
+    /// <summary>
+    /// Tests the DeleteGameAsync method when the JSON file exists with invalid content and a JsonException occurs, and expects an Unprocessable result.
+    /// </summary>
     [Fact]
     public async Task DeleteGameAsync_WhenJsonFileExists_WithInvalidContent_AJsonExceptionOccurs_ReturnsUnprocessable()
     {
@@ -87,6 +102,9 @@ public class DeleteGameAsyncTests : JsonFileGameRepositoryTests
         result.Errors.Count.Should().Be(1);
     }
 
+    /// <summary>
+    /// Tests the DeleteGameAsync method when an exception occurs while writing the JSON file, and expects an Error result.
+    /// </summary>
     [Fact]
     public async Task DeleteGameAsync_WhenWritingJsonFile_AnExceptionOccurs_ReturnsError()
     {

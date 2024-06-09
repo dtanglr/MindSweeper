@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents an option for specifying the number of columns in the game.
 /// </summary>
-public class ColumnsOption : CliOption<int>
+internal class ColumnsOption : CliOption<int>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ColumnsOption"/> class.

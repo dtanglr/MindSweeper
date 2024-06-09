@@ -3,7 +3,7 @@
 /// <summary>
 /// Represents an option for specifying the number of lives the player has in the game.
 /// </summary>
-public class LivesOption : CliOption<int>
+internal class LivesOption : CliOption<int>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="LivesOption"/> class.

@@ -1,7 +1,14 @@
 ﻿namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
 
+/// <summary>
+/// Unit tests for the CreateGameAsync method in the JsonFileGameRepository class.
+/// </summary>
 public class CreateGameAsyncTests : JsonFileGameRepositoryTests
 {
+    /// <summary>
+    /// Tests the CreateGameAsync method when the JSON file exists and contains an existing game.
+    /// It should return a conflict result.
+    /// </summary>
     [Fact]
     public async Task CreateGameAsync_WhenJsonFileExists_WithAnExistingGame_ReturnsConflict()
     {
@@ -25,6 +32,10 @@ public class CreateGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.Conflict());
     }
 
+    /// <summary>
+    /// Tests the CreateGameAsync method when the JSON file exists and does not contain an existing game.
+    /// It should return an accepted result.
+    /// </summary>
     [Fact]
     public async Task CreateGameAsync_WhenJsonFileExists_WithNoExistingGame_ReturnsAccepted()
     {
@@ -47,6 +58,10 @@ public class CreateGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.Accepted());
     }
 
+    /// <summary>
+    /// Tests the CreateGameAsync method when the JSON file is missing.
+    /// It should return an accepted result.
+    /// </summary>
     [Fact]
     public async Task CreateGameAsync_WhenJsonFileMissing_ReturnsAccepted()
     {
@@ -69,6 +84,10 @@ public class CreateGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.Accepted());
     }
 
+    /// <summary>
+    /// Tests the CreateGameAsync method when the JSON file exists but contains invalid content,
+    /// resulting in a JsonException. It should return an unprocessable result.
+    /// </summary>
     [Fact]
     public async Task CreateGameAsync_WhenJsonFileExists_WithInvalidContent_AJsonExceptionOccurs_ReturnsUnprocessable()
     {
@@ -92,6 +111,10 @@ public class CreateGameAsyncTests : JsonFileGameRepositoryTests
         result.Errors.Count.Should().Be(1);
     }
 
+    /// <summary>
+    /// Tests the CreateGameAsync method when an exception occurs while writing the JSON file.
+    /// It should return an error result.
+    /// </summary>
     [Fact]
     public async Task CreateGameAsync_WhenWritingJsonFile_AnExceptionOccurs_ReturnsError()
     {

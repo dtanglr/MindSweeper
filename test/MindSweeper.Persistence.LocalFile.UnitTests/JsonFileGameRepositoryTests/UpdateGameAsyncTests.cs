@@ -1,7 +1,13 @@
 ﻿namespace MindSweeper.Persistence.LocalFile.UnitTests.JsonFileGameRepositoryTests;
 
+/// <summary>
+/// Unit tests for the <see cref="JsonFileGameRepository.UpdateGameAsync"/> method.
+/// </summary>
 public class UpdateGameAsyncTests : JsonFileGameRepositoryTests
 {
+    /// <summary>
+    /// Tests the scenario when the JSON file is missing.
+    /// </summary>
     [Fact]
     public async Task UpdateGameAsync_WhenJsonFileMissing_ReturnsNotFound()
     {
@@ -24,6 +30,9 @@ public class UpdateGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.NotFound());
     }
 
+    /// <summary>
+    /// Tests the scenario when the JSON file exists but the existing game has a different ID.
+    /// </summary>
     [Fact]
     public async Task UpdateGameAsync_WhenJsonFileExists_WithAnExistingGame_WithNonMatchingId_ReturnsNotFound()
     {
@@ -47,6 +56,9 @@ public class UpdateGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.NotFound());
     }
 
+    /// <summary>
+    /// Tests the scenario when the JSON file exists and the existing game has a matching ID.
+    /// </summary>
     [Fact]
     public async Task UpdateGameAsync_WhenJsonFileExists_WithAnExistingGame_WithMatchingId_ReturnsAccepted()
     {
@@ -73,6 +85,9 @@ public class UpdateGameAsyncTests : JsonFileGameRepositoryTests
         result.Should().BeEquivalentTo(Result.Accepted());
     }
 
+    /// <summary>
+    /// Tests the scenario when the JSON file exists but has invalid content that causes a JsonException.
+    /// </summary>
     [Fact]
     public async Task UpdateGameAsync_WhenJsonFileExists_WithInvalidContent_AJsonExceptionOccurs_ReturnsUnprocessable()
     {
@@ -96,6 +111,9 @@ public class UpdateGameAsyncTests : JsonFileGameRepositoryTests
         result.Errors.Count.Should().Be(1);
     }
 
+    /// <summary>
+    /// Tests the scenario when an exception occurs while writing the JSON file.
+    /// </summary>
     [Fact]
     public async Task UpdateGameAsync_WhenWritingJsonFile_AnExceptionOccurs_ReturnsError()
     {

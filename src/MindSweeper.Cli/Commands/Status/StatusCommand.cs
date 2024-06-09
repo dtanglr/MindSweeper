@@ -6,7 +6,7 @@ namespace MindSweeper.Cli.Commands.Status;
 /// <summary>
 /// Represents a command that displays the status of the game.
 /// </summary>
-public class StatusCommand : CliCommand
+internal class StatusCommand : CliCommand
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="StatusCommand"/> class.

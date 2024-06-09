@@ -2,15 +2,25 @@
 
 namespace MindSweeper.Cli.UnitTests.CommandTests;
 
+/// <summary>
+/// Represents the unit tests for the StartCommand class.
+/// </summary>
 public class StartCommandTests
 {
     private readonly CliRootCommand _rootCommand;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StartCommandTests"/> class.
+    /// </summary>
     public StartCommandTests()
     {
         _rootCommand = new RootCommand();
     }
 
+    /// <summary>
+    /// Tests the StartCommand with valid options and ensures no errors are produced.
+    /// </summary>
+    /// <param name="commandLine">The command line to test.</param>
     [Theory]
     [InlineData("testhost start")]
     [InlineData("testhost start --columns 8 --rows 8 --bombs 21 --lives 3")]
@@ -27,6 +37,13 @@ public class StartCommandTests
         result.UnmatchedTokens.Should().BeEmpty();
     }
 
+    /// <summary>
+    /// Tests the StartCommand with invalid options above or below the threshold and ensures an error is produced.
+    /// </summary>
+    /// <param name="commandLine">The command line to test.</param>
+    /// <param name="optionName">The name of the option.</param>
+    /// <param name="threshold">The threshold value.</param>
+    /// <param name="value">The value to test.</param>
     [Theory]
     [InlineData("testhost start --columns 0", "--columns", GameSettings.MinimumColumns, 0)]
     [InlineData("testhost start -c 0", "-c", GameSettings.MinimumColumns, 0)]
@@ -57,6 +74,11 @@ public class StartCommandTests
         result.UnmatchedTokens.Should().BeEmpty();
     }
 
+    /// <summary>
+    /// Tests the StartCommand with multiple options and ensures an error is produced.
+    /// </summary>
+    /// <param name="commandLine">The command line to test.</param>
+    /// <param name="argumentName">The name of the argument.</param>
     [Theory]
     [InlineData("testhost start --columns 8 --columns 8", "--columns")]
     [InlineData("testhost start --columns 8 -c 8", "--columns")]
