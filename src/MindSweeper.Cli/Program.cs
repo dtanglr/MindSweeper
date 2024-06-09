@@ -9,10 +9,15 @@ namespace MindSweeper.Cli;
 /// <summary>
 /// Entry point of the application.
 /// </summary>
-/// <param name="args">Command-line arguments.</param>
-/// <returns>Exit code of the application.</returns>
 internal class Program
 {
+    /// <summary>
+    /// Builds the MindSweeper CLI application.
+    /// </summary>
+    /// <returns>The CLI configuration.</returns>
+    /// <remarks>The <see cref="RootCommand"/> class implicitly converts to an instance of a <see cref="CliConfiguration"/> class</remarks>
+    static CliConfiguration BuildMindSweeper() => new RootCommand();
+
     /// <summary>
     /// Entry point of the application.
     /// </summary>
@@ -40,11 +45,4 @@ internal class Program
                     logging.SetMinimumLevel(LogLevel.Error));
             })
         .InvokeAsync(args);
-
-    /// <summary>
-    /// Builds the MindSweeper CLI application.
-    /// </summary>
-    /// <returns>The CLI configuration.</returns>
-    /// <remarks>The <see cref="RootCommand"/> class implicitly converts to an instance of a <see cref="CliConfiguration"/> class</remarks>
-    static CliConfiguration BuildMindSweeper() => new RootCommand();
 }

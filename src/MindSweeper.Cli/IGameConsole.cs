@@ -19,7 +19,7 @@ internal interface IGameConsole : IConsole
     void Write(string format, params object?[] args);
 
     /// <summary>
-    /// Writes the game object to the console.
+    /// Writes the game status summary to the console.
     /// </summary>
     /// <param name="game">The game object to write.</param>
     void Write(Game game);

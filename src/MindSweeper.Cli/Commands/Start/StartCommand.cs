@@ -19,7 +19,7 @@ internal class StartCommand : CliCommand
         Options.Add(new BombsOption());
         Options.Add(new LivesOption());
 
-        //Add action
+        // Add action
         Action = CommandHandler.Create<StartOptions, IGameConsole, IMediator>(async (options, console, mediator) =>
         {
             var command = new Request(options.Settings);
