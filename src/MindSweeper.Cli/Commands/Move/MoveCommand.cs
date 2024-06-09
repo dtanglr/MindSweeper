@@ -1,27 +1,22 @@
-﻿using MindSweeper.Application.Mediator.Commands.Move;
-using MindSweeper.Domain.Results;
+﻿using MindSweeper.Domain.Results;
+using Request = MindSweeper.Application.Mediator.Commands.Move.MoveCommand;
 
-namespace MindSweeper.Cli;
+namespace MindSweeper.Cli.Commands.Move;
 
-partial class Program
+/// <summary>
+/// Represents a command to move in the MindSweeper game.
+/// </summary>
+public class MoveCommand : CliCommand
 {
     /// <summary>
-    /// Represents the CLI command for moving in the game.
+    /// Initializes a new instance of the <see cref="MoveCommand"/> class.
     /// </summary>
-    public static CliCommand MoveCommand => new("move", Resources.MoveCommandDescription)
+    public MoveCommand() : base("move", Resources.MoveCommandDescription)
     {
-        Arguments =
-        {
-            new CliArgument<Direction>("direction")
-            {
-                Arity = ArgumentArity.ExactlyOne,
-                Description = Resources.MoveCommandDirectionArgumentDescription,
-                HelpName = Resources.MoveCommandDirectionArgumentHelpName
-            }
-        },
+        Arguments.Add(new DirectionArgument());
         Action = CommandHandler.Create<Direction, IConsole, IMediator>(async (direction, console, mediator) =>
         {
-            var command = new MoveCommand(direction);
+            var command = new Request(direction);
             var result = await mediator.Send(command);
 
             console.WriteLine();
@@ -62,7 +57,7 @@ partial class Program
                     }
 
                     console.WriteLine();
-                    console.WriteGameStatus(game);
+                    console.Write(game);
                     break;
                 case ResultStatus.Unprocessable:
                     console.WriteLine(Resources.MoveCommandResultStatusUnprocessable, direction);
@@ -84,6 +79,6 @@ partial class Program
             }
 
             console.WriteLine();
-        })
-    };
+        });
+    }
 }

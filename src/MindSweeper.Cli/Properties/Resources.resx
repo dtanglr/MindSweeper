@@ -121,6 +121,12 @@
   <data name="Boom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>Boom.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="CommandOptionGreaterThanMaximum" xml:space="preserve">
+    <value>Option '{0}' can not be more than {1}. The provided value was {2}.</value>
+  </data>
+  <data name="CommandOptionLessThanMinimum" xml:space="preserve">
+    <value>Option '{0}' can not be less than {1}. The provided value was {2}.</value>
+  </data>
   <data name="CommandResultStatusError" xml:space="preserve">
     <value>Unfortunately an error occurred.</value>
   </data>

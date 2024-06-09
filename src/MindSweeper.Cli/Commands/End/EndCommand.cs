@@ -1,18 +1,21 @@
-﻿using MindSweeper.Application.Mediator.Commands.End;
-using MindSweeper.Domain.Results;
+﻿using MindSweeper.Domain.Results;
+using Request = MindSweeper.Application.Mediator.Commands.End.EndCommand;
 
-namespace MindSweeper.Cli;
+namespace MindSweeper.Cli.Commands.End;
 
-partial class Program
+/// <summary>
+/// Represents the command to end the game.
+/// </summary>
+public class EndCommand : CliCommand
 {
     /// <summary>
-    /// Represents the CLI command for ending the game.
+    /// Initializes a new instance of the <see cref="EndCommand"/> class.
     /// </summary>
-    public static CliCommand EndCommand => new("end", Resources.EndCommandDescription)
+    public EndCommand() : base("end", Resources.EndCommandDescription)
     {
         Action = CommandHandler.Create<IConsole, IMediator>(async (console, mediator) =>
         {
-            var command = new EndCommand();
+            var command = new Request();
             var result = await mediator.Send(command);
 
             console.WriteLine();
@@ -39,6 +42,6 @@ partial class Program
             }
 
             console.WriteLine();
-        })
-    };
+        });
+    }
 }

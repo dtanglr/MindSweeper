@@ -76,6 +76,24 @@ namespace MindSweeper.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Option &apos;{0}&apos; can not be more than {1}. The provided value was {2}..
+        /// </summary>
+        internal static string CommandOptionGreaterThanMaximum {
+            get {
+                return ResourceManager.GetString("CommandOptionGreaterThanMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Option &apos;{0}&apos; can not be less than {1}. The provided value was {2}..
+        /// </summary>
+        internal static string CommandOptionLessThanMinimum {
+            get {
+                return ResourceManager.GetString("CommandOptionLessThanMinimum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unfortunately an error occurred..
         /// </summary>
         internal static string CommandResultStatusError {

@@ -1,4 +1,6 @@
-﻿namespace MindSweeper.Cli;
+﻿using System.CommandLine.Parsing;
+
+namespace MindSweeper.Cli;
 
 /// <summary>
 /// Provides extension methods for the IConsole interface.
@@ -66,7 +68,7 @@ internal static class Extensions
     /// </summary>
     /// <param name="console">The console object.</param>
     /// <param name="game">The game object.</param>
-    public static void WriteGameStatus(this IConsole console, Game game)
+    public static void Write(this IConsole console, Game game)
     {
         switch (game.Status)
         {
@@ -102,7 +104,7 @@ internal static class Extensions
     /// <param name="source">The source object.</param>
     /// <param name="next">The function to get the next object in the iteration.</param>
     /// <returns>An enumerable of the source object and its descendants.</returns>
-    public static IEnumerable<T> RecurseWhileNotNull<T>(this T? source, Func<T, T?> next) where T : class
+    public static IEnumerable<T> RecurseWhileNotNull<T>(this T? source, Func<T, T?> next) where T : SymbolResult
     {
         while (source is not null)
         {
@@ -111,4 +113,13 @@ internal static class Extensions
             source = next(source);
         }
     }
+
+    /// <summary>
+    /// Adds an error message to the symbol result.
+    /// </summary>
+    /// <param name="result">The symbol result.</param>
+    /// <param name="format">The format string.</param>
+    /// <param name="args">The arguments to format the string.</param>
+    public static void AddError(this SymbolResult result, string format, params object?[] args) =>
+        result.AddError(string.Format(format, args));
 }

@@ -1,18 +1,19 @@
 ﻿using System.CommandLine.Hosting;
 using Microsoft.Extensions.Logging;
 using MindSweeper.Application.Mediator;
+using MindSweeper.Cli.Commands.Root;
 using MindSweeper.Persistence.LocalFile;
 
 namespace MindSweeper.Cli;
 
-internal partial class Program : IProgram
+internal class Program
 {
     /// <summary>
     /// Entry point of the application.
     /// </summary>
     /// <param name="args">Command-line arguments.</param>
     /// <returns>Exit code of the application.</returns>
-    public static Task<int> Main(string[] args) => new CliConfiguration(RootCommand)
+    static Task<int> Main(string[] args) => BuildMindSweeper()
         .UseHost(_ => Host.CreateDefaultBuilder(),
             host =>
             {
@@ -34,4 +35,11 @@ internal partial class Program : IProgram
                     logging.SetMinimumLevel(LogLevel.Error));
             })
         .InvokeAsync(args);
+
+    /// <summary>
+    /// Builds the MindSweeper CLI application.
+    /// </summary>
+    /// <returns>The CLI configuration.</returns>
+    /// <remarks>The <see cref="RootCommand"/> class implicitly converts to an instance of a <see cref="CliConfiguration"/> class</remarks>
+    static CliConfiguration BuildMindSweeper() => new RootCommand();
 }

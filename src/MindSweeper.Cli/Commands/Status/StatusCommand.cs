@@ -1,14 +1,17 @@
 ﻿using MindSweeper.Application.Mediator.Queries.GetGame;
 using MindSweeper.Domain.Results;
 
-namespace MindSweeper.Cli;
+namespace MindSweeper.Cli.Commands.Status;
 
-partial class Program
+/// <summary>
+/// Represents a command that displays the status of the game.
+/// </summary>
+public class StatusCommand : CliCommand
 {
     /// <summary>
-    /// Represents the CLI command for getting the current game status.
+    /// Initializes a new instance of the <see cref="StatusCommand"/> class.
     /// </summary>
-    public static CliCommand StatusCommand => new("status", Resources.StatusCommandDescription)
+    public StatusCommand() : base("status", Resources.StatusCommandDescription)
     {
         Action = CommandHandler.Create<IConsole, IMediator>(async (console, mediator) =>
         {
@@ -23,7 +26,7 @@ partial class Program
                     var game = result.Value!.Game;
                     console.WriteLine(Resources.StatusCommandResultStatusOk);
                     console.WriteLine();
-                    console.WriteGameStatus(game);
+                    console.Write(game);
                     break;
                 case ResultStatus.NotFound:
                     console.WriteLine(Resources.StatusCommandResultStatusNotFound);
@@ -42,6 +45,6 @@ partial class Program
             }
 
             console.WriteLine();
-        })
-    };
+        });
+    }
 }

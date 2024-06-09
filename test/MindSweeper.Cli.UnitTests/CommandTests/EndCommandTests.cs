@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Cli.UnitTests;
+﻿namespace MindSweeper.Cli.UnitTests.CommandTests;
 
 public class EndCommandTests
 {
@@ -6,7 +6,7 @@ public class EndCommandTests
 
     public EndCommandTests()
     {
-        _rootCommand = Program.RootCommand;
+        _rootCommand = new RootCommand();
     }
 
     [Fact]
