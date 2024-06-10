@@ -8,6 +8,9 @@ public abstract class JsonFileGameRepositoryTests
     private const string Directory = "";
     private const string FileName = "game.json";
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="JsonFileGameRepositoryTests"/> class.
+    /// </summary>
     public JsonFileGameRepositoryTests()
     {
         FilePath = FileName;
