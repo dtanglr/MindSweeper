@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Cli.UnitTests.CommandTests;
+﻿namespace MindSweeper.Cli.UnitTests.CommandTests.End;
 
 /// <summary>
 /// Unit tests for the EndCommand class.

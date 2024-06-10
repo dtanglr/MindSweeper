@@ -1,6 +1,6 @@
 ﻿using MindSweeper.Cli.Properties;
 
-namespace MindSweeper.Cli.UnitTests.CommandTests;
+namespace MindSweeper.Cli.UnitTests.CommandTests.Start;
 
 /// <summary>
 /// Represents the unit tests for the StartCommand class.

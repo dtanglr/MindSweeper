@@ -1,4 +1,5 @@
-﻿global using System.CommandLine;
+﻿global using AutoFixture;
+global using System.CommandLine;
 global using System.CommandLine.Parsing;
 global using FluentAssertions;
 global using MindSweeper.Cli.Commands.Root;

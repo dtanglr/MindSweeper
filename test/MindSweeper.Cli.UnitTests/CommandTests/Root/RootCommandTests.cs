@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Cli.UnitTests.CommandTests;
+﻿namespace MindSweeper.Cli.UnitTests.CommandTests.Root;
 
 /// <summary>
 /// Represents the unit tests for the RootCommand class.

@@ -1,4 +1,4 @@
-﻿namespace MindSweeper.Cli.UnitTests.CommandTests;
+﻿namespace MindSweeper.Cli.UnitTests.CommandTests.Move;
 
 /// <summary>
 /// Unit tests for the MoveCommand class.
