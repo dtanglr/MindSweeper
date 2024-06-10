@@ -1,7 +1,9 @@
-﻿global using AutoFixture;
-global using System.CommandLine;
+﻿global using System.CommandLine;
 global using System.CommandLine.Parsing;
+global using AutoFixture;
 global using FluentAssertions;
 global using MindSweeper.Cli.Commands.Root;
+global using MindSweeper.Cli.Properties;
 global using MindSweeper.Domain;
+global using MindSweeper.Domain.Results;
 global using Xunit;

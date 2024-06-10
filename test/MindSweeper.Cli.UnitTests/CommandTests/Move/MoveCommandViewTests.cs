@@ -1,21 +1,28 @@
 ﻿using MindSweeper.Application.Mediator.Commands.Move;
 using MindSweeper.Cli.Commands.Move;
-using MindSweeper.Cli.Properties;
-using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Cli.UnitTests.CommandTests.Move;
 
+/// <summary>
+/// Unit tests for the MoveCommandView class.
+/// </summary>
 public class MoveCommandViewTests
 {
     private readonly IGameConsole _console;
-    private readonly IFixture _fixture;
+    private readonly Fixture _fixture;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MoveCommandViewTests"/> class.
+    /// </summary>
     public MoveCommandViewTests()
     {
         _console = new GameTestConsole();
         _fixture = new Fixture();
     }
 
+    /// <summary>
+    /// Test case to verify that the Render method displays the correct message for an Accepted result with GameStatus.InProgress.
+    /// </summary>
     [Fact]
     public void Render_Accepted_Result_Should_Display_Accepted_InProgress_Message()
     {
@@ -36,6 +43,9 @@ public class MoveCommandViewTests
         output.Should().Contain(Resources.MoveCommandResultStatusAccepted);
     }
 
+    /// <summary>
+    /// Test case to verify that the Render method displays the correct message for an Accepted result with GameStatus.Won.
+    /// </summary>
     [Fact]
     public void Render_Accepted_Result_Should_Display_Accepted_Won_Message()
     {
@@ -57,6 +67,9 @@ public class MoveCommandViewTests
         output.Should().Contain(Resources.YouWin);
     }
 
+    /// <summary>
+    /// Test case to verify that the Render method displays the correct message for an Accepted result with GameStatus.Lost.
+    /// </summary>
     [Fact]
     public void Render_Accepted_Result_Should_Display_Accepted_Lost_Message()
     {
@@ -79,6 +92,9 @@ public class MoveCommandViewTests
         output.Should().Contain(Resources.YouLose);
     }
 
+    /// <summary>
+    /// Test case to verify that the Render method displays the correct message for an Accepted result with a hit bomb.
+    /// </summary>
     [Fact]
     public void Render_Accepted_Result_Should_Display_Accepted_HitBomb_Message()
     {
@@ -104,6 +120,9 @@ public class MoveCommandViewTests
         output.Should().Contain(Resources.MoveCommandDidHitBomb);
     }
 
+    /// <summary>
+    /// Test case to verify that the Render method displays the correct message for an Accepted result without hitting a bomb.
+    /// </summary>
     [Fact]
     public void Render_Accepted_Result_Should_Display_Accepted_DidNotHitBomb_Message()
     {
@@ -129,6 +148,9 @@ public class MoveCommandViewTests
         output.Should().Contain(Resources.MoveCommandDidNotHitBomb);
     }
 
+    /// <summary>
+    /// Test case to verify that the Render method displays the correct message for an Unprocessable result.
+    /// </summary>
     [Fact]
     public void Render_Unprocessable_Result_Should_Display_Unprocessable_Message()
     {
@@ -145,6 +167,9 @@ public class MoveCommandViewTests
         output.Should().Contain(string.Format(Resources.MoveCommandResultStatusUnprocessable, request.Direction));
     }
 
+    /// <summary>
+    /// Test case to verify that the Render method displays the correct message for a NotFound result.
+    /// </summary>
     [Fact]
     public void Render_NotFound_Result_Should_Display_NotFound_Message()
     {

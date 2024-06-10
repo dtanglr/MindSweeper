@@ -4,7 +4,7 @@
 /// Represents a game console interface.
 /// </summary>
 /// <remarks>
-/// Provides methods to facilitate the sharing of the implementations between <see cref="GameConsole"/> and <see cref="GameTestConsole"/>
+/// Provides methods implementations in here to facilitate the sharing between <see cref="GameConsole"/> and <see cref="GameTestConsole"/>
 /// </remarks>
 internal interface IGameConsole : IConsole
 {
