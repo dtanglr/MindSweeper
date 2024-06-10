@@ -1,9 +1,8 @@
-﻿using System.CommandLine.Help;
-using System.CommandLine.Invocation;
-using MindSweeper.Cli.Commands.End;
+﻿using MindSweeper.Cli.Commands.End;
 using MindSweeper.Cli.Commands.Move;
 using MindSweeper.Cli.Commands.Start;
 using MindSweeper.Cli.Commands.Status;
+using MindSweeper.Cli.Views;
 
 namespace MindSweeper.Cli.Commands.Root;
 
@@ -28,25 +27,8 @@ internal class RootCommand : CliRootCommand
         // Displays the game logo and help text for the root command.
         Action = CommandHandler.Create<IGameConsole, ParseResult>((console, parseResult) =>
         {
-            // Display the logo.
-            console.Write(Resources.Logo);
-
-            // Get and display the help text for the root command.
-            var availableHelpOptions = parseResult.RootCommandResult.Command.Options.OfType<HelpOption>();
-
-            if (availableHelpOptions.FirstOrDefault(o => o is not null) is { Action: not null } helpOption)
-            {
-                switch (helpOption.Action)
-                {
-                    case SynchronousCliAction syncAction:
-                        syncAction.Invoke(parseResult);
-                        break;
-
-                    case AsynchronousCliAction asyncAction:
-                        asyncAction.InvokeAsync(parseResult, CancellationToken.None).ConfigureAwait(false).GetAwaiter().GetResult();
-                        break;
-                }
-            }
+            var view = new RootCommandView(console);
+            view.Render(parseResult);
         });
     }
 

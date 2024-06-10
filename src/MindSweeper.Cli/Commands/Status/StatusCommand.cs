@@ -1,5 +1,5 @@
 ﻿using MindSweeper.Application.Mediator.Queries.GetGame;
-using MindSweeper.Domain.Results;
+using MindSweeper.Cli.Views;
 
 namespace MindSweeper.Cli.Commands.Status;
 
@@ -13,38 +13,13 @@ internal class StatusCommand : CliCommand
     /// </summary>
     public StatusCommand() : base("status", Resources.StatusCommandDescription)
     {
+        // Add action
         Action = CommandHandler.Create<IGameConsole, IMediator>(async (console, mediator) =>
         {
-            var query = new GetGameQuery();
-            var result = await mediator.Send(query);
-
-            console.WriteLine();
-
-            switch (result.Status)
-            {
-                case ResultStatus.Ok:
-                    var game = result.Value!.Game;
-                    console.WriteLine(Resources.StatusCommandResultStatusOk);
-                    console.WriteLine();
-                    console.Write(game);
-                    break;
-                case ResultStatus.NotFound:
-                    console.WriteLine(Resources.StatusCommandResultStatusNotFound);
-                    break;
-                case ResultStatus.Invalid:
-                    console.WriteLine(Resources.CommandResultStatusInvalid);
-                    result.ValidationIssues.ForEach(e => console.WriteLine(e.Message));
-                    break;
-                case ResultStatus.Error:
-                    console.WriteLine(Resources.CommandResultStatusError);
-                    result.Errors.ForEach(console.WriteLine);
-                    break;
-                default:
-                    console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
-                    break;
-            }
-
-            console.WriteLine();
+            var request = new GetGameQuery();
+            var result = await mediator.Send(request);
+            var view = new StatusCommandView(console);
+            view.Render(result);
         });
     }
 }

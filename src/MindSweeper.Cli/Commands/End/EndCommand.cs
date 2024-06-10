@@ -1,4 +1,4 @@
-﻿using MindSweeper.Domain.Results;
+﻿using MindSweeper.Cli.Views;
 using Request = MindSweeper.Application.Mediator.Commands.End.EndCommand;
 
 namespace MindSweeper.Cli.Commands.End;
@@ -13,35 +13,13 @@ internal class EndCommand : CliCommand
     /// </summary>
     public EndCommand() : base("end", Resources.EndCommandDescription)
     {
+        // Add action
         Action = CommandHandler.Create<IGameConsole, IMediator>(async (console, mediator) =>
         {
-            var command = new Request();
-            var result = await mediator.Send(command);
-
-            console.WriteLine();
-
-            switch (result.Status)
-            {
-                case ResultStatus.Accepted:
-                    console.WriteLine(Resources.EndCommandResultStatusAccepted);
-                    break;
-                case ResultStatus.NotFound:
-                    console.WriteLine(Resources.EndCommandResultStatusNotFound);
-                    break;
-                case ResultStatus.Invalid:
-                    console.WriteLine(Resources.CommandResultStatusInvalid);
-                    result.ValidationIssues.ForEach(e => console.WriteLine(e.Message));
-                    break;
-                case ResultStatus.Error:
-                    console.WriteLine(Resources.CommandResultStatusError);
-                    result.Errors.ForEach(console.WriteLine);
-                    break;
-                default:
-                    console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
-                    break;
-            }
-
-            console.WriteLine();
+            var request = new Request();
+            var result = await mediator.Send(request);
+            var view = new EndCommandView(console);
+            view.Render(result);
         });
     }
 }

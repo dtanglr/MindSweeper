@@ -1,4 +1,4 @@
-﻿using MindSweeper.Domain.Results;
+﻿using MindSweeper.Cli.Views;
 using Request = MindSweeper.Application.Mediator.Commands.Start.StartCommand;
 
 namespace MindSweeper.Cli.Commands.Start;
@@ -22,36 +22,10 @@ internal class StartCommand : CliCommand
         // Add action
         Action = CommandHandler.Create<StartOptions, IGameConsole, IMediator>(async (options, console, mediator) =>
         {
-            var command = new Request(options.Settings);
-            var result = await mediator.Send(command);
-
-            console.WriteLine();
-
-            switch (result.Status)
-            {
-                case ResultStatus.Accepted:
-                    var game = result.Value!.Game;
-                    console.WriteLine(Resources.StartCommandResultStatusAccepted);
-                    console.WriteLine();
-                    console.Write(game);
-                    break;
-                case ResultStatus.Conflict:
-                    console.WriteLine(Resources.StartCommandResultStatusConflict);
-                    break;
-                case ResultStatus.Invalid:
-                    console.WriteLine(Resources.CommandResultStatusInvalid);
-                    result.ValidationIssues.ForEach(e => console.WriteLine(e.Message));
-                    break;
-                case ResultStatus.Error:
-                    console.WriteLine(Resources.CommandResultStatusError);
-                    result.Errors.ForEach(console.WriteLine);
-                    break;
-                default:
-                    console.WriteLine(Resources.CommandResultStatusUnhandled, result.Status);
-                    break;
-            }
-
-            console.WriteLine();
+            var request = new Request(options.Settings);
+            var result = await mediator.Send(request);
+            var view = new StartCommandView(console);
+            view.Render(result);
         });
     }
 }
