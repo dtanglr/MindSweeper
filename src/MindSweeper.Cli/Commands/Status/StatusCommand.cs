@@ -1,5 +1,4 @@
 ﻿using MindSweeper.Application.Mediator.Queries.GetGame;
-using MindSweeper.Cli.Views;
 
 namespace MindSweeper.Cli.Commands.Status;
 
@@ -16,7 +15,7 @@ internal class StatusCommand : CliCommand
         // Add action
         Action = CommandHandler.Create<IGameConsole, IMediator>(async (console, mediator) =>
         {
-            var request = new GetGameQuery();
+            var request = new GetGameQueryRequest();
             var result = await mediator.Send(request);
             var view = new StatusCommandView(console);
             view.Render(result);

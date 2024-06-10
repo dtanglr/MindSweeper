@@ -1,5 +1,4 @@
-﻿using MindSweeper.Cli.Views;
-using Request = MindSweeper.Application.Mediator.Commands.Start.StartCommand;
+﻿using MindSweeper.Application.Mediator.Commands.Start;
 
 namespace MindSweeper.Cli.Commands.Start;
 
@@ -22,7 +21,7 @@ internal class StartCommand : CliCommand
         // Add action
         Action = CommandHandler.Create<StartOptions, IGameConsole, IMediator>(async (options, console, mediator) =>
         {
-            var request = new Request(options.Settings);
+            var request = new StartCommandRequest(options.Settings);
             var result = await mediator.Send(request);
             var view = new StartCommandView(console);
             view.Render(result);

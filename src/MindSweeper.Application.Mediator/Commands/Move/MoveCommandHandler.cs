@@ -7,7 +7,7 @@ namespace MindSweeper.Application.Mediator.Commands.Move;
 /// <summary>
 /// Handles the MoveCommand and updates the game state accordingly.
 /// </summary>
-public class MoveCommandHandler : IRequestHandler<MoveCommand, Result<MoveCommandResponse>>
+public class MoveCommandHandler : IRequestHandler<MoveCommandRequest, Result<MoveCommandResponse>>
 {
     private readonly IGameService _service;
 
@@ -26,7 +26,7 @@ public class MoveCommandHandler : IRequestHandler<MoveCommand, Result<MoveComman
     /// <param name="request">The MoveCommand request.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The result of the MoveCommand handling.</returns>
-    public async Task<Result<MoveCommandResponse>> Handle(MoveCommand request, CancellationToken cancellationToken)
+    public async Task<Result<MoveCommandResponse>> Handle(MoveCommandRequest request, CancellationToken cancellationToken)
     {
         var result = await _service.MoveAsync(request.Direction, cancellationToken);
 

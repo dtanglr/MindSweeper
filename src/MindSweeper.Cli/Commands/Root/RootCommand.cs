@@ -2,7 +2,6 @@
 using MindSweeper.Cli.Commands.Move;
 using MindSweeper.Cli.Commands.Start;
 using MindSweeper.Cli.Commands.Status;
-using MindSweeper.Cli.Views;
 
 namespace MindSweeper.Cli.Commands.Root;
 

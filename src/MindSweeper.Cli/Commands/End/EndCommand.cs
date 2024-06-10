@@ -1,5 +1,4 @@
-﻿using MindSweeper.Cli.Views;
-using Request = MindSweeper.Application.Mediator.Commands.End.EndCommand;
+﻿using MindSweeper.Application.Mediator.Commands.End;
 
 namespace MindSweeper.Cli.Commands.End;
 
@@ -16,7 +15,7 @@ internal class EndCommand : CliCommand
         // Add action
         Action = CommandHandler.Create<IGameConsole, IMediator>(async (console, mediator) =>
         {
-            var request = new Request();
+            var request = new EndCommandRequest();
             var result = await mediator.Send(request);
             var view = new EndCommandView(console);
             view.Render(result);

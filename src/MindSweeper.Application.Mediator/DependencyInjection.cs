@@ -24,7 +24,7 @@ public static class DependencyInjection
         {
             config.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
             config.AddOpenRequestPreProcessor(typeof(PlayerContextBehavior<>));
-            config.AddBehavior(typeof(IPipelineBehavior<StartCommand, Result<StartCommandResponse>>), typeof(StartCommandValidationBehavior));
+            config.AddBehavior(typeof(IPipelineBehavior<StartCommandRequest, Result<StartCommandResponse>>), typeof(StartCommandRequestValidationBehavior));
         });
 
         configurator.Services.AddValidatorsFromAssemblies([typeof(DependencyInjection).Assembly]);

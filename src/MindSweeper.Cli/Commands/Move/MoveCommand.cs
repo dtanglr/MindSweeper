@@ -1,5 +1,4 @@
-﻿using MindSweeper.Cli.Views;
-using Request = MindSweeper.Application.Mediator.Commands.Move.MoveCommand;
+﻿using MindSweeper.Application.Mediator.Commands.Move;
 
 namespace MindSweeper.Cli.Commands.Move;
 
@@ -19,7 +18,7 @@ internal class MoveCommand : CliCommand
         // Add action
         Action = CommandHandler.Create<Direction, IGameConsole, IMediator>(async (direction, console, mediator) =>
         {
-            var request = new Request(direction);
+            var request = new MoveCommandRequest(direction);
             var result = await mediator.Send(request);
             var view = new MoveCommandView(console);
             view.Render(request, result);

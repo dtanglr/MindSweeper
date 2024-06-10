@@ -7,7 +7,7 @@ namespace MindSweeper.Application.Mediator.Commands.Start;
 /// <summary>
 /// Command handler for starting the game.
 /// </summary>
-public class StartCommandHandler : IRequestHandler<StartCommand, Result<StartCommandResponse>>
+public class StartCommandHandler : IRequestHandler<StartCommandRequest, Result<StartCommandResponse>>
 {
     private readonly IGameService _service;
 
@@ -26,7 +26,7 @@ public class StartCommandHandler : IRequestHandler<StartCommand, Result<StartCom
     /// <param name="request">The StartCommand request.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The result of the StartCommand request.</returns>
-    public async Task<Result<StartCommandResponse>> Handle(StartCommand request, CancellationToken cancellationToken)
+    public async Task<Result<StartCommandResponse>> Handle(StartCommandRequest request, CancellationToken cancellationToken)
     {
         var result = await _service.StartAsync(request.Settings, cancellationToken);
 

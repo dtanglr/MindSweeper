@@ -7,7 +7,7 @@ namespace MindSweeper.Application.Mediator.Queries.GetGame;
 /// <summary>
 /// Request handler for getting the game for the player.
 /// </summary>
-public class GetGameQueryHandler(PlayerContext context) : IRequestHandler<GetGameQuery, Result<GetGameQueryResponse>>
+public class GetGameQueryHandler(PlayerContext context) : IRequestHandler<GetGameQueryRequest, Result<GetGameQueryResponse>>
 {
     private readonly PlayerContext _context = context;
 
@@ -17,7 +17,7 @@ public class GetGameQueryHandler(PlayerContext context) : IRequestHandler<GetGam
     /// <param name="request">The GetGameRequest object.</param>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The result of the GetGameRequest.</returns>
-    public Task<Result<GetGameQueryResponse>> Handle(GetGameQuery request, CancellationToken cancellationToken)
+    public Task<Result<GetGameQueryResponse>> Handle(GetGameQueryRequest request, CancellationToken cancellationToken)
     {
         if (!_context.HasGame)
         {
