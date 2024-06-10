@@ -29,7 +29,6 @@ internal class Program
             {
                 host.ConfigureServices(services =>
                 {
-                    services.AddSingleton<IGameConsole, GameConsole>();
                     services.ConfigureMindSweeper(configure =>
                     {
                         configure.PlayerContextFactory = _ => new PlayerContext(Environment.MachineName);
@@ -38,7 +37,8 @@ internal class Program
                     .UseLocalFileStorage(configure =>
                     {
                         configure.JsonSerializerOptions = options => options.WriteIndented = true;
-                    });
+                    })
+                    .UseCommandLine();
                 });
 
                 host.ConfigureLogging(logging =>
