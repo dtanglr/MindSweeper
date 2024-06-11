@@ -149,22 +149,22 @@ public class MoveCommandViewTests
     }
 
     /// <summary>
-    /// Test case to verify that the Render method displays the correct message for an Unprocessable result.
+    /// Test case to verify that the Render method displays the correct message for an Forbidden result.
     /// </summary>
     [Fact]
-    public void Render_Unprocessable_Result_Should_Display_Unprocessable_Message()
+    public void Render_Forbidden_Result_Should_Display_Forbidden_Message()
     {
         // Arrange
         var view = new MoveCommandView(_console);
         var request = new MoveCommandRequest(Direction.Up);
-        var result = Result<MoveCommandResponse>.Unprocessable();
+        var result = Result<MoveCommandResponse>.Forbidden();
 
         // Act
         view.Render(request, result);
 
         // Assert
         var output = _console.Out.ToString();
-        output.Should().Contain(string.Format(Resources.MoveCommandResultStatusUnprocessable, request.Direction));
+        output.Should().Contain(string.Format(Resources.MoveCommandResultStatusForbidden, request.Direction));
     }
 
     /// <summary>

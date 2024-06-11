@@ -1,7 +1,4 @@
-﻿using MediatR;
-using MindSweeper.Domain.Results;
-
-namespace MindSweeper.Application.Mediator.Commands.End;
+﻿namespace MindSweeper.Application.Mediator.Commands.End;
 
 /// <summary>
 /// Represents a command to end the game for the current player.

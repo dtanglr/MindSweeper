@@ -1,7 +1,6 @@
 ﻿using MELT;
 using Microsoft.Extensions.Logging;
 using MindSweeper.Application.Mediator.Behaviors;
-using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 
 namespace MindSweeper.Application.Mediator.UnitTests.BehaviorTests;

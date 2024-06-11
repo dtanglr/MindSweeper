@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
-using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application.Mediator.Behaviors;
 

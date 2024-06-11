@@ -207,12 +207,12 @@
   <data name="MoveCommandResultStatusAccepted" xml:space="preserve">
     <value>The current state of play is as follows:</value>
   </data>
-  <data name="MoveCommandResultStatusNotFound" xml:space="preserve">
-    <value>You don't have an active game. Start a new game then make your move.</value>
-  </data>
-  <data name="MoveCommandResultStatusUnprocessable" xml:space="preserve">
+  <data name="MoveCommandResultStatusForbidden" xml:space="preserve">
     <value>It's not possible to move '{0}' from your current square.</value>
     <comment>e.g. "It's not possible to move 'down' from your current square."</comment>
+  </data>
+  <data name="MoveCommandResultStatusNotFound" xml:space="preserve">
+    <value>You don't have an active game. Start a new game then make your move.</value>
   </data>
   <data name="RootCommandDescription" xml:space="preserve">
     <value>Once started, you will be placed on a square on the very bottom of a playing field that's similar to a chess board.

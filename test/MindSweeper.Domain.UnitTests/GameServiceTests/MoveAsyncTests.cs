@@ -22,7 +22,7 @@ public class MoveAsyncTests
     }
 
     [Fact]
-    public async Task MoveAsync_WithFailedMoveAttempt_ReturnsUnprocessable()
+    public async Task MoveAsync_WithFailedMoveAttempt_ReturnsForbidden()
     {
         // Arrange
         var fixture = new Fixture();
@@ -41,7 +41,7 @@ public class MoveAsyncTests
         var result = await service.MoveAsync(impossibleMoveDirection, CancellationToken.None);
 
         // Assert
-        result.Should().BeEquivalentTo(Result<Game>.Unprocessable());
+        result.Should().BeEquivalentTo(Result<Game>.Forbidden());
     }
 
     [Theory]

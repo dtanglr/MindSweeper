@@ -60,7 +60,14 @@ public sealed class GameSettings
     /// </summary>
     public const int DefaultLives = 3;
 
-    private int _bombs;
+    /// <summary>
+    /// The number of bombs in the game.
+    /// </summary>
+    /// <remarks>
+    /// If the value of <see cref="Bombs"/> is greater than <see cref="int.MinValue"/>, it represents the number of bombs set by the user.
+    /// Otherwise, it is calculated based on the number of squares in the game and the default bomb threat level.
+    /// </remarks>
+    private int _bombs = int.MinValue;
 
     /// <summary>
     /// The number of columns in the game.
@@ -75,7 +82,17 @@ public sealed class GameSettings
     /// <summary>
     /// The number of bombs in the game.
     /// </summary>
-    public int Bombs { get => _bombs > 0 ? _bombs : Squares / DefaultBombThreat; init => _bombs = value; }
+    /// <value>
+    /// If the number of bombs is not set by the user, they are calculated based on the number of squares in the game divided by the default bomb threat level.
+    /// </value>
+    /// <remarks>
+    /// The default bomb threat level is not currently configurable.
+    /// </remarks>
+    public int Bombs
+    {
+        get => _bombs > int.MinValue ? _bombs : Squares / DefaultBombThreat;
+        init => _bombs = value;
+    }
 
     /// <summary>
     /// The number of lives in the game.

@@ -1,10 +1,7 @@
 ﻿using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using MindSweeper.Application.Mediator.Behaviors;
 using MindSweeper.Application.Mediator.Commands.Start;
-using MindSweeper.Domain;
-using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application.Mediator;
 

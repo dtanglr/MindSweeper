@@ -8,11 +8,9 @@ namespace MindSweeper.Application.Mediator.UnitTests.CommandTests.End;
 public class EndCommandHandlerTests
 {
     /// <summary>
-    /// Tests the <see cref="EndCommandHandler.Handle"/> method when the service ends the game and returns the expected result.
+    /// Tests the <see cref="EndCommandHandler.Handle"/> method ends the game and returns the expected result.
     /// </summary>
     /// <param name="status">The result status.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    /// <exception cref="ArgumentOutOfRangeException">Thrown when the status is not a valid <see cref="ResultStatus"/>.</exception>
     [Theory]
     [InlineData(ResultStatus.Accepted)]
     [InlineData(ResultStatus.NotFound)]
@@ -30,8 +28,8 @@ public class EndCommandHandlerTests
         {
             ResultStatus.Accepted => Result.Accepted(),
             ResultStatus.NotFound => Result.NotFound(),
-            ResultStatus.Unprocessable => Result.Unprocessable(),
-            ResultStatus.Error => Result.Error(),
+            ResultStatus.Unprocessable => Result.Unprocessable("unprocessable"),
+            ResultStatus.Error => Result.Error("error"),
             _ => throw new ArgumentOutOfRangeException(nameof(status))
         };
 

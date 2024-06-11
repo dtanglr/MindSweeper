@@ -30,8 +30,10 @@ internal class ErrorView : ICommandView<Result>
                 _console.WriteLine(Resources.CommandResultStatusInvalid);
                 result.ValidationIssues.ForEach(e => _console.WriteLine(e.Message));
                 break;
+            case ResultStatus.Unprocessable:
             case ResultStatus.Error:
                 _console.WriteLine(Resources.CommandResultStatusError);
+                // Danger: potential for revealing sensitive information
                 result.Errors.ForEach(_console.WriteLine);
                 break;
             default:

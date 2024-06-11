@@ -1,8 +1,4 @@
-﻿using MediatR;
-using MindSweeper.Domain;
-using MindSweeper.Domain.Results;
-
-namespace MindSweeper.Application.Mediator.Queries.GetGame;
+﻿namespace MindSweeper.Application.Mediator.Queries.GetGame;
 
 /// <summary>
 /// Request handler for getting the game for the player.

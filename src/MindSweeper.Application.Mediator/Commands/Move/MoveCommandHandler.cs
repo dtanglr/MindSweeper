@@ -1,8 +1,4 @@
-﻿using MediatR;
-using MindSweeper.Domain;
-using MindSweeper.Domain.Results;
-
-namespace MindSweeper.Application.Mediator.Commands.Move;
+﻿namespace MindSweeper.Application.Mediator.Commands.Move;
 
 /// <summary>
 /// Handles the MoveCommand and updates the game state accordingly.
@@ -37,6 +33,6 @@ public class MoveCommandHandler : IRequestHandler<MoveCommandRequest, Result<Mov
 
         var response = new MoveCommandResponse(result.Value!);
 
-        return Result<MoveCommandResponse>.Accepted(response);
+        return result.ToResult(response);
     }
 }

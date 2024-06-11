@@ -1,6 +1,5 @@
 ﻿using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
-using MindSweeper.Domain;
 
 namespace MindSweeper.Application.Mediator.Behaviors;
 

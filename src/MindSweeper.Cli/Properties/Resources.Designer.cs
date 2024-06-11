@@ -323,20 +323,20 @@ namespace MindSweeper.Cli.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It&apos;s not possible to move &apos;{0}&apos; from your current square..
+        /// </summary>
+        internal static string MoveCommandResultStatusForbidden {
+            get {
+                return ResourceManager.GetString("MoveCommandResultStatusForbidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You don&apos;t have an active game. Start a new game then make your move..
         /// </summary>
         internal static string MoveCommandResultStatusNotFound {
             get {
                 return ResourceManager.GetString("MoveCommandResultStatusNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to It&apos;s not possible to move &apos;{0}&apos; from your current square..
-        /// </summary>
-        internal static string MoveCommandResultStatusUnprocessable {
-            get {
-                return ResourceManager.GetString("MoveCommandResultStatusUnprocessable", resourceCulture);
             }
         }
         

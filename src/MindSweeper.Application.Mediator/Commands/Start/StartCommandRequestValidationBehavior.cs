@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Logging;
 using MindSweeper.Application.Mediator.Behaviors;
-using MindSweeper.Domain.Results;
 
 namespace MindSweeper.Application.Mediator.Commands.Start;
 

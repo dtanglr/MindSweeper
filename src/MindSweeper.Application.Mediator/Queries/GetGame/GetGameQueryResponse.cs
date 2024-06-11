@@ -1,6 +1,4 @@
-﻿using MindSweeper.Domain;
-
-namespace MindSweeper.Application.Mediator.Queries.GetGame;
+﻿namespace MindSweeper.Application.Mediator.Queries.GetGame;
 
 /// <summary>
 /// Represents the response for the GetGameRequest.

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using MindSweeper.Domain;
 
 namespace MindSweeper.Application.Mediator.Commands.Start;
 

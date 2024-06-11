@@ -70,8 +70,8 @@ internal class MoveCommandView : ICommandView<MoveCommandRequest, Result<MoveCom
                 _console.WriteLine();
                 _gameStatusView.Render(game);
                 break;
-            case ResultStatus.Unprocessable:
-                _console.WriteLine(Resources.MoveCommandResultStatusUnprocessable, request.Direction);
+            case ResultStatus.Forbidden:
+                _console.WriteLine(Resources.MoveCommandResultStatusForbidden, request.Direction);
                 break;
             case ResultStatus.NotFound:
                 _console.WriteLine(Resources.MoveCommandResultStatusNotFound);

@@ -92,7 +92,7 @@ public class GameService : IGameService
 
             if (!fromSquare.TryMove(direction, out var toSquare))
             {
-                return Result<Game>.Unprocessable();
+                return Result<Game>.Forbidden();
             }
 
             var bombs = new Field.Bombs(game.Bombs);

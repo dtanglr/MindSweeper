@@ -1,6 +1,4 @@
-﻿using MindSweeper.Domain;
-
-namespace MindSweeper.Application.Mediator.Commands.Start;
+﻿namespace MindSweeper.Application.Mediator.Commands.Start;
 
 /// <summary>
 /// Represents the response of the StartCommand.

@@ -1,8 +1,4 @@
-﻿using MediatR;
-using MindSweeper.Domain;
-using MindSweeper.Domain.Results;
-
-namespace MindSweeper.Application.Mediator.Commands.Start;
+﻿namespace MindSweeper.Application.Mediator.Commands.Start;
 
 /// <summary>
 /// Command handler for starting the game.
@@ -37,6 +33,6 @@ public class StartCommandHandler : IRequestHandler<StartCommandRequest, Result<S
 
         var response = new StartCommandResponse(result.Value!);
 
-        return Result<StartCommandResponse>.Accepted(response);
+        return result.ToResult(response);
     }
 }
