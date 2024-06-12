@@ -1,7 +1,7 @@
 ﻿using MindSweeper.Application.Mediator.Queries.GetGame;
 using MindSweeper.Cli.Commands.Status;
 
-namespace MindSweeper.Cli.UnitTests.CommandTests.End;
+namespace MindSweeper.Cli.UnitTests.CommandTests.Status;
 
 /// <summary>
 /// Represents the unit tests for the StatusCommandView class.
