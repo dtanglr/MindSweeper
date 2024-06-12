@@ -19,7 +19,6 @@ public class EndCommandHandlerTests
     public async Task Handle_WhenServiceEndsGame_ReturnsExpectedResult(ResultStatus status)
     {
         // Arrange
-        var fixture = new Fixture();
         var service = Substitute.For<IGameService>();
         var handler = new EndCommandHandler(service);
         var request = new EndCommandRequest();
