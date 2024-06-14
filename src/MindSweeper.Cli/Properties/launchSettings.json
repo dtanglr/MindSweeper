@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "SchneiderElectric.MindSweeper.Cli": {
+    "MindSweeper.Cli": {
       "commandName": "Project",
       "commandLineArgs": ""
     }
